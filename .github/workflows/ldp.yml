@@ -1,0 +1,53 @@
+name: "LDPTechs — tests / EXE"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Test LDP-Practicum
+    runs-on: windows-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: ldp-practicum
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Run tests
+        run: python -m unittest discover -v
+
+  build:
+    name: Build LDP-Practicum.exe
+    if: github.event_name == 'workflow_dispatch'
+    needs: tests
+    runs-on: windows-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: ldp-practicum
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install build dependencies
+        run: python -m pip install -r ../.github/requirements-build.txt
+      - name: Build Windows executable
+        run: python -m PyInstaller --noconfirm --clean --onefile --windowed --name LDP-Practicum --distpath dist --workpath .build app.py
+      - name: Upload executable
+        uses: actions/upload-artifact@v6
+        with:
+          name: LDP-Practicum-windows-x64
+          path: ldp-practicum/dist/LDP-Practicum.exe
+          if-no-files-found: error
+          retention-days: 30
