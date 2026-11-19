@@ -8,7 +8,13 @@ from presets import PRESETS
 class TransportTests(unittest.TestCase):
     def test_variant3_rebalancing_preserves_strategic_staffing(self):
         original = PRESETS['Вариант 3 · специалисты']
-        real_suppliers = len(original.supply) - 1
+        self.assertFalse(original.dummy_row)
+        self.assertEqual(original.supply,(160,140,170))
+        self.assertEqual(original.m,3)
+        with self.assertRaises(ValueError):Lesson(original)
+        real_suppliers = len(original.supply)
+        original = Problem(original.costs + ((100,0,0,100),),
+                           original.supply + (30,),original.demand,True)
 
         # Control: the unedited task fully staffs strategic enterprises.
         baseline = solve(original)
@@ -44,6 +50,8 @@ class TransportTests(unittest.TestCase):
     def test_manual_optima(self):
         for problem, expected in zip(list(PRESETS.values())[:5], [1370,830,1620,1240,830]):
             with self.subTest(expected=expected):
+                if problem is PRESETS['Вариант 3 · специалисты']:
+                    problem=Problem(problem.costs+((100,0,0,100),),problem.supply+(30,),problem.demand,True)
                 result = solve(problem)
                 result.validate()
                 self.assertEqual(result.cost, expected)

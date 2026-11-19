@@ -14,6 +14,7 @@ class Lesson:
         self.selected = set()
         self.entering = None
         self.errors = 0
+        self.hints = 0
         self.history = []
         self.seen = set()
         self.added = []
@@ -112,3 +113,20 @@ class Lesson:
             self.phase = 'potentials'
             return
         raise ValueError('Решение уже завершено.')
+
+    def hint(self):
+        self.hints += 1
+        if self.phase == 'cell': return 'Подходящие минимальные тарифы: ' + self.cells_text(self.builder.candidates)
+        if self.phase == 'amount': return f'Минимум остатка запаса и спроса: {self.builder.amount(self.entering)}.'
+        if self.phase == 'potentials':
+            u,v=self.state.potentials()
+            return f'При u₁ = 0: u = {u}; v = {v}.'
+        if self.phase == 'optimal': return 'Положительных оценок: ' + str(len(self.state.improving())) + '. Если есть положительные оценки, то план не оптимален.'
+        if self.phase == 'enter':
+            rule = ('При правиле Бланда выбирайте первую клетку с положительной оценкой: по строкам сверху вниз, внутри строки — по столбцам слева направо.'
+                    if self.state.uses_bland else
+                    'Для невырожденного плана выбирайте клетку с наибольшей положительной оценкой. Если таких клеток несколько, можно выбрать любую из них.')
+            return rule + '\nПодходящие клетки: ' + self.cells_text(self.state.entering_candidates())
+        if self.phase == 'cycle': return 'Цикл: ' + self.cells_text(self.state.cycle(self.entering))
+        if self.phase == 'theta': return f'Минимальный минусовой объём: {self.state.theta(self.entering)}.'
+        return 'Следуйте инструкции текущего этапа.'

@@ -7,6 +7,8 @@ root=Path(__file__).resolve().parent
 sys.path.insert(0,str(root/'.build-deps'))
 
 def main():
+    from variant_files import load_variants
+    load_variants(root/'variants')
     from PIL import Image, ImageDraw
     icon=Image.new('RGBA',(256,256),'#12233c')
     draw=ImageDraw.Draw(icon)
@@ -22,6 +24,7 @@ def main():
         '--icon',str(root/'icon.ico'),'--add-data',str(root/'icon.ico')+';.',
         '--distpath',str(root/'dist'),'--workpath',str(root/'.build'),
         '--specpath',str(root),str(root/'app.py')])
+    shutil.copytree(root/'variants',root/'dist'/'variants',dirs_exist_ok=True)
     destination=root/'КТЗ-Практикум.exe'
     shutil.copy2(root/'dist'/'KTZ-Practicum.exe',destination)
     print('Built:',destination)
