@@ -210,14 +210,18 @@ class RenderingTests(unittest.TestCase):
     def test_zoom_does_not_scroll_a_fitting_table(self):
         root=tk.Tk()
         try:
-            app=App(root);root.update_idletasks()
+            app=App(root);root.geometry('1050x720');root.update_idletasks()
+            app.edit_problem(Problem(((1,),),(5,),(5,)))
             for lesson in (False,True):
                 if lesson:
-                    app.edit_problem(Problem(((1,)*8,)*8,(8,)*8,(8,)*8))
+                    app.edit_problem(Problem(((1,),),(5,),(5,)))
                     app.start()
                 app.change_zoom(50)
                 canvas=app.matrix.canvas if lesson else app.editor.canvas
                 root.update_idletasks()
+                left,top,right,bottom=map(float,canvas.tk.splitlist(canvas.cget('scrollregion')))
+                self.assertLessEqual(right-left,canvas.winfo_width(),'Test requires a table fitting horizontally')
+                self.assertLessEqual(bottom-top,canvas.winfo_height(),'Test requires a table fitting vertically')
                 # Zoom from a fitting table to an overflowing one, with the
                 # pointer near the far edge (possibly over blank space).
                 app.change_zoom(200,anchor=(canvas,canvas.winfo_width()-10,
