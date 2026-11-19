@@ -185,22 +185,127 @@ class App:
         self.header=tk.Frame(self.main,bg=BG);self.header.pack(fill='x',padx=28,pady=(24,16))
         label(self.header,'Транспортная задача',size=23,bold=True,bg=BG).pack(side='left')
         self.new_button=ttk.Button(self.header,text='Новая задача',command=self.setup)
-        ttk.Scale(self.header,from_=50,to=150,variable=self.zoom,command=self.change_zoom,length=100).pack(side='right',padx=8)
-        self.zoom_label=label(self.header,'100%',size=10,bg=BG)
-        self.zoom_label.pack(side='right')
+        toolbar=tk.Frame(self.main,bg=BG)
+        toolbar.pack(fill='x',padx=28,pady=(0,10))
+        label(toolbar,'Масштаб таблицы',size=10,bg=BG).pack(side='left',padx=(0,10))
+        self.zoom_minus=ttk.Button(toolbar,text='−',width=3,command=lambda:self.step_zoom(-10))
+        self.zoom_minus.pack(side='left')
+        self.zoom_text=tk.StringVar(value='100%')
+        self.zoom_input=ttk.Combobox(toolbar,textvariable=self.zoom_text,width=7,
+                                    values=('50%','75%','100%','125%','150%','200%'))
+        self.zoom_input.pack(side='left',padx=6)
+        self.zoom_input.bind('<Return>',self.apply_zoom)
+        self.zoom_input.bind('<<ComboboxSelected>>',self.apply_zoom)
+        self.zoom_input.bind('<FocusOut>',self.apply_zoom)
+        self.zoom_plus=ttk.Button(toolbar,text='+',width=3,command=lambda:self.step_zoom(10))
+        self.zoom_plus.pack(side='left')
+        self.zoom_fit=ttk.Button(toolbar,text='По ширине',command=self.fit_width)
+        self.zoom_fit.pack(side='left',padx=8)
+        root.bind('<Control-Key-0>',self.reset_zoom)
+        root.bind('<Control-MouseWheel>',self.zoom_wheel)
+        root.bind('<MouseWheel>',self.scroll_table)
         self.body=tk.Frame(self.main,bg=BG);self.body.pack(fill='both',expand=True,padx=28,pady=(0,22))
         self.setup()
 
-    def change_zoom(self,value=None):
-        self.zoom_label.configure(text=f'{round(self.zoom.get())}%')
+    def apply_zoom(self,event=None):
+        try:
+            value=int(self.zoom_text.get().strip().removesuffix('%').strip())
+            if not 10<=value<=200:raise ValueError()
+        except ValueError:
+            self.zoom_text.set(f'{round(self.zoom.get())}%')
+            self.root.bell()
+        else:self.change_zoom(value)
+        return 'break'
+
+    def step_zoom(self,delta):
+        self.change_zoom(self.zoom.get()+delta)
+
+    def reset_zoom(self,event=None):
+        self.change_zoom(100)
+        return 'break'
+
+    def table_canvas(self,widget):
+        canvases=([self.matrix.canvas,self.original_matrix.canvas] if self.lesson
+                  else [self.editor.canvas] if hasattr(self,'editor') else [])
+        while widget is not None:
+            if widget in canvases:return widget
+            widget=getattr(widget,'master',None)
+        return None
+
+    def zoom_wheel(self,event):
+        canvas=self.table_canvas(event.widget)
+        if canvas is None:return
+        if event.delta:
+            x=event.x_root-canvas.winfo_rootx()
+            y=event.y_root-canvas.winfo_rooty()
+            self.change_zoom(self.zoom.get()+(10 if event.delta>0 else -10),
+                             anchor=(canvas,x,y))
+        return 'break'
+
+    def scroll_table(self,event):
+        canvas=self.table_canvas(event.widget)
+        if canvas is not None:
+            if event.delta:canvas.yview_scroll(-1 if event.delta>0 else 1,'units')
+            return 'break'
+
+    def change_zoom(self,value=None,anchor=None):
+        value=max(10,min(200,round(self.zoom.get() if value is None else value)))
+        canvases=([self.matrix.canvas,self.original_matrix.canvas] if self.lesson
+                  else [self.editor.canvas] if hasattr(self,'editor') else [])
+        views=[]
+        for canvas in canvases:
+            region=canvas.cget('scrollregion')
+            if not region:continue
+            left,top,right,bottom=map(float,canvas.tk.splitlist(region))
+            width,height=right-left,bottom-top
+            x,y=(anchor[1:] if anchor and anchor[0] is canvas else (0,0))
+            # A table that fits stays at the top-left. Do not anchor empty space
+            # outside it, or a later enlargement unexpectedly scrolls the table.
+            if width<=canvas.winfo_width():x=0
+            if height<=canvas.winfo_height():y=0
+            views.append((canvas,max(0,canvas.canvasx(x)-left)/max(1,width),
+                          max(0,canvas.canvasy(y)-top)/max(1,height),x,y))
+        self.zoom.set(value)
+        self.zoom_text.set(f'{value}%')
+        self.zoom_minus.state(['disabled'] if value==10 else ['!disabled'])
+        self.zoom_plus.state(['disabled'] if value==200 else ['!disabled'])
         if self.lesson:
             for matrix,original in [(self.matrix,False),(self.original_matrix,True)]:
-                matrix.zoom=self.zoom.get()/100
+                matrix.zoom=value/100
                 matrix.draw(self.lesson,original)
         elif hasattr(self,'cost_entries'):
-            size=max(6,round(11*self.zoom.get()/100))
+            size=max(6,round(11*value/100))
             for entry in [*self.supply_entries,*self.demand_entries,*(e for row in self.cost_entries for e in row)]:
-                entry.configure(font=(FONT,size),width=max(4,round(8*self.zoom.get()/100)))
+                entry.configure(font=(FONT,size),width=max(1,round(8*value/100)))
+        self.root.update_idletasks()
+        for canvas,fx,fy,x,y in views:
+            left,top,right,bottom=map(float,canvas.tk.splitlist(canvas.cget('scrollregion')))
+            width,height=right-left,bottom-top
+            offset_x=max(0,min(fx*width-x,max(0,width-canvas.winfo_width())))
+            offset_y=max(0,min(fy*height-y,max(0,height-canvas.winfo_height())))
+            canvas.xview_moveto(offset_x/max(1,width))
+            canvas.yview_moveto(offset_y/max(1,height))
+
+    def fit_width(self):
+        self.root.update_idletasks()
+        if self.lesson:
+            original=self.notebook.index(self.notebook.select())==1
+            matrix=self.original_matrix if original else self.matrix
+            canvas=matrix.canvas
+            width=float(canvas.tk.splitlist(canvas.cget('scrollregion'))[2])
+            self.change_zoom(int((canvas.winfo_width()-2)*self.zoom.get()/max(1,width)))
+        else:
+            canvas=self.editor.canvas
+            # Entry widths and fonts are rounded; measure the actual editor at each size.
+            low,high=10,200
+            while low<high:
+                middle=(low+high+1)//2
+                self.change_zoom(middle)
+                if self.editor.inner.winfo_reqwidth()<=canvas.winfo_width()-2:low=middle
+                else:high=middle-1
+            self.change_zoom(low)
+        canvas.xview_moveto(0)
+        canvas.yview_moveto(0)
 
     def activate_nav(self,index):
         for k,item in enumerate(self.nav):item.configure(bg='#253e61' if k==index else NAVY,fg='white' if k==index else '#aabbd2')
@@ -370,7 +475,7 @@ class App:
         self.clear();self.new_button.pack(side='right')
         self.summary=tk.Frame(self.body,bg=BG);self.summary.pack(fill='x',pady=(0,15))
         self.stat_labels=[]
-        for title in ['СТОИМОСТЬ ПЛАНА','ИТЕРАЦИЯ','ОШИБКИ']:
+        for title in ['СТОИМОСТЬ ПЛАНА','ИТЕРАЦИЯ','ОШИБКИ / ПОДСКАЗКИ']:
             card=tk.Frame(self.summary,bg='white',padx=18,pady=12);card.pack(side='left',fill='x',expand=True,padx=(0,10))
             label(card,title,size=8,color=MUTED).pack(anchor='w')
             val=label(card,'',size=20,bold=True);val.pack(anchor='w');self.stat_labels.append(val)
@@ -408,7 +513,7 @@ class App:
         self.activate_nav(step)
         self.stat_labels[0].configure(text=str(l.state.cost) if l.state else 'строится')
         self.stat_labels[1].configure(text=str(l.state.iteration) if l.state else '0')
-        self.stat_labels[2].configure(text=str(l.errors))
+        self.stat_labels[2].configure(text=f'{l.errors} / {l.hints}')
         self.matrix.zoom=self.original_matrix.zoom=self.zoom.get()/100
         self.matrix.draw(l);self.original_matrix.draw(l,True)
         self.log.configure(state='normal');self.log.delete('1.0','end')
@@ -418,6 +523,8 @@ class App:
         titles={'cell':'Минимальный тариф','amount':'Объём перевозки','basis':'Начальный план готов','potentials':'Рассчитайте потенциалы','optimal':'Дальнейшее действие','enter':'Входящая клетка','cycle':'Постройте цикл','theta':'Определите θ','pivot':'Переход к новому плану','done':'Решение завершено'}
         label(self.question,f'ШАГ {step+1:02d}',size=9,bold=True,color=BLUE).pack(anchor='w')
         label(self.question,titles[phase],size=17,bold=True,wraplength=285,justify='left').pack(anchor='w',pady=(9,14))
+        if phase=='cycle':
+            label(self.question,'Выберите остальные вершины цикла. Уже выделенную входящую клетку выбирать повторно не нужно.',size=10,wraplength=285,justify='left').pack(anchor='w',pady=(0,8))
         self.selection=label(self.question,'Выбрано: —',size=10,color=BLUE,wraplength=285,justify='left')
         if phase in ('cell','enter','cycle'):self.selection.pack(anchor='w',pady=(16,4))
         self.answer=None;self.u_entry=None;self.v_entry=None
@@ -434,6 +541,16 @@ class App:
         else:ttk.Button(buttons,text='Решить другую задачу',style='Primary.TButton',command=self._setup).pack(fill='x')
         self.feedback_label=label(self.question,'',size=10,color='#b33c41',bg='#fff0f0',wraplength=265,justify='left',anchor='w',padx=10,pady=10)
         self.update_feedback()
+        self.hint_button=None
+        if phase not in ('done','basis','pivot'):
+            self.hint_button=ttk.Button(self.question,text='Подсказка',command=self.hint)
+            self.hint_button.pack(fill='x',pady=(0,8))
+        self.hint_label=label(self.question,'',size=10,color='#2454a6',bg='#edf4ff',wraplength=265,justify='left',anchor='w',padx=10,pady=10)
+
+    def hint(self):
+        self.hint_label.configure(text='Подсказка\n\n'+self.lesson.hint())
+        self.hint_label.pack(fill='x',pady=(0,12))
+        self.stat_labels[2].configure(text=f'{self.lesson.errors} / {self.lesson.hints}')
 
     def check(self,answer=None):
         try:
@@ -451,7 +568,7 @@ class App:
         else:self.update_feedback()
 
     def update_feedback(self):
-        self.stat_labels[2].configure(text=str(self.lesson.errors))
+        self.stat_labels[2].configure(text=f'{self.lesson.errors} / {self.lesson.hints}')
         if self.feedback_ok:
             self.feedback_label.pack_forget()
         else:
