@@ -50,6 +50,8 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: KTZ-Practicum-windows-x64
-          path: ktz-practicum/dist/KTZ-Practicum.exe
+          path: |
+            ktz-practicum/dist/KTZ-Practicum.exe
+            ktz-practicum/dist/variants/*.json
           if-no-files-found: error
           retention-days: 30

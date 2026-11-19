@@ -6,8 +6,7 @@ import tkinter as tk
 from tkinter import ttk, filedialog
 from transport import Problem
 from lesson import Lesson
-from presets import PRESETS
-from variant_files import load_variant, save_variant
+from variant_files import read_variant, save_variant, load_variants, variants_directory, append_variant
 
 BG = '#f3f5f9'
 INK = '#17243b'
@@ -152,6 +151,12 @@ class App:
         self.feedback=''
         self.feedback_ok=True
         self.entries=[]
+        self.variants_dir=variants_directory()
+        self.variants={}
+        startup_error=''
+        if self.variants_dir.exists():
+            try:self.variants=load_variants(self.variants_dir)
+            except ValueError as error:startup_error=str(error)
         self.zoom=tk.DoubleVar(value=100)
         root.title('КТЗ · Практикум')
         icon=Path(getattr(sys,'_MEIPASS',Path(__file__).resolve().parent))/'icon.ico'
@@ -206,6 +211,7 @@ class App:
         root.bind('<MouseWheel>',self.scroll_table)
         self.body=tk.Frame(self.main,bg=BG);self.body.pack(fill='both',expand=True,padx=28,pady=(0,22))
         self.setup()
+        if startup_error:self.setup_error(startup_error)
 
     def apply_zoom(self,event=None):
         try:
@@ -337,8 +343,9 @@ class App:
         self.lesson=None;self.clear();self.activate_nav(0);self.new_button.pack_forget()
         label(self.body,'Начните с условий задачи',size=15,bold=True,bg=BG).pack(anchor='w')
         bar=tk.Frame(self.body,bg='white',padx=16,pady=16);bar.pack(fill='x',pady=(0,12))
-        self.preset=ttk.Combobox(bar,values=list(PRESETS),state='readonly',width=34)
-        self.preset.current(0);self.preset.grid(row=0,column=0,padx=(0,8),sticky='w')
+        self.preset=ttk.Combobox(bar,values=list(self.variants),state='readonly',width=34)
+        if self.variants:self.preset.current(0)
+        self.preset.grid(row=0,column=0,padx=(0,8),sticky='w')
         ttk.Button(bar,text='Загрузить',command=self.load_preset).grid(row=0,column=1,padx=(0,20))
         label(bar,'Строки').grid(row=0,column=2,padx=(0,5))
         self.rows=ttk.Spinbox(bar,from_=1,to=30,width=3);self.rows.set('4');self.rows.grid(row=0,column=3,padx=(0,10))
@@ -348,6 +355,8 @@ class App:
         files=tk.Frame(self.body,bg=BG);files.pack(fill='x',pady=(0,12))
         ttk.Button(files,text='Загрузить вариант из файла',command=self.open_variant).pack(side='left')
         ttk.Button(files,text='Сохранить вариант в файл',command=self.export_variant).pack(side='left',padx=8)
+        ttk.Button(files,text='Загрузить все варианты',command=self.open_variants).pack(side='left')
+        label(self.body,'Можно изменить вариант в таблице или создать новый, затем сохранить его в отдельный JSON-файл.',size=10,bg=BG,wraplength=850,justify='left').pack(anchor='w',pady=(0,8))
         self.editor=ScrollArea(self.body);self.editor.pack(fill='both',expand=True)
         self.setup_note=label(self.body,'',bg=BG,color=MUTED,anchor='w',justify='left',wraplength=890)
         self.setup_note.pack(fill='x',pady=12)
@@ -357,35 +366,51 @@ class App:
         self.dummy_button.pack(side='left',padx=8)
         ttk.Button(footer,text='Добавить столбец',command=lambda:self.add_dummy('col')).pack(side='left')
         ttk.Button(footer,text='Приступить к решению →',style='Primary.TButton',command=self.start).pack(side='right')
-        self.load_preset()
+        if self.variants:self.load_preset()
+        else:self.create_empty()
 
     def load_preset(self):
-        p=PRESETS[self.preset.get()]
+        if self.preset.get() not in self.variants:return
+        p=self.variants[self.preset.get()]
         self.rows.set(str(p.m));self.cols.set(str(p.n))
         self.edit_problem(p)
         self.setup_note.configure(text='')
 
     def open_variant(self):
-        path=filedialog.askopenfilename(parent=self.root,title='Загрузить вариант',filetypes=[('Вариант JSON','*.json')])
+        path=filedialog.askopenfilename(parent=self.root,title='Загрузить вариант',
+                                       initialdir=str(self.variants_dir),filetypes=[('Вариант JSON','*.json')])
         if not path:return
-        try:
-            p=load_variant(path)
-            self.edit_problem(p)
-            self.rows.set(p.m);self.cols.set(p.n)
-            self.setup_note.configure(text='')
-        except (OSError,ValueError,KeyError,TypeError,OverflowError):
-            self.setup_error('Ошибка файла варианта.')
+        try:name,p=read_variant(path)
+        except ValueError as error:
+            self.setup_error(str(error));return
+        name=append_variant(self.variants,name,p)
+        self.preset.configure(values=list(self.variants));self.preset.set(name)
+        self.load_preset()
+
+    def open_variants(self):
+        directory=filedialog.askdirectory(parent=self.root,title='Загрузить все варианты из папки',
+                                          initialdir=str(self.variants_dir),mustexist=True)
+        if not directory:return
+        try:variants=load_variants(directory)
+        except ValueError as error:
+            self.setup_error(str(error));return
+        self.variants=variants
+        self.variants_dir=Path(directory)
+        self.preset.configure(values=list(self.variants));self.preset.current(0)
+        self.load_preset()
 
     def export_variant(self):
         try:p=self.read_problem()
         except ValueError:
             self.setup_error('Ошибка исходных данных.');return
-        path=filedialog.asksaveasfilename(parent=self.root,title='Сохранить вариант',defaultextension='.json',filetypes=[('Вариант JSON','*.json')])
+        path=filedialog.asksaveasfilename(parent=self.root,title='Сохранить вариант',
+                                         initialdir=str(self.variants_dir),defaultextension='.json',
+                                         filetypes=[('Вариант JSON','*.json')])
         if not path:return
         try:
-            save_variant(path,p)
+            save_variant(path,p,name=Path(path).stem)
             self.setup_note.configure(text='')
-        except OSError:self.setup_error('Ошибка сохранения файла.')
+        except (OSError,ValueError) as error:self.setup_error(str(error))
 
     def create_empty(self):
         try:
@@ -451,14 +476,6 @@ class App:
 
     def validate_editor(self,p):
         p.validate_balance()
-        if p.dummy_row:
-            expected=self.edit_source.costs[-1]
-            if p.costs[-1]!=expected:
-                raise ValueError(f'Тарифы фиктивной строки должны быть {expected}; сохраните штрафы по условию задачи.')
-        if p.dummy_col:
-            expected=tuple(row[-1] for row in self.edit_source.costs)
-            if tuple(row[-1] for row in p.costs)!=expected:
-                raise ValueError(f'Тарифы фиктивного столбца должны быть {expected}.')
 
     def start(self):
         try:

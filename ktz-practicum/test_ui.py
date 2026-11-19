@@ -28,7 +28,7 @@ class RenderingTests(unittest.TestCase):
             app.start()
             self.assertIsNotNone(app.lesson)
             visited=set()
-            for problem in [next(iter(PRESETS.values())), list(PRESETS.values())[-1]]:
+            for problem in [next(iter(PRESETS.values())), Problem(((0,0,10),(0,5,0),(3,2,4)),(5,5,0),(5,0,5))]:
                 app.lesson=Lesson(problem.balanced())
                 app.show_lesson()
                 while True:
@@ -232,6 +232,70 @@ class RenderingTests(unittest.TestCase):
                     app.change_zoom(value)
                     self.assertEqual(canvas.canvasx(0),0)
                     self.assertEqual(canvas.canvasy(0),0)
+        finally:root.destroy()
+
+    def test_variant3_manual_dummy_row_and_tariffs(self):
+        root=tk.Tk();root.withdraw()
+        try:
+            app=App(root)
+            app.preset.set('Вариант 3 · специалисты');app.load_preset()
+            self.assertEqual(len(app.cost_entries),3)
+            self.assertFalse(app.read_problem().dummy_row)
+            app.start();self.assertIsNone(app.lesson)
+            app.add_dummy('row')
+            self.assertEqual(app.supply_entries[-1].get(),'')
+            for entry,value in zip(app.cost_entries[-1],(100,0,0,100)):
+                entry.delete(0,'end');entry.insert(0,str(value))
+            app.supply_entries[-1].insert(0,'29')
+            app.start();self.assertIsNone(app.lesson)
+            app.supply_entries[-1].delete(0,'end');app.supply_entries[-1].insert(0,'30')
+            app.cost_entries[-1][0].delete(0,'end');app.cost_entries[-1][0].insert(0,'-1')
+            app.start();self.assertIsNone(app.lesson)
+            app.cost_entries[-1][0].delete(0,'end');app.cost_entries[-1][0].insert(0,'100')
+            problem=app.read_problem()
+            with tempfile.TemporaryDirectory() as directory:
+                path=Path(directory)/'manual.json'
+                save_variant(path,problem)
+                app.edit_problem(load_variant(path))
+                self.assertEqual(app.read_problem(),problem)
+            app.check_balance()
+            self.assertEqual(app.setup_note.cget('text'),'Баланс соблюдён.')
+            app.start();self.assertIsNotNone(app.lesson)
+            self.assertEqual(app.lesson.problem.costs[-1],(100,0,0,100))
+            self.assertEqual(app.lesson.problem.supply[-1],30)
+        finally:root.destroy()
+
+    def test_manual_dummy_column_tariffs(self):
+        root=tk.Tk();root.withdraw()
+        try:
+            app=App(root)
+            app.edit_problem(Problem(((1,),(2,)),(5,4),(6,)))
+            app.add_dummy('col')
+            self.assertEqual(app.demand_entries[-1].get(),'')
+            for row,value in zip(app.cost_entries,(7,11)):
+                row[-1].delete(0,'end');row[-1].insert(0,str(value))
+            app.demand_entries[-1].insert(0,'2')
+            app.start();self.assertIsNone(app.lesson)
+            app.demand_entries[-1].delete(0,'end');app.demand_entries[-1].insert(0,'3')
+            for invalid in ('-1','abc','1.5','1000000000001'):
+                app.cost_entries[0][-1].delete(0,'end')
+                app.cost_entries[0][-1].insert(0,invalid)
+                app.start();self.assertIsNone(app.lesson)
+            app.cost_entries[0][-1].delete(0,'end');app.cost_entries[0][-1].insert(0,'7')
+            problem=app.read_problem()
+            with tempfile.TemporaryDirectory() as directory:
+                path=Path(directory)/'column.json'
+                save_variant(path,problem)
+                app.edit_problem(load_variant(path))
+                self.assertEqual(app.read_problem(),problem)
+            # Imported tariffs can also be edited, not just newly added ones.
+            app.cost_entries[1][-1].delete(0,'end');app.cost_entries[1][-1].insert(0,'12')
+            app.check_balance()
+            self.assertEqual(app.setup_note.cget('text'),'Баланс соблюдён.')
+            app.start();self.assertIsNotNone(app.lesson)
+            self.assertTrue(app.lesson.problem.dummy_col)
+            self.assertEqual(tuple(row[-1] for row in app.lesson.problem.costs),(7,12))
+            self.assertEqual(app.lesson.problem.demand[-1],3)
         finally:root.destroy()
 
     def test_variant_files(self):
