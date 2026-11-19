@@ -1,0 +1,6 @@
+__pycache__/
+.build-deps/
+.build/
+dist/
+*.spec
+/КТЗ-Практикум.exe
