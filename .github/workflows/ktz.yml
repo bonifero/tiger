@@ -43,6 +43,8 @@ jobs:
       - name: Install build dependencies
         run: python -m pip install -r ../.github/requirements-build.txt
       - name: Build Windows executable
+        env:
+          PYTHONIOENCODING: utf-8
         run: python build.py
       - name: Upload executable
         uses: actions/upload-artifact@v6
