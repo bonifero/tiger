@@ -1,0 +1,4439 @@
+{
+  "scope": "Prepared test inputs only; no original EXE run by generator.",
+  "cases": [
+    {
+      "case": "example",
+      "file": "example-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "example",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ]
+        ],
+        "b": [
+          3000,
+          -300
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.33333333333333,
+            33.333333333333336,
+            0.0
+          ],
+          "x_rational": [
+            "100/3",
+            "100/3",
+            "0"
+          ],
+          "objective": 66.66666666666666,
+          "objective_rational": "200/3",
+          "slack": [
+            0.0,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33,
+            33,
+            1
+          ],
+          "x_rational": [
+            "33",
+            "33",
+            "1"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            10.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.33333333333333,
+            33.333333333333336,
+            0.0
+          ],
+          "objective": 66.66666666666666,
+          "objective_rational": "200/3"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "example",
+      "file": "example-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "example",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ]
+        ],
+        "b": [
+          3000,
+          -300
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.33333333333333,
+            33.333333333333336,
+            0.0
+          ],
+          "x_rational": [
+            "100/3",
+            "100/3",
+            "0"
+          ],
+          "objective": 66.66666666666666,
+          "objective_rational": "200/3",
+          "slack": [
+            0.0,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33,
+            33,
+            1
+          ],
+          "x_rational": [
+            "33",
+            "33",
+            "1"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            10.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.33333333333333,
+            33.333333333333336,
+            0.0
+          ],
+          "objective": 66.66666666666666,
+          "objective_rational": "200/3"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "variant1",
+      "file": "variant1-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "variant1",
+        "c": [
+          35,
+          25,
+          30,
+          23
+        ],
+        "A": [
+          [
+            3,
+            3,
+            2,
+            2
+          ],
+          [
+            1,
+            2,
+            3,
+            1
+          ],
+          [
+            6,
+            6,
+            7,
+            6
+          ],
+          [
+            -1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "b": [
+          300,
+          400,
+          500,
+          -50
+        ],
+        "sense": "max",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            83.33333333333333,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "x_rational": [
+            "250/3",
+            "0",
+            "0",
+            "0"
+          ],
+          "objective": 2916.6666666666665,
+          "objective_rational": "8750/3",
+          "slack": [
+            50.0,
+            316.6666666666667,
+            0.0,
+            33.33333333333333
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            83,
+            0,
+            0,
+            0
+          ],
+          "x_rational": [
+            "83",
+            "0",
+            "0",
+            "0"
+          ],
+          "objective": 2905.0,
+          "objective_rational": "2905",
+          "slack": [
+            51.0,
+            317.0,
+            2.0,
+            33.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            83.33333333333333,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "objective": 2916.6666666666665,
+          "objective_rational": "8750/3"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            83.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "objective": 2905.0,
+          "objective_rational": "2905"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            83.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "objective": 2905.0,
+          "objective_rational": "2905"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "variant1",
+      "file": "variant1-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "variant1",
+        "c": [
+          35,
+          25,
+          30,
+          23
+        ],
+        "A": [
+          [
+            3,
+            3,
+            2,
+            2
+          ],
+          [
+            1,
+            2,
+            3,
+            1
+          ],
+          [
+            6,
+            6,
+            7,
+            6
+          ],
+          [
+            -1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "b": [
+          300,
+          400,
+          500,
+          -50
+        ],
+        "sense": "max",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            83.33333333333333,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "x_rational": [
+            "250/3",
+            "0",
+            "0",
+            "0"
+          ],
+          "objective": 2916.6666666666665,
+          "objective_rational": "8750/3",
+          "slack": [
+            50.0,
+            316.6666666666667,
+            0.0,
+            33.33333333333333
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            83,
+            0,
+            0,
+            0
+          ],
+          "x_rational": [
+            "83",
+            "0",
+            "0",
+            "0"
+          ],
+          "objective": 2905.0,
+          "objective_rational": "2905",
+          "slack": [
+            51.0,
+            317.0,
+            2.0,
+            33.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            83.33333333333333,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "objective": 2916.6666666666665,
+          "objective_rational": "8750/3"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            83.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "objective": 2905.0,
+          "objective_rational": "2905"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            83.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "objective": 2905.0,
+          "objective_rational": "2905"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "variant2_profit",
+      "file": "variant2_profit-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "variant2_profit",
+        "c": [
+          -3000,
+          -5500,
+          2200,
+          1600
+        ],
+        "A": [
+          [
+            4000,
+            6000,
+            400,
+            3200
+          ],
+          [
+            10000,
+            6000,
+            4000,
+            5000
+          ]
+        ],
+        "b": [
+          1000000,
+          10800000
+        ],
+        "sense": "max",
+        "notes": [
+          "Profit interpreted as price minus stated wages; other costs absent."
+        ],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0.0,
+            0.0,
+            2500.0,
+            0.0
+          ],
+          "x_rational": [
+            "0",
+            "0",
+            "2500",
+            "0"
+          ],
+          "objective": 5500000.0,
+          "objective_rational": "5500000",
+          "slack": [
+            0.0,
+            800000.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0,
+            0,
+            2500,
+            0
+          ],
+          "x_rational": [
+            "0",
+            "0",
+            "2500",
+            "0"
+          ],
+          "objective": 5500000.0,
+          "objective_rational": "5500000",
+          "slack": [
+            0.0,
+            800000.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0.0,
+            0.0,
+            2500.0,
+            0.0
+          ],
+          "objective": 5500000.0,
+          "objective_rational": "5500000"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0.0,
+            0.0,
+            2500.0,
+            0.0
+          ],
+          "objective": 5500000.0,
+          "objective_rational": "5500000"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            0.0,
+            0.0,
+            2500.0,
+            0.0
+          ],
+          "objective": 5500000.0,
+          "objective_rational": "5500000"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "variant2_profit",
+      "file": "variant2_profit-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "variant2_profit",
+        "c": [
+          -3000,
+          -5500,
+          2200,
+          1600
+        ],
+        "A": [
+          [
+            4000,
+            6000,
+            400,
+            3200
+          ],
+          [
+            10000,
+            6000,
+            4000,
+            5000
+          ]
+        ],
+        "b": [
+          1000000,
+          10800000
+        ],
+        "sense": "max",
+        "notes": [
+          "Profit interpreted as price minus stated wages; other costs absent."
+        ],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0.0,
+            0.0,
+            2500.0,
+            0.0
+          ],
+          "x_rational": [
+            "0",
+            "0",
+            "2500",
+            "0"
+          ],
+          "objective": 5500000.0,
+          "objective_rational": "5500000",
+          "slack": [
+            0.0,
+            800000.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0,
+            0,
+            2500,
+            0
+          ],
+          "x_rational": [
+            "0",
+            "0",
+            "2500",
+            "0"
+          ],
+          "objective": 5500000.0,
+          "objective_rational": "5500000",
+          "slack": [
+            0.0,
+            800000.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0.0,
+            0.0,
+            2500.0,
+            0.0
+          ],
+          "objective": 5500000.0,
+          "objective_rational": "5500000"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0.0,
+            0.0,
+            2500.0,
+            0.0
+          ],
+          "objective": 5500000.0,
+          "objective_rational": "5500000"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            0.0,
+            0.0,
+            2500.0,
+            0.0
+          ],
+          "objective": 5500000.0,
+          "objective_rational": "5500000"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "variant3",
+      "file": "variant3-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "variant3",
+        "c": [
+          2.5,
+          1.5,
+          2.2
+        ],
+        "A": [
+          [
+            3,
+            4,
+            6
+          ],
+          [
+            4,
+            4,
+            7
+          ],
+          [
+            5,
+            4,
+            8
+          ]
+        ],
+        "b": [
+          336,
+          266.8,
+          501
+        ],
+        "sense": "max",
+        "notes": [
+          "Objective scaled by 10: divide F by 10; second constraint scaled by 10."
+        ],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            66.7,
+            0.0,
+            0.0
+          ],
+          "x_rational": [
+            "667/10",
+            "0",
+            "0"
+          ],
+          "objective": 1667.5,
+          "objective_rational": "3335/2",
+          "slack": [
+            135.89999999999998,
+            0.0,
+            167.5
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            66,
+            0,
+            0
+          ],
+          "x_rational": [
+            "66",
+            "0",
+            "0"
+          ],
+          "objective": 1650.0,
+          "objective_rational": "1650",
+          "slack": [
+            138.0,
+            28.0,
+            171.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            66.7,
+            0.0,
+            0.0
+          ],
+          "objective": 166.75,
+          "objective_rational": "667/4"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            66.0,
+            0.0,
+            0.0
+          ],
+          "objective": 165.0,
+          "objective_rational": "165"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            66.0,
+            0.0,
+            0.0
+          ],
+          "objective": 165.0,
+          "objective_rational": "165"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "variant3",
+      "file": "variant3-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "variant3",
+        "c": [
+          2.5,
+          1.5,
+          2.2
+        ],
+        "A": [
+          [
+            3,
+            4,
+            6
+          ],
+          [
+            4,
+            4,
+            7
+          ],
+          [
+            5,
+            4,
+            8
+          ]
+        ],
+        "b": [
+          336,
+          266.8,
+          501
+        ],
+        "sense": "max",
+        "notes": [
+          "Objective scaled by 10: divide F by 10; second constraint scaled by 10."
+        ],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            66.7,
+            0.0,
+            0.0
+          ],
+          "x_rational": [
+            "667/10",
+            "0",
+            "0"
+          ],
+          "objective": 1667.5,
+          "objective_rational": "3335/2",
+          "slack": [
+            135.89999999999998,
+            0.0,
+            167.5
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            66,
+            0,
+            0
+          ],
+          "x_rational": [
+            "66",
+            "0",
+            "0"
+          ],
+          "objective": 1650.0,
+          "objective_rational": "1650",
+          "slack": [
+            138.0,
+            28.0,
+            171.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            66.7,
+            0.0,
+            0.0
+          ],
+          "objective": 166.75,
+          "objective_rational": "667/4"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            66.0,
+            0.0,
+            0.0
+          ],
+          "objective": 165.0,
+          "objective_rational": "165"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            66.0,
+            0.0,
+            0.0
+          ],
+          "objective": 165.0,
+          "objective_rational": "165"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "variant4",
+      "file": "variant4-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "variant4",
+        "c": [
+          12,
+          15,
+          10,
+          12,
+          11
+        ],
+        "A": [
+          [
+            3,
+            4,
+            5,
+            4,
+            2
+          ],
+          [
+            2,
+            1,
+            2,
+            25,
+            3
+          ],
+          [
+            -300,
+            -260,
+            -320,
+            -400,
+            -450
+          ]
+        ],
+        "b": [
+          400,
+          30,
+          -30000
+        ],
+        "sense": "min",
+        "notes": [
+          "Energy D extracted as literal 25, no silent correction."
+        ],
+        "lp": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)"
+        },
+        "integer": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)"
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)"
+        },
+        "integer": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)"
+        },
+        "integer_with_integer_objective": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F."
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "variant4",
+      "file": "variant4-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "variant4",
+        "c": [
+          12,
+          15,
+          10,
+          12,
+          11
+        ],
+        "A": [
+          [
+            3,
+            4,
+            5,
+            4,
+            2
+          ],
+          [
+            2,
+            1,
+            2,
+            25,
+            3
+          ],
+          [
+            -300,
+            -260,
+            -320,
+            -400,
+            -450
+          ]
+        ],
+        "b": [
+          400,
+          30,
+          -30000
+        ],
+        "sense": "min",
+        "notes": [
+          "Energy D extracted as literal 25, no silent correction."
+        ],
+        "lp": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)"
+        },
+        "integer": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)"
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)"
+        },
+        "integer": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)"
+        },
+        "integer_with_integer_objective": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F."
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "variant5",
+      "file": "variant5-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "variant5",
+        "c": [
+          100,
+          40,
+          20
+        ],
+        "A": [
+          [
+            32,
+            31,
+            38
+          ],
+          [
+            2,
+            2,
+            8
+          ],
+          [
+            10.2,
+            7.5,
+            5.8
+          ]
+        ],
+        "b": [
+          900,
+          300,
+          16800
+        ],
+        "sense": "max",
+        "notes": [
+          "Labor row scaled by 10."
+        ],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            28.125,
+            0.0,
+            0.0
+          ],
+          "x_rational": [
+            "225/8",
+            "0",
+            "0"
+          ],
+          "objective": 2812.5,
+          "objective_rational": "5625/2",
+          "slack": [
+            0.0,
+            243.75,
+            165131.25
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            28,
+            0,
+            0
+          ],
+          "x_rational": [
+            "28",
+            "0",
+            "0"
+          ],
+          "objective": 2800.0,
+          "objective_rational": "2800",
+          "slack": [
+            4.0,
+            244.0,
+            165144.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            28.125,
+            0.0,
+            0.0
+          ],
+          "objective": 2812.5,
+          "objective_rational": "5625/2"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            28.0,
+            0.0,
+            0.0
+          ],
+          "objective": 2800.0,
+          "objective_rational": "2800"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            28.0,
+            0.0,
+            0.0
+          ],
+          "objective": 2800.0,
+          "objective_rational": "2800"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "variant5",
+      "file": "variant5-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "variant5",
+        "c": [
+          100,
+          40,
+          20
+        ],
+        "A": [
+          [
+            32,
+            31,
+            38
+          ],
+          [
+            2,
+            2,
+            8
+          ],
+          [
+            10.2,
+            7.5,
+            5.8
+          ]
+        ],
+        "b": [
+          900,
+          300,
+          16800
+        ],
+        "sense": "max",
+        "notes": [
+          "Labor row scaled by 10."
+        ],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            28.125,
+            0.0,
+            0.0
+          ],
+          "x_rational": [
+            "225/8",
+            "0",
+            "0"
+          ],
+          "objective": 2812.5,
+          "objective_rational": "5625/2",
+          "slack": [
+            0.0,
+            243.75,
+            165131.25
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            28,
+            0,
+            0
+          ],
+          "x_rational": [
+            "28",
+            "0",
+            "0"
+          ],
+          "objective": 2800.0,
+          "objective_rational": "2800",
+          "slack": [
+            4.0,
+            244.0,
+            165144.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            28.125,
+            0.0,
+            0.0
+          ],
+          "objective": 2812.5,
+          "objective_rational": "5625/2"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            28.0,
+            0.0,
+            0.0
+          ],
+          "objective": 2800.0,
+          "objective_rational": "2800"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            28.0,
+            0.0,
+            0.0
+          ],
+          "objective": 2800.0,
+          "objective_rational": "2800"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "variant6",
+      "file": "variant6-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "variant6",
+        "c": [
+          100,
+          400,
+          200,
+          300
+        ],
+        "A": [
+          [
+            -40,
+            -60,
+            -100,
+            -160
+          ],
+          [
+            20,
+            25,
+            40,
+            35
+          ]
+        ],
+        "b": [
+          -10000,
+          4000
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0.0,
+            0.0,
+            0.0,
+            62.5
+          ],
+          "x_rational": [
+            "0",
+            "0",
+            "0",
+            "125/2"
+          ],
+          "objective": 18750.0,
+          "objective_rational": "18750",
+          "slack": [
+            0.0,
+            1812.5
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2,
+            0,
+            0,
+            62
+          ],
+          "x_rational": [
+            "2",
+            "0",
+            "0",
+            "62"
+          ],
+          "objective": 18800.0,
+          "objective_rational": "18800",
+          "slack": [
+            0.0,
+            1790.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0.0,
+            0.0,
+            0.0,
+            62.5
+          ],
+          "objective": 18750.0,
+          "objective_rational": "18750"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2.0,
+            0.0,
+            0.0,
+            62.0
+          ],
+          "objective": 18800.0,
+          "objective_rational": "18800"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            2.0,
+            0.0,
+            0.0,
+            62.0
+          ],
+          "objective": 18800.0,
+          "objective_rational": "18800"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "variant6",
+      "file": "variant6-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "variant6",
+        "c": [
+          100,
+          400,
+          200,
+          300
+        ],
+        "A": [
+          [
+            -40,
+            -60,
+            -100,
+            -160
+          ],
+          [
+            20,
+            25,
+            40,
+            35
+          ]
+        ],
+        "b": [
+          -10000,
+          4000
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0.0,
+            0.0,
+            0.0,
+            62.5
+          ],
+          "x_rational": [
+            "0",
+            "0",
+            "0",
+            "125/2"
+          ],
+          "objective": 18750.0,
+          "objective_rational": "18750",
+          "slack": [
+            0.0,
+            1812.5
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2,
+            0,
+            0,
+            62
+          ],
+          "x_rational": [
+            "2",
+            "0",
+            "0",
+            "62"
+          ],
+          "objective": 18800.0,
+          "objective_rational": "18800",
+          "slack": [
+            0.0,
+            1790.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0.0,
+            0.0,
+            0.0,
+            62.5
+          ],
+          "objective": 18750.0,
+          "objective_rational": "18750"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2.0,
+            0.0,
+            0.0,
+            62.0
+          ],
+          "objective": 18800.0,
+          "objective_rational": "18800"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            2.0,
+            0.0,
+            0.0,
+            62.0
+          ],
+          "objective": 18800.0,
+          "objective_rational": "18800"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "G11",
+      "file": "G11-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "G11",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ],
+          [
+            1,
+            0,
+            0
+          ]
+        ],
+        "b": [
+          3000,
+          -300,
+          33
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            33.75,
+            0.0
+          ],
+          "x_rational": [
+            "33",
+            "135/4",
+            "0"
+          ],
+          "objective": 66.75,
+          "objective_rational": "267/4",
+          "slack": [
+            7.5,
+            0.0,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33,
+            34,
+            0
+          ],
+          "x_rational": [
+            "33",
+            "34",
+            "0"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            33.75,
+            0.0
+          ],
+          "objective": 66.75,
+          "objective_rational": "267/4"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "G11",
+      "file": "G11-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "G11",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ],
+          [
+            1,
+            0,
+            0
+          ]
+        ],
+        "b": [
+          3000,
+          -300,
+          33
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            33.75,
+            0.0
+          ],
+          "x_rational": [
+            "33",
+            "135/4",
+            "0"
+          ],
+          "objective": 66.75,
+          "objective_rational": "267/4",
+          "slack": [
+            7.5,
+            0.0,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33,
+            34,
+            0
+          ],
+          "x_rational": [
+            "33",
+            "34",
+            "0"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            33.75,
+            0.0
+          ],
+          "objective": 66.75,
+          "objective_rational": "267/4"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "G12",
+      "file": "G12-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "G12",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ],
+          [
+            -1,
+            0,
+            0
+          ]
+        ],
+        "b": [
+          3000,
+          -300,
+          -34
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            34.0,
+            28.0,
+            6.0
+          ],
+          "x_rational": [
+            "34",
+            "28",
+            "6"
+          ],
+          "objective": 68.0,
+          "objective_rational": "68",
+          "slack": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            34,
+            28,
+            6
+          ],
+          "x_rational": [
+            "34",
+            "28",
+            "6"
+          ],
+          "objective": 68.0,
+          "objective_rational": "68",
+          "slack": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            34.0,
+            28.0,
+            6.0
+          ],
+          "objective": 68.0,
+          "objective_rational": "68"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            34.0,
+            28.0,
+            6.0
+          ],
+          "objective": 68.0,
+          "objective_rational": "68"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            34.0,
+            28.0,
+            6.0
+          ],
+          "objective": 68.0,
+          "objective_rational": "68"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "G12",
+      "file": "G12-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "G12",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ],
+          [
+            -1,
+            0,
+            0
+          ]
+        ],
+        "b": [
+          3000,
+          -300,
+          -34
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            34.0,
+            28.0,
+            6.0
+          ],
+          "x_rational": [
+            "34",
+            "28",
+            "6"
+          ],
+          "objective": 68.0,
+          "objective_rational": "68",
+          "slack": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            34,
+            28,
+            6
+          ],
+          "x_rational": [
+            "34",
+            "28",
+            "6"
+          ],
+          "objective": 68.0,
+          "objective_rational": "68",
+          "slack": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            34.0,
+            28.0,
+            6.0
+          ],
+          "objective": 68.0,
+          "objective_rational": "68"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            34.0,
+            28.0,
+            6.0
+          ],
+          "objective": 68.0,
+          "objective_rational": "68"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            34.0,
+            28.0,
+            6.0
+          ],
+          "objective": 68.0,
+          "objective_rational": "68"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "G21",
+      "file": "G21-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "G21",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "b": [
+          3000,
+          -300,
+          33,
+          33
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "x_rational": [
+            "33",
+            "33",
+            "1"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            10.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33,
+            33,
+            1
+          ],
+          "x_rational": [
+            "33",
+            "33",
+            "1"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            10.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "G21",
+      "file": "G21-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "G21",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "b": [
+          3000,
+          -300,
+          33,
+          33
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "x_rational": [
+            "33",
+            "33",
+            "1"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            10.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33,
+            33,
+            1
+          ],
+          "x_rational": [
+            "33",
+            "33",
+            "1"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            10.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "G22",
+      "file": "G22-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "G22",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ]
+        ],
+        "b": [
+          3000,
+          -300,
+          33,
+          -34
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            32.8,
+            34.0,
+            0.0
+          ],
+          "x_rational": [
+            "164/5",
+            "34",
+            "0"
+          ],
+          "objective": 66.8,
+          "objective_rational": "334/5",
+          "slack": [
+            12.0,
+            0.0,
+            0.20000000000000284,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33,
+            34,
+            0
+          ],
+          "x_rational": [
+            "33",
+            "34",
+            "0"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            32.8,
+            34.0,
+            0.0
+          ],
+          "objective": 66.8,
+          "objective_rational": "334/5"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "G22",
+      "file": "G22-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "G22",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ]
+        ],
+        "b": [
+          3000,
+          -300,
+          33,
+          -34
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            32.8,
+            34.0,
+            0.0
+          ],
+          "x_rational": [
+            "164/5",
+            "34",
+            "0"
+          ],
+          "objective": 66.8,
+          "objective_rational": "334/5",
+          "slack": [
+            12.0,
+            0.0,
+            0.20000000000000284,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33,
+            34,
+            0
+          ],
+          "x_rational": [
+            "33",
+            "34",
+            "0"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            32.8,
+            34.0,
+            0.0
+          ],
+          "objective": 66.8,
+          "objective_rational": "334/5"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "G33",
+      "file": "G33-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "G33",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ]
+        ],
+        "b": [
+          3000,
+          -300,
+          33,
+          -34,
+          32
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            32.0,
+            35.0,
+            0.0
+          ],
+          "x_rational": [
+            "32",
+            "35",
+            "0"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            30.0,
+            0.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            32,
+            35,
+            0
+          ],
+          "x_rational": [
+            "32",
+            "35",
+            "0"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            30.0,
+            0.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            32.0,
+            35.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            32.0,
+            35.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            32.0,
+            35.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "G33",
+      "file": "G33-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "G33",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ]
+        ],
+        "b": [
+          3000,
+          -300,
+          33,
+          -34,
+          32
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            32.0,
+            35.0,
+            0.0
+          ],
+          "x_rational": [
+            "32",
+            "35",
+            "0"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            30.0,
+            0.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            32,
+            35,
+            0
+          ],
+          "x_rational": [
+            "32",
+            "35",
+            "0"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            30.0,
+            0.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            32.0,
+            35.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            32.0,
+            35.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            32.0,
+            35.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "G34",
+      "file": "G34-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "G34",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            -1,
+            0,
+            0
+          ]
+        ],
+        "b": [
+          3000,
+          -300,
+          33,
+          -34,
+          -33
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "x_rational": [
+            "33",
+            "34",
+            "0"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33,
+            34,
+            0
+          ],
+          "x_rational": [
+            "33",
+            "34",
+            "0"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "G34",
+      "file": "G34-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "G34",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            -1,
+            0,
+            0
+          ]
+        ],
+        "b": [
+          3000,
+          -300,
+          33,
+          -34,
+          -33
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "x_rational": [
+            "33",
+            "34",
+            "0"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33,
+            34,
+            0
+          ],
+          "x_rational": [
+            "33",
+            "34",
+            "0"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            33.0,
+            34.0,
+            0.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "simple_fraction",
+      "file": "simple_fraction-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "simple_fraction",
+        "c": [
+          1
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "b": [
+          2.5
+        ],
+        "sense": "max"
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2.5
+          ],
+          "objective": 2.5,
+          "objective_rational": "5/2"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "simple_fraction",
+      "file": "simple_fraction-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "simple_fraction",
+        "c": [
+          1
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "b": [
+          2.5
+        ],
+        "sense": "max"
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2.5
+          ],
+          "objective": 2.5,
+          "objective_rational": "5/2"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "infeasible",
+      "file": "infeasible-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "infeasible",
+        "c": [
+          1
+        ],
+        "A": [
+          [
+            1
+          ],
+          [
+            -1
+          ]
+        ],
+        "b": [
+          1,
+          -2
+        ],
+        "sense": "max"
+      },
+      "expected": {
+        "lp": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)"
+        },
+        "integer": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)"
+        },
+        "integer_with_integer_objective": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F."
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "infeasible",
+      "file": "infeasible-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "infeasible",
+        "c": [
+          1
+        ],
+        "A": [
+          [
+            1
+          ],
+          [
+            -1
+          ]
+        ],
+        "b": [
+          1,
+          -2
+        ],
+        "sense": "max"
+      },
+      "expected": {
+        "lp": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)"
+        },
+        "integer": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)"
+        },
+        "integer_with_integer_objective": {
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F."
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "unbounded",
+      "file": "unbounded-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "unbounded",
+        "c": [
+          1
+        ],
+        "A": [
+          [
+            -1
+          ]
+        ],
+        "b": [
+          0
+        ],
+        "sense": "max"
+      },
+      "expected": {
+        "lp": {
+          "status": 3,
+          "message": "The problem is unbounded. (HiGHS Status 10: model_status is Unbounded; primal_status is At upper bound)"
+        },
+        "integer": {
+          "status": 4,
+          "message": "The problem is unbounded or infeasible. (HiGHS Status 9: model_status is Primal infeasible or unbounded; primal_status is At lower/fixed bound)"
+        },
+        "integer_with_integer_objective": {
+          "status": 4,
+          "message": "The problem is unbounded or infeasible. (HiGHS Status 9: model_status is Primal infeasible or unbounded; primal_status is At lower/fixed bound)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F."
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "unbounded",
+      "file": "unbounded-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "unbounded",
+        "c": [
+          1
+        ],
+        "A": [
+          [
+            -1
+          ]
+        ],
+        "b": [
+          0
+        ],
+        "sense": "max"
+      },
+      "expected": {
+        "lp": {
+          "status": 3,
+          "message": "The problem is unbounded. (HiGHS Status 10: model_status is Unbounded; primal_status is At upper bound)"
+        },
+        "integer": {
+          "status": 4,
+          "message": "The problem is unbounded or infeasible. (HiGHS Status 9: model_status is Primal infeasible or unbounded; primal_status is At lower/fixed bound)"
+        },
+        "integer_with_integer_objective": {
+          "status": 4,
+          "message": "The problem is unbounded or infeasible. (HiGHS Status 9: model_status is Primal infeasible or unbounded; primal_status is At lower/fixed bound)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F."
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "negative_rhs",
+      "file": "negative_rhs-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "negative_rhs",
+        "c": [
+          1
+        ],
+        "A": [
+          [
+            -1
+          ],
+          [
+            1
+          ]
+        ],
+        "b": [
+          -2,
+          5
+        ],
+        "sense": "min"
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "negative_rhs",
+      "file": "negative_rhs-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "negative_rhs",
+        "c": [
+          1
+        ],
+        "A": [
+          [
+            -1
+          ],
+          [
+            1
+          ]
+        ],
+        "b": [
+          -2,
+          5
+        ],
+        "sense": "min"
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "equality",
+      "file": "equality-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "equality",
+        "c": [
+          1,
+          1
+        ],
+        "A": [
+          [
+            1,
+            1
+          ]
+        ],
+        "b": [
+          3
+        ],
+        "sense": "max",
+        "signs": [
+          0
+        ]
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0.0,
+            3.0
+          ],
+          "objective": 3.0,
+          "objective_rational": "3"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            3.0,
+            0.0
+          ],
+          "objective": 3.0,
+          "objective_rational": "3"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            3.0,
+            0.0
+          ],
+          "objective": 3.0,
+          "objective_rational": "3"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "equality",
+      "file": "equality-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "equality",
+        "c": [
+          1,
+          1
+        ],
+        "A": [
+          [
+            1,
+            1
+          ]
+        ],
+        "b": [
+          3
+        ],
+        "sense": "max",
+        "signs": [
+          0
+        ]
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0.0,
+            3.0
+          ],
+          "objective": 3.0,
+          "objective_rational": "3"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            3.0,
+            0.0
+          ],
+          "objective": 3.0,
+          "objective_rational": "3"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            3.0,
+            0.0
+          ],
+          "objective": 3.0,
+          "objective_rational": "3"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "degenerate",
+      "file": "degenerate-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "degenerate",
+        "c": [
+          1,
+          1
+        ],
+        "A": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "b": [
+          0,
+          1,
+          1
+        ],
+        "sense": "max"
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            -0.0,
+            1.0
+          ],
+          "objective": 1.0,
+          "objective_rational": "1"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0.0,
+            1.0
+          ],
+          "objective": 1.0,
+          "objective_rational": "1"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            0.0,
+            1.0
+          ],
+          "objective": 1.0,
+          "objective_rational": "1"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "degenerate",
+      "file": "degenerate-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "degenerate",
+        "c": [
+          1,
+          1
+        ],
+        "A": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "b": [
+          0,
+          1,
+          1
+        ],
+        "sense": "max"
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            -0.0,
+            1.0
+          ],
+          "objective": 1.0,
+          "objective_rational": "1"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            0.0,
+            1.0
+          ],
+          "objective": 1.0,
+          "objective_rational": "1"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            0.0,
+            1.0
+          ],
+          "objective": 1.0,
+          "objective_rational": "1"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "multiple_optima",
+      "file": "multiple_optima-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "multiple_optima",
+        "c": [
+          1,
+          1
+        ],
+        "A": [
+          [
+            1,
+            1
+          ]
+        ],
+        "b": [
+          3
+        ],
+        "sense": "max"
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            3.0,
+            0.0
+          ],
+          "objective": 3.0,
+          "objective_rational": "3"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            3.0,
+            0.0
+          ],
+          "objective": 3.0,
+          "objective_rational": "3"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            3.0,
+            0.0
+          ],
+          "objective": 3.0,
+          "objective_rational": "3"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "multiple_optima",
+      "file": "multiple_optima-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "multiple_optima",
+        "c": [
+          1,
+          1
+        ],
+        "A": [
+          [
+            1,
+            1
+          ]
+        ],
+        "b": [
+          3
+        ],
+        "sense": "max"
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            3.0,
+            0.0
+          ],
+          "objective": 3.0,
+          "objective_rational": "3"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            3.0,
+            0.0
+          ],
+          "objective": 3.0,
+          "objective_rational": "3"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            3.0,
+            0.0
+          ],
+          "objective": 3.0,
+          "objective_rational": "3"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "strict_upper",
+      "file": "strict_upper-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "strict_upper",
+        "c": [
+          1
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "b": [
+          1.5
+        ],
+        "sense": "max",
+        "signs": [
+          -2
+        ]
+      },
+      "expected": {
+        "status": "strict",
+        "note": "Open feasible set; compare against documented semantics, not LP <= relaxation."
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "strict_upper",
+      "file": "strict_upper-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "strict_upper",
+        "c": [
+          1
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "b": [
+          1.5
+        ],
+        "sense": "max",
+        "signs": [
+          -2
+        ]
+      },
+      "expected": {
+        "status": "strict",
+        "note": "Open feasible set; compare against documented semantics, not LP <= relaxation."
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "strict_lower",
+      "file": "strict_lower-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "strict_lower",
+        "c": [
+          1
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "b": [
+          1.5
+        ],
+        "sense": "min",
+        "signs": [
+          2
+        ]
+      },
+      "expected": {
+        "status": "strict",
+        "note": "Open feasible set; compare against documented semantics, not LP <= relaxation."
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "strict_lower",
+      "file": "strict_lower-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "strict_lower",
+        "c": [
+          1
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "b": [
+          1.5
+        ],
+        "sense": "min",
+        "signs": [
+          2
+        ]
+      },
+      "expected": {
+        "status": "strict",
+        "note": "Open feasible set; compare against documented semantics, not LP <= relaxation."
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "negative_objective",
+      "file": "negative_objective-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "negative_objective",
+        "c": [
+          -1
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "b": [
+          3
+        ],
+        "sense": "min"
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            3.0
+          ],
+          "objective": -3.0,
+          "objective_rational": "-3"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            3.0
+          ],
+          "objective": -3.0,
+          "objective_rational": "-3"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            3.0
+          ],
+          "objective": -3.0,
+          "objective_rational": "-3"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "negative_objective",
+      "file": "negative_objective-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "negative_objective",
+        "c": [
+          -1
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "b": [
+          3
+        ],
+        "sense": "min"
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            3.0
+          ],
+          "objective": -3.0,
+          "objective_rational": "-3"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            3.0
+          ],
+          "objective": -3.0,
+          "objective_rational": "-3"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            3.0
+          ],
+          "objective": -3.0,
+          "objective_rational": "-3"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "zero_row",
+      "file": "zero_row-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "zero_row",
+        "c": [
+          1
+        ],
+        "A": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ],
+        "b": [
+          0,
+          2
+        ],
+        "sense": "max"
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "zero_row",
+      "file": "zero_row-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "zero_row",
+        "c": [
+          1
+        ],
+        "A": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ],
+        "b": [
+          0,
+          2
+        ],
+        "sense": "max"
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            2.0
+          ],
+          "objective": 2.0,
+          "objective_rational": "2"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "fractional_objective",
+      "file": "fractional_objective-lp.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "fractional_objective",
+        "c": [
+          0.5
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "b": [
+          3
+        ],
+        "sense": "max"
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            3.0
+          ],
+          "objective": 1.5,
+          "objective_rational": "3/2"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            3.0
+          ],
+          "objective": 1.5,
+          "objective_rational": "3/2"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            2.0
+          ],
+          "objective": 1.0,
+          "objective_rational": "1"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "fractional_objective",
+      "file": "fractional_objective-ip.ini",
+      "method": "omdCutting",
+      "model": {
+        "name": "fractional_objective",
+        "c": [
+          0.5
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "b": [
+          3
+        ],
+        "sense": "max"
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            3.0
+          ],
+          "objective": 1.5,
+          "objective_rational": "3/2"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            3.0
+          ],
+          "objective": 1.5,
+          "objective_rational": "3/2"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            2.0
+          ],
+          "objective": 1.0,
+          "objective_rational": "1"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "example-real",
+      "file": "example-real.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "example",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ]
+        ],
+        "b": [
+          3000,
+          -300
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.33333333333333,
+            33.333333333333336,
+            0.0
+          ],
+          "x_rational": [
+            "100/3",
+            "100/3",
+            "0"
+          ],
+          "objective": 66.66666666666666,
+          "objective_rational": "200/3",
+          "slack": [
+            0.0,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33,
+            33,
+            1
+          ],
+          "x_rational": [
+            "33",
+            "33",
+            "1"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            10.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.33333333333333,
+            33.333333333333336,
+            0.0
+          ],
+          "objective": 66.66666666666666,
+          "objective_rational": "200/3"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        }
+      },
+      "runtime_status": "not_run"
+    },
+    {
+      "case": "example-step",
+      "file": "example-step.ini",
+      "method": "omdSimplex",
+      "model": {
+        "name": "example",
+        "c": [
+          1,
+          1,
+          1
+        ],
+        "A": [
+          [
+            60,
+            30,
+            20
+          ],
+          [
+            -5,
+            -4,
+            -3
+          ]
+        ],
+        "b": [
+          3000,
+          -300
+        ],
+        "sense": "min",
+        "notes": [],
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.33333333333333,
+            33.333333333333336,
+            0.0
+          ],
+          "x_rational": [
+            "100/3",
+            "100/3",
+            "0"
+          ],
+          "objective": 66.66666666666666,
+          "objective_rational": "200/3",
+          "slack": [
+            0.0,
+            0.0
+          ]
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33,
+            33,
+            1
+          ],
+          "x_rational": [
+            "33",
+            "33",
+            "1"
+          ],
+          "objective": 67.0,
+          "objective_rational": "67",
+          "slack": [
+            10.0,
+            0.0
+          ]
+        }
+      },
+      "expected": {
+        "lp": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.33333333333333,
+            33.333333333333336,
+            0.0
+          ],
+          "objective": 66.66666666666666,
+          "objective_rational": "200/3"
+        },
+        "integer": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        },
+        "integer_with_integer_objective": {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "note": "Integer x and integer F=c*x; relevant only to cutting with vkdInt F.",
+          "x": [
+            33.0,
+            33.0,
+            1.0
+          ],
+          "objective": 67.0,
+          "objective_rational": "67"
+        }
+      },
+      "runtime_status": "not_run"
+    }
+  ]
+}
