@@ -108,8 +108,9 @@ class Probe:
     def click(self,name):
         h=self.resolve(name);assert U.IsWindowVisible(h),(name,'hidden')
         left,top,right,bottom=rect(h)
-        gui.click((left+right)//2,(top+bottom)//2);self.actions+=1;time.sleep(.2)
+        gui.click((left+right)//2,(top+bottom)//2);self.actions+=1;time.sleep(.8)
     def dialogs(self,label):
+        time.sleep(.5)
         for i in range(4):
             dialogs=[h for h in owned(self.proc.pid) if h!=self.main and U.IsWindowVisible(h) and cls(h)!='TApplication' and rect(h)[2]>rect(h)[0]]
             if not dialogs:return
@@ -119,7 +120,7 @@ class Probe:
                 if buttons:
                     left,top,right,bottom=rect(buttons[0]);gui.click((left+right)//2,(top+bottom)//2)
                 else:U.PostMessageW(h,0x10,0,0)
-            time.sleep(.15)
+            time.sleep(.4)
     def edit(self,name,value):
         h=self.resolve(name);left,top,right,bottom=rect(h)
         gui.click((left+right)//2,(top+bottom)//2)
