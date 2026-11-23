@@ -1,9 +1,9 @@
 """Regression checks for simultaneous references, navigation and source validation."""
 import unittest
-from tkinter import ttk
+from tkinter import ttk, font
 from unittest.mock import patch
 
-from app import App, DataGrid
+from app import App, DataGrid, GREEN, RED
 from model import Problem
 from presets import PRESETS
 
@@ -70,6 +70,34 @@ class UsabilityTests(unittest.TestCase):
         self.assertEqual(self.app.lesson.phase, 'summary')
         self.assertEqual(len(self.app.reference_grids[0].columns), 3)
         self.assertEqual(self.app.accepted[0]['rows'][0], ['0', '0', '5'])
+
+    def test_footer_uses_available_width_and_preserves_feedback_on_resize(self):
+        self.app.geometry('1440x900')
+        self.app.update()
+        self.app._apply_compact_layout()
+        self.app.begin()
+        self.accept_table()
+        self.app.update()
+        label = self.app.message_label
+        metrics = font.Font(font=label.cget('font'))
+        self.assertGreater(label.winfo_width(), metrics.measure(self.app.message_var.get()))
+        self.assertLessEqual(label.winfo_reqheight(), metrics.metrics('linespace') + 8)
+        self.assertEqual(label.cget('fg'), GREEN)
+        wide_wrap = int(label.cget('wraplength'))
+        self.app.geometry('1024x700')
+        self.app.update()
+        self.app._apply_compact_layout()
+        self.app.zoom.set('140%')
+        self.app.rescale()
+        self.app.update()
+        label = self.app.message_label
+        self.assertLess(int(label.cget('wraplength')), wide_wrap)
+        self.assertAlmostEqual(int(label.cget('wraplength')), label.master.winfo_width() - 4, delta=1)
+        self.assertEqual(label.cget('fg'), GREEN)
+        self.assertGreaterEqual(self.app.check_button.winfo_width(), self.app.check_button.winfo_reqwidth())
+        self.assertFalse(self.app.check_answers())
+        self.app.update()
+        self.assertEqual(self.app.message_label.cget('fg'), RED)
 
     def test_step_references_only_show_source_and_accepted_answers(self):
         self.app.begin()

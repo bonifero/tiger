@@ -615,15 +615,21 @@ class App(tk.Tk):
         area = tk.Frame(self.footer, bg=WHITE)
         area.pack(side='left', fill='both', expand=True)
         self.message_label = self._label(area, text='', color=MUTED, anchor='w',
-                                         wraplength=280, justify='left')
+                                         width=1, wraplength=280, justify='left')
         self.message_label.configure(textvariable=self.message_var)
-        self.message_label.pack(anchor='w')
+        self.message_label.pack(fill='x', anchor='w')
+        label = self.message_label
+        def fit_message(event):
+            width = max(1, event.width - 4)
+            if int(label.cget('wraplength')) != width:
+                label.configure(wraplength=width)
+        area.bind('<Configure>', fit_message)
         return area
 
-    def _message(self, text, error=False):
+    def _message(self, text, error=False, success=False):
         self.message_var.set(text)
         if hasattr(self, 'message_label') and self.message_label.winfo_exists():
-            self.message_label.configure(fg=RED if error else MUTED)
+            self.message_label.configure(fg=RED if error else GREEN if success else MUTED)
 
     def _confirm_replace(self):
         if self.screen == 'editor':
@@ -1132,7 +1138,7 @@ class App(tk.Tk):
             if feedback.accepted:
                 self.final_plan = self.lesson.accepted_plan
                 self.show_result()
-                self._message('Практикум завершён. План допустим, его оптимальность подтверждена.')
+                self._message('Практикум завершён. План допустим, его оптимальность подтверждена.', success=True)
                 return True
         else:
             stage = self.lesson.current_stage
@@ -1154,7 +1160,7 @@ class App(tk.Tk):
                                       'columns': tuple(self.answer_grid.columns),
                                       'rows': rows})
                 self.show_lesson()
-                self._message('Таблица принята. Продолжайте решение.')
+                self._message('Таблица принята. Продолжайте решение.', success=True)
                 return True
         self.answer_grid.mark_invalid(invalid)
         self._message(feedback.message, error=True)
@@ -1395,6 +1401,7 @@ class App(tk.Tk):
             view = self.answer_grid.view_state()
             pending = self.answer_grid.get_rows()
         error = hasattr(self, 'message_label') and self.message_label.cget('fg') == RED
+        success = hasattr(self, 'message_label') and self.message_label.cget('fg') == GREEN
         message = self.message_var.get()
         hint = self.hint_var.get()
         self._style()
@@ -1409,7 +1416,7 @@ class App(tk.Tk):
                 self.answer_grid.restore_view(view)
         else:
             self.show_result()
-        self._message(message, error=error)
+        self._message(message, error=error, success=success)
         self.hint_var.set(hint)
 
     def destroy(self):
