@@ -14,6 +14,7 @@ from model import Problem, parse_number, fmt_number
 from lesson import Lesson
 from formats import load, save
 from presets import PRESETS
+from controls import Button, Combobox, Card, CONTROL_FONT_SIZE, install as install_controls
 
 TITLE = 'Рюкзак · Практикум'
 BG = '#f3f5f9'
@@ -30,22 +31,12 @@ RED = '#bf3946'
 RED_BG = '#fff0f1'
 
 
-class NavButton(tk.Label):
-    """Flat navigation that retains the same colors on Windows and Cocoa."""
-
-    def __init__(self, parent, *, command, **kwargs):
-        super().__init__(parent, takefocus=1, highlightthickness=1,
-                         highlightbackground=NAVY, highlightcolor='#7f9df4',
-                         disabledforeground='#61748f', **kwargs)
-        self.command = command
-        self.bind('<Button-1>', lambda e: self.invoke())
+class NavButton(Button):
+    """Keyboard-accessible navigation using the same compact control typography."""
+    def __init__(self, parent, *, command, text):
+        super().__init__(parent, text=text, command=command, style='Breadcrumb.TButton')
         self.bind('<Return>', lambda e: self.invoke())
-        self.bind('<space>', lambda e: self.invoke())
 
-    def invoke(self):
-        if self.cget('state') != 'disabled':
-            return self.command()
-        return None
 
 
 class DataGrid(tk.Frame):
@@ -68,7 +59,7 @@ class DataGrid(tk.Frame):
         self.family = font_family
         self.font_size = font_size
         self.cell_padding = 8 if dense else 15
-        self.row_height = max(25 if dense else 38, round(font_size * (2.5 if dense else 3.4)))
+        self.row_height = max(25 if dense else 32, round(font_size * (2.5 if dense else 2.9)))
         self.header_height = self.row_height + (4 if dense else 6)
         self.invalid = set()
         self.selected = None
@@ -176,19 +167,21 @@ class DataGrid(tk.Frame):
                 x0, x1 = self.positions[c:c + 2]
                 enabled = (r, c) in self.editable
                 value = self.rows[r][c]
-                fill = WHITE if r % 2 == 0 else '#fbfcfe'
+                fill = WHITE if r % 2 == 0 else '#fafbfe'
                 color = INK
                 if value == '—':
                     fill, color = '#f5f7fa', '#bdc5d1'
                 elif c == 0 and not enabled:
                     fill, color = '#f7f9fc', MUTED
+                if (r, c) == self.selected and enabled:
+                    fill = PALE
                 if (r, c) in self.invalid:
                     fill = RED_BG
                 self.canvas.create_rectangle(x0, y0, x1, y1, fill=fill,
-                                             outline=LINE, tags='cells')
+                                             outline='#edf1f7', tags='cells')
                 label = value if value else ('·' if enabled else '')
-                self.canvas.create_text(x0 + self.cell_padding, (y0 + y1) / 2, text=label,
-                                        anchor='w', fill=color if value else '#bec7d6',
+                self.canvas.create_text(x0 + self.cell_padding if c == 0 else (x0 + x1) / 2,
+                                        (y0 + y1) / 2, text=label, anchor='w' if c == 0 else 'center', fill=color if value else '#bec7d6',
                                         width=max(20, x1 - x0 - 2 * self.cell_padding),
                                         font=(self.family, self.font_size), tags='cells')
         if self.selected is not None:
@@ -215,9 +208,10 @@ class DataGrid(tk.Frame):
             if c == 0 and self.freeze_first:
                 x0, x1 = left, left + self.widths[0]
             self.canvas.create_rectangle(x0, top, x1, top + self.header_height,
-                                         fill='#f4f6fa', outline=LINE, tags='cells')
-            self.canvas.create_text(x0 + self.cell_padding, top + self.header_height / 2,
-                                    text=self.columns[c], anchor='w', fill=MUTED,
+                                         fill='#f6f8fc', outline=LINE, tags='cells')
+            self.canvas.create_text(x0 + self.cell_padding if c == 0 else (x0 + x1) / 2,
+                                    top + self.header_height / 2, text=self.columns[c],
+                                    anchor='w' if c == 0 else 'center', fill=MUTED,
                                     width=max(20, x1 - x0 - 2 * self.cell_padding),
                                     font=(self.family, self.font_size - 1, 'bold'), tags='cells')
         if self.entry_window:
@@ -270,7 +264,7 @@ class DataGrid(tk.Frame):
         x0, x1 = self.positions[c:c + 2]
         y0 = self.header_height + r * self.row_height
         self.entry = tk.Entry(self.canvas, font=(self.family, self.font_size),
-                              bg=WHITE, fg=INK, insertbackground=BLUE,
+                              bg=WHITE, fg=INK, insertbackground=BLUE, justify='left' if c == 0 else 'center',
                               relief='flat', bd=0, highlightthickness=2,
                               highlightbackground=BLUE, highlightcolor=BLUE)
         self.entry.insert(0, self.rows[r][c] if replacement is None else replacement)
@@ -504,9 +498,9 @@ class App(tk.Tk):
         compact = self.winfo_height() < 820
         if compact != self.compact:
             self.compact = compact
-            self.header.configure(height=64 if compact else 76)
-            self.content.configure(pady=16 if compact else 24)
-            self.footer.configure(pady=10 if compact else 14)
+            self.header.configure(height=64)
+            self.content.configure(padx=16 if compact else 24, pady=16 if compact else 24)
+            self.footer.configure(padx=16 if compact else 24, pady=12)
             self.rescale()
 
     def _style(self):
@@ -514,23 +508,12 @@ class App(tk.Tk):
         style.theme_use('clam')
         style.configure('.', font=(self.family, self.font_size), background=BG,
                         foreground=INK, bordercolor=LINE)
-        style.configure('TButton', padding=(15, 10), background=WHITE,
-                        foreground=INK, relief='flat', borderwidth=1, focusthickness=2,
-                        focuscolor=BLUE)
-        style.map('TButton', background=[('active', '#eaf0fa'), ('disabled', BG)],
-                  foreground=[('disabled', '#a8b2c2')])
-        style.configure('Primary.TButton', background=BLUE, foreground=WHITE,
-                        borderwidth=0, font=(self.family, self.font_size, 'bold'), padding=(20, 12))
-        style.map('Primary.TButton', background=[('active', '#244dd2'), ('disabled', '#a6b8ee')],
-                  foreground=[('disabled', WHITE)])
-        style.configure('Small.TButton', padding=(11, 7), font=(self.family, self.font_size - 1))
         style.configure('Reference.TNotebook', background=WHITE, borderwidth=0)
         style.configure('Reference.TNotebook.Tab', padding=(9, 7), font=(self.family, 9, 'bold'), background=BG)
         style.map('Reference.TNotebook.Tab', background=[('selected', PALE)], foreground=[('selected', BLUE)])
         style.configure('TEntry', fieldbackground=WHITE, padding=(9, 8), borderwidth=1)
-        style.configure('TCombobox', fieldbackground=WHITE, padding=(9, 8), arrowsize=14)
-        style.map('TCombobox', fieldbackground=[('readonly', WHITE)], foreground=[('readonly', INK)])
         style.configure('TSpinbox', fieldbackground=WHITE, padding=(7, 8), arrowsize=12)
+        install_controls(self, self.family, self.font_size)
         for orient, sticky in [('Horizontal', 'we'), ('Vertical', 'ns')]:
             style.layout(f'{orient}.TScrollbar', [(f'{orient}.Scrollbar.trough',
                 {'sticky': 'nsew', 'children': [(f'{orient}.Scrollbar.thumb',
@@ -543,44 +526,50 @@ class App(tk.Tk):
         return tk.Label(parent, text=text, font=(self.family, size or self.font_size,
                         'bold' if bold else 'normal'), fg=color, bg=bg, **kwargs)
 
-    def _card(self, parent, *, padding=20, bg=WHITE):
-        if self.compact:
-            padding = min(padding, 15)
-        outer = tk.Frame(parent, bg=bg, highlightbackground=LINE, highlightthickness=1)
-        inner = tk.Frame(outer, bg=bg, padx=padding, pady=padding)
-        inner.pack(fill='both', expand=True)
+    def _card(self, parent, *, padding=18, bg=WHITE):
+        padding = min(padding, 12 if self.compact else 18)
+        outer = Card(parent, tint=bg)
+        inner = tk.Frame(outer, bg=bg, padx=max(0, padding - 10), pady=max(0, padding - 10))
+        inner.pack(fill='both', expand=True, padx=10, pady=10)
         return outer, inner
 
     def _build_shell(self):
-        self.header = tk.Frame(self, bg=NAVY, height=64 if self.compact else 76)
+        self.workspace = tk.Frame(self, bg=BG)
+        self.workspace.pack(side='left', fill='both', expand=True)
+        self.header = tk.Frame(self.workspace, bg=WHITE, height=64)
         self.header.pack(fill='x')
         self.header.pack_propagate(False)
-        brand = tk.Frame(self.header, bg=NAVY)
-        brand.pack(side='left', padx=28)
-        self._label(brand, 'РЮКЗАК', size=18, bold=True, color=WHITE, bg=NAVY).pack(anchor='w')
-        self._label(brand, 'П Р А К Т И К У М  /  0 3', size=8, color='#a9b8cf', bg=NAVY).pack(anchor='w', pady=(3, 0))
-        nav = tk.Frame(self.header, bg=NAVY)
-        nav.pack(side='left', padx=20)
+        brand = tk.Frame(self.header, bg=WHITE)
+        brand.pack(side='left', padx=24)
+        self._label(brand, '03', size=11, bold=True, color=WHITE, bg=NAVY,
+                    padx=8, pady=6).pack(side='left', padx=(0, 10))
+        self._label(brand, 'Рюкзак', size=15, bold=True).pack(side='left')
+        self._label(self.header, '/', size=15, color=LINE).pack(side='left', padx=(0, 12))
+        nav = tk.Frame(self.header, bg=WHITE)
+        nav.pack(side='left')
         self.nav_buttons = []
-        for label, callback in [('01  Условие', self.return_to_editor),
-                                ('02  Решение', self.navigate_to_lesson),
-                                ('03  Итог', self.show_result)]:
-            button = NavButton(nav, text=label, font=(self.family, 11), relief='flat',
-                               bd=0, bg=NAVY, fg='#a9b8cf', padx=12, pady=11,
-                               cursor='hand2', command=callback)
-            button.pack(side='left', padx=3)
+        for index, (label, callback) in enumerate([
+                ('Условие', self.return_to_editor),
+                ('Решение', self.navigate_to_lesson),
+                ('Итог', self.show_result)]):
+            if index:
+                self._label(nav, '›', size=13, color=MUTED).pack(side='left', padx=3)
+            button = NavButton(nav, text=label, command=callback)
+            button.pack(side='left')
             self.nav_buttons.append(button)
-        zoom_box = tk.Frame(self.header, bg=NAVY)
-        zoom_box.pack(side='right', padx=28)
-        self._label(zoom_box, 'Таблица', size=9, color='#a9b8cf', bg=NAVY).pack(side='left', padx=8)
-        zoom = ttk.Combobox(zoom_box, textvariable=self.zoom, values=['80%', '100%', '120%', '140%'],
-                            state='readonly', width=5)
+        zoom_box = tk.Frame(self.header, bg=WHITE)
+        zoom_box.pack(side='right', padx=24)
+        self._label(zoom_box, 'Таблица', size=CONTROL_FONT_SIZE, color=MUTED).pack(side='left', padx=(0, 10))
+        zoom = Combobox(zoom_box, textvariable=self.zoom, values=['80%', '100%', '120%', '140%'],
+                        state='readonly', width=5)
         zoom.pack(side='left')
         zoom.bind('<<ComboboxSelected>>', self.rescale)
-        self.footer = tk.Frame(self, bg=WHITE, highlightbackground=LINE, highlightthickness=1,
-                               padx=20, pady=10 if self.compact else 14)
+        tk.Frame(self.workspace, bg=LINE, height=1).pack(fill='x')
+        self.footer = tk.Frame(self.workspace, bg=WHITE, highlightbackground=LINE, highlightthickness=1,
+                               padx=16 if self.compact else 24, pady=12)
         self.footer.pack(side='bottom', fill='x')
-        self.content = tk.Frame(self, bg=BG, padx=20, pady=16 if self.compact else 24)
+        self.content = tk.Frame(self.workspace, bg=BG, padx=16 if self.compact else 24,
+                                pady=16 if self.compact else 24)
         self.content.pack(fill='both', expand=True)
         self.message_var = tk.StringVar(value='')
         self.hint_var = tk.StringVar(value='')
@@ -595,20 +584,20 @@ class App(tk.Tk):
         self.hint_var.set('')
         for i, button in enumerate(self.nav_buttons):
             selected = i == {'editor': 0, 'lesson': 1, 'result': 2}[self.screen]
-            button.configure(bg='#263e60' if selected else NAVY,
-                             fg=WHITE if selected else '#a9b8cf')
+            button.state(['selected'] if selected else ['!selected'])
         self.nav_buttons[1].configure(state='normal' if self.lesson else 'disabled')
         self.nav_buttons[2].configure(state='normal' if self.lesson and self.lesson.phase == 'done' else 'disabled')
 
     def _heading(self, eyebrow, title, subtitle):
-        self._label(self.content, eyebrow.upper(), size=9, bold=True, color=BLUE,
-                    bg=BG, anchor='w').pack(fill='x')
+        top = tk.Frame(self.content, bg=BG)
+        top.pack(fill='x', pady=(0, 5))
+        self._label(top, eyebrow, size=9, color=MUTED, bg=BG, anchor='w').pack(side='left')
         row = tk.Frame(self.content, bg=BG)
-        row.pack(fill='x', pady=(8, 0))
-        self._label(row, title, size=21 if self.compact else 27, bold=True, bg=BG, anchor='w').pack(side='left')
-        self._label(self.content, subtitle, size=10 if self.compact else self.font_size,
-                    color=MUTED, bg=BG, anchor='w',
-                    wraplength=1120, justify='left').pack(fill='x', pady=(6, 12 if self.compact else 22))
+        row.pack(fill='x')
+        self._label(row, title, size=20 if self.compact else 23, bold=True,
+                    bg=BG, anchor='w').pack(side='left')
+        self._label(self.content, subtitle, size=10, color=MUTED, bg=BG, anchor='w',
+                    wraplength=1000, justify='left').pack(fill='x', pady=(5, 16))
         return row
 
     def _footer_message(self):
@@ -668,36 +657,32 @@ class App(tk.Tk):
     def show_editor(self):
         self.screen = 'editor'
         self._clear_content()
-        if self.compact:
-            self._label(self.content, 'Условие задачи', size=20, bold=True, bg=BG,
-                        anchor='w').pack(fill='x', pady=(0, 12))
-        else:
-            self._heading('Динамическое программирование', 'У каждого выбора есть ценность',
-                          'Задайте ресурс, веса и ценности. Затем самостоятельно пройдите все шаги поиска оптимального плана.')
+        self._heading('Подготовка / 01', 'Условие задачи',
+                      'Выберите вариант или задайте собственные веса и ценности.')
         picker = tk.Frame(self.content, bg=BG)
         picker.pack(fill='x', pady=(0, 10 if self.compact else 16))
         self.preset_var = tk.StringVar(value=self.problem.name)
-        self.preset_box = ttk.Combobox(picker, values=[p.name for p in PRESETS],
-                                       textvariable=self.preset_var, state='readonly', width=38)
+        self.preset_box = Combobox(picker, values=[p.name for p in PRESETS],
+                                       textvariable=self.preset_var, state='readonly', width=32)
         self.preset_box.pack(side='left')
-        ttk.Button(picker, text='Выбрать пример', command=self.choose_preset).pack(side='left', padx=(8, 0))
-        ttk.Button(picker, text='Открыть JSON', command=self.open_file).pack(side='right')
-        ttk.Button(picker, text='Сохранить', command=self.save_file).pack(side='right', padx=8)
+        Button(picker, text='Выбрать пример', command=self.choose_preset).pack(side='left', padx=(8, 0))
+        Button(picker, text='Открыть JSON', command=self.open_file).pack(side='right')
+        Button(picker, text='Сохранить', command=self.save_file).pack(side='right', padx=8)
         layout = tk.Frame(self.content, bg=BG)
         layout.pack(fill='both', expand=True)
         layout.columnconfigure(0, weight=1)
         layout.rowconfigure(0, weight=1)
         left, inner = self._card(layout)
-        left.grid(row=0, column=0, sticky='nsew', padx=(0, 18))
+        left.grid(row=0, column=0, sticky='nsew', padx=(0, 16))
         inner.rowconfigure(4, weight=1)
         inner.columnconfigure(0, weight=1)
         title_row = tk.Frame(inner, bg=WHITE)
         if not self.compact:
             title_row.grid(row=0, column=0, sticky='ew')
-        self._label(title_row, 'УСЛОВИЕ ЗАДАЧИ', size=9, bold=True, color=MUTED).pack(side='left')
-        self._label(title_row, '01', size=11, bold=True, color=BLUE).pack(side='right')
-        name = ttk.Entry(inner, textvariable=self.name_var, font=(self.family, self.font_size + 2))
-        name.grid(row=1, column=0, sticky='ew', pady=(8, 10) if self.compact else (12, 16))
+        self._label(title_row, 'Параметры задачи', size=12, bold=True).pack(side='left')
+        self._label(title_row, 'Исходные данные', size=9, color=MUTED).pack(side='right')
+        name = ttk.Entry(inner, textvariable=self.name_var, font=(self.family, self.font_size))
+        name.grid(row=1, column=0, sticky='ew', pady=(0, 10) if self.compact else (10, 14))
         dims = tk.Frame(inner, bg=WHITE)
         dims.grid(row=2, column=0, sticky='ew')
         for label, var, frm, to in [('Ёмкость B', self.capacity_var, 1, 200),
@@ -706,16 +691,16 @@ class App(tk.Tk):
             field = tk.Frame(dims, bg=WHITE)
             field.pack(side='left', padx=(0, 14))
             self._label(field, label, size=9, color=MUTED).pack(
-                side='left' if self.compact else 'top', anchor='w',
-                padx=(0, 5) if self.compact else 0, pady=0 if self.compact else (0, 5))
-            spin = ttk.Spinbox(field, from_=frm, to=to, textvariable=var, width=4 if self.compact else 6)
-            spin.pack(side='left' if self.compact else 'top', anchor='w')
-        ttk.Button(dims, text='Новая таблица', command=self.new_table,
+                side='left', anchor='w',
+                padx=(0, 6), pady=0)
+            spin = ttk.Spinbox(field, from_=frm, to=to, textvariable=var, width=4)
+            spin.pack(side='left', anchor='w')
+        Button(dims, text='Новая таблица', command=self.new_table,
                    style='Small.TButton').pack(side='right', anchor='s')
         table_heading = tk.Frame(inner, bg=WHITE)
-        table_heading.grid(row=3, column=0, sticky='ew', pady=(10, 6) if self.compact else (20, 10))
+        table_heading.grid(row=3, column=0, sticky='ew', pady=(16, 10))
         self._label(table_heading, 'Веса и таблица ценностей', bold=True).pack(side='left')
-        ttk.Button(table_heading, text='Применить лимиты', command=self.apply_limits,
+        Button(table_heading, text='Применить лимиты', command=self.apply_limits,
                    style='Small.TButton').pack(side='right')
         labels = self.problem.labels or tuple(f'Груз {i + 1}' for i in range(len(self.problem.weights)))
         if self._pending_editor is None:
@@ -724,15 +709,15 @@ class App(tk.Tk):
         else:
             raw_rows = self._pending_editor
         self._mount_editor_grid(inner, raw_rows)
-        footnote = 'Клик — ввод  ·  Tab — следующая ячейка  ·  Enter — ниже  ·  Ctrl/Cmd+V — вставить таблицу'
+        footnote = 'Стрелки — переход  ·  Tab — следующая ячейка  ·  Ctrl/Cmd+V — вставить таблицу'
         self._label(inner, footnote, size=9, color=MUTED, anchor='w',
                     wraplength=760, justify='left').grid(row=5, column=0, sticky='ew', pady=(6, 0))
-        side = tk.Frame(layout, bg=BG, width=270)
+        side = tk.Frame(layout, bg=BG, width=240 if self.compact else 280)
         side.grid(row=0, column=1, sticky='ns')
         side.grid_propagate(False)
         self._editor_side(side)
         self._footer_message()
-        ttk.Button(self.footer, text='Начать практикум  →', style='Primary.TButton',
+        Button(self.footer, text='Начать практикум  →', style='Primary.TButton',
                    command=self.begin).pack(side='right')
 
     def _mount_editor_grid(self, parent, raw_rows):
@@ -741,36 +726,32 @@ class App(tk.Tk):
         editable = {(r, c) for r, row in enumerate(raw_rows) for c in range(len(row)) if c != 3}
         self.editor_grid = DataGrid(parent, ['Название', 'Вес a', 'Лимит',
                                              *[f'F({i})' for i in range(max_columns - 3)]], rows,
-                                    editable=editable, widths=[150, 80, 80] + [87] * (max_columns - 3),
+                                    editable=editable, widths=([125, 55, 55] + [60] * (max_columns - 3)) if self.compact else
+                                        ([165, 75, 75] + [85] * (max_columns - 3)),
                                     on_change=self.mark_dirty, font_family=self.family,
                                     font_size=self.table_font_size)
         self.editor_grid.grid(row=4, column=0, sticky='nsew')
 
     def _editor_side(self, parent):
-        outer, card = self._card(parent, padding=18, bg=PALE)
-        outer.pack(fill='x')
-        self._label(card, 'СМЫСЛ ЗАДАЧИ', size=9, bold=True, color=BLUE, bg=PALE).pack(anchor='w')
-        if not self.compact:
-            self._label(card, 'Максимум ценности.\nОдин общий ресурс.', size=17, bold=True,
-                        bg=PALE, justify='left', anchor='w').pack(fill='x', pady=(14, 10))
-        self._label(card, 'Σ aⱼ · xⱼ ≤ B', size=16 if self.compact else 18, bold=True, color=BLUE, bg=PALE).pack(anchor='w', pady=(10, 8) if self.compact else (0, 12))
-        self._label(card, 'x — целое количество. Оставлять часть ресурса свободной можно.',
-                    size=10, color=MUTED, bg=PALE, wraplength=225, justify='left', anchor='w').pack(fill='x')
-        outer2, desc = self._card(parent, padding=18)
-        outer2.pack(fill='both', expand=True, pady=(16, 0))
-        self._label(desc, 'ОБ ЭТОМ ПРИМЕРЕ', size=9, bold=True, color=MUTED).pack(anchor='w')
-        description = self.description or 'Создайте собственную задачу: укажите число типов, ёмкость и доступные количества.'
-        text = tk.Text(desc, bg=WHITE, fg=INK, relief='flat', bd=0, wrap='word',
-                       font=(self.family, self.font_size), height=5, width=24,
-                       highlightthickness=0, padx=0, pady=0, cursor='arrow', takefocus=0)
-        text.pack(fill='both', expand=True, pady=(12, 10))
-        # Long source notes remain available by mouse wheel and in a full text window.
+        outer, card = self._card(parent)
+        outer.pack(fill='both', expand=True)
+        self._label(card, 'О ВАРИАНТЕ', size=8, bold=True, color=MUTED).pack(anchor='w')
+        self._label(card, self.problem.name, size=13, bold=True, wraplength=210 if self.compact else 240,
+                    justify='left', anchor='w').pack(fill='x', pady=(10, 12))
+        description = self.description or 'Задайте число типов грузов, доступный ресурс и ценность каждого количества.'
+        text = tk.Text(card, bg=WHITE, fg=MUTED, relief='flat', bd=0, wrap='word',
+                       font=(self.family, 10), height=5, width=20, highlightthickness=0,
+                       padx=0, pady=0, cursor='arrow', takefocus=0)
+        text.pack(fill='both', expand=True)
         text.insert('1.0', description)
         text.configure(state='disabled')
-        ttk.Button(desc, text='Полное описание ↗', style='Small.TButton',
-                   command=self.open_description).pack(fill='x', pady=(0, 12))
-        self._label(desc, 'F(x) — ценность всего набора из x единиц, а не цена одной единицы.',
-                    size=10, color=BLUE, wraplength=225, justify='left', anchor='w').pack(fill='x')
+        Button(card, text='Полное описание ↗', command=self.open_description).pack(fill='x', pady=(12, 14))
+        tk.Frame(card, bg=LINE, height=1).pack(fill='x')
+        self._label(card, 'Ограничение ресурса', size=9, color=MUTED).pack(anchor='w', pady=(14, 8))
+        self._label(card, 'Σ aⱼ · xⱼ ≤ B', size=17, color=BLUE).pack(anchor='w')
+        self._label(card, 'F(x) — ценность всего набора из x единиц.', size=9,
+                    color=MUTED, wraplength=210 if self.compact else 240,
+                    justify='left', anchor='w').pack(fill='x', pady=(10, 0))
 
     @staticmethod
     def _integer(raw, label, minimum, maximum):
@@ -933,31 +914,31 @@ class App(tk.Tk):
         phase = self.lesson.phase
         restoring = phase == 'restore'
         if restoring:
-            eyebrow, title = 'Все этапы пройдены', 'Соберите оптимальный план'
+            eyebrow, title = 'Решение / Обратный ход', 'Восстановление плана'
             subtitle = 'Заполните состояния y и количества x для итогового плана.'
         else:
             stage = self.lesson.current_stage
             name = self._item_name(stage.index)
             eyebrow = f'Этап {self.lesson.stage_index + 1} из {len(self.problem.weights)} · {name}'
-            title = 'Сравните допустимые решения' if phase == 'candidates' else 'Найдите лучшие значения'
+            title = 'Таблица значений' if phase == 'candidates' else 'Максимумы и решения'
             subtitle = ('Заполните доступные ячейки таблицы значений.'
                         if phase == 'candidates' else
                         'Заполните столбцы f(y) и x* для каждого состояния.')
         title_row = self._heading(eyebrow, title, subtitle)
         chip = 'Восстановление' if restoring else ('1 / 2  Вычисления' if phase == 'candidates' else '2 / 2  Максимумы')
         self._label(title_row, chip, size=10, bold=True, color=BLUE, bg=PALE,
-                    padx=13, pady=8).pack(side='right', padx=(15, 0))
+                    padx=10, pady=5).pack(side='right', padx=(15, 0))
         layout = tk.Frame(self.content, bg=BG)
         layout.pack(fill='both', expand=True)
         layout.columnconfigure(0, weight=1)
         layout.rowconfigure(0, weight=1)
         outer, main = self._card(layout, padding=20)
-        outer.grid(row=0, column=0, sticky='nsew', padx=(0, 18))
+        outer.grid(row=0, column=0, sticky='nsew', padx=(0, 16))
         if restoring:
             self._build_restore(main)
         else:
             self._build_stage(main)
-        side = tk.Frame(layout, bg=BG, width=390 if phase == 'summary' else 310)
+        side = tk.Frame(layout, bg=BG, width=330 if phase == 'summary' else 290)
         side.grid(row=0, column=1, sticky='ns')
         side.pack_propagate(False)
         self._build_reference(side)
@@ -967,11 +948,11 @@ class App(tk.Tk):
         hint.pack(fill='x', pady=(10, 0))
         self._footer_message()
         self._stats(self.footer)
-        self.check_button = ttk.Button(self.footer,
+        self.check_button = Button(self.footer,
             text='Проверить план  →' if restoring else 'Проверить таблицу  →',
             style='Primary.TButton', command=self.check_answers)
         self.check_button.pack(side='right')
-        ttk.Button(self.footer, text='Подсказка', command=self.show_hint).pack(side='right', padx=(12, 10))
+        Button(self.footer, text='Подсказка', command=self.show_hint).pack(side='right', padx=(12, 10))
 
     def _item_name(self, index):
         return self.problem.labels[index] if self.problem.labels else f'Груз {index + 1}'
@@ -982,15 +963,14 @@ class App(tk.Tk):
         phase = self.lesson.phase
         top = tk.Frame(parent, bg=WHITE)
         top.pack(fill='x')
-        self._label(top, f'ГРУЗ {index + 1}  /  {self._item_name(index)}', size=9,
-                    bold=True, color=MUTED).pack(side='left')
+        self._label(top, self._item_name(index), size=12, bold=True).pack(side='left')
         self._label(top, f'Вес: {self.problem.weights[index]}    ·    Ёмкость: {self.problem.capacity}',
                     size=10, color=MUTED).pack(side='right')
         formula = ('Fⱼ(x) + fⱼ₊₁(y + aⱼ · x)' if index < len(self.problem.weights) - 1 else 'Fⱼ(x)  ·  последний тип груза')
         self._label(parent, formula if phase == 'candidates' else 'fⱼ(y) = max по допустимым x',
-                    size=18, bold=True, color=BLUE, anchor='w').pack(fill='x', pady=(18, 8))
+                    size=13, color=BLUE, anchor='w').pack(fill='x', pady=(14, 7))
         self._label(parent, 'y — ресурс, израсходованный до этого груза.  x — количество текущего груза.',
-                    size=10, color=MUTED, anchor='w', justify='left', wraplength=750).pack(fill='x', pady=(0, 18))
+                    size=10, color=MUTED, anchor='w', justify='left', wraplength=750).pack(fill='x', pady=(0, 14))
         if phase == 'candidates':
             # Quantities beyond B/a cannot occur in any state; keep them in the
             # solver, but do not make students scroll past empty columns.
@@ -1015,12 +995,12 @@ class App(tk.Tk):
         bottom.pack(side='bottom', fill='x', pady=(12, 0), before=self.answer_grid)
         self._label(bottom, '—  выбор не помещается в оставшийся ресурс', size=9, color=MUTED).pack(side='left')
         if phase == 'summary':
-            ttk.Button(bottom, text='Посмотреть вычисления', style='Small.TButton',
+            Button(bottom, text='Посмотреть вычисления', style='Small.TButton',
                        command=lambda: self.open_review(len(self.accepted) - 1)).pack(side='right')
 
     def _build_restore(self, parent):
-        self._label(parent, 'ОБРАТНОЕ ДВИЖЕНИЕ', size=9, bold=True, color=MUTED).pack(anchor='w')
-        self._label(parent, 'yⱼ₊₁ = yⱼ + aⱼ · xⱼ', size=20, bold=True, color=BLUE).pack(anchor='w', pady=(16, 10))
+        self._label(parent, 'Итоговый план', size=12, bold=True).pack(anchor='w')
+        self._label(parent, 'yⱼ₊₁ = yⱼ + aⱼ · xⱼ', size=14, color=BLUE).pack(anchor='w', pady=(14, 8))
         self._label(parent, 'Введите ресурс y до каждого груза и его количество x. Любой оптимальный допустимый план будет принят.',
                     color=MUTED, wraplength=740, justify='left', anchor='w').pack(fill='x', pady=(0, 20))
         columns = ['Обратный ход'] + [f'Груз {i + 1}' for i in range(len(self.problem.weights))]
@@ -1032,7 +1012,7 @@ class App(tk.Tk):
                                            ([230] + [125] * len(self.problem.weights)), font_family=self.family,
                                     font_size=self.table_font_size, height=300, dense=self.compact)
         self.answer_grid.pack(fill='both', expand=True)
-        ttk.Button(parent, text='Открыть все принятые максимумы', command=self.open_summary_sheet,
+        Button(parent, text='Открыть все принятые максимумы', command=self.open_summary_sheet,
                    style='Small.TButton').pack(side='bottom', anchor='w', pady=(15, 0), before=self.answer_grid)
 
     def _reference_grid(self, parent, columns, rows, widths, *, height=160):
@@ -1042,11 +1022,13 @@ class App(tk.Tk):
         return grid
 
     def _build_reference(self, parent):
-        self.reference_notebook = ttk.Notebook(parent, style='Reference.TNotebook')
+        outer, host = self._card(parent, padding=10)
+        outer.pack(fill='both', expand=True)
+        self.reference_notebook = ttk.Notebook(host, style='Reference.TNotebook')
         self.reference_notebook.pack(fill='both', expand=True)
         current = tk.Frame(self.reference_notebook, bg=WHITE, padx=10, pady=10)
         history = tk.Frame(self.reference_notebook, bg=WHITE, padx=10, pady=10)
-        self.reference_notebook.add(current, text='Для этого шага')
+        self.reference_notebook.add(current, text='Справка')
         self.reference_notebook.add(history, text='История')
         self.reference_grids = []
         phase = self.lesson.phase
@@ -1100,7 +1082,7 @@ class App(tk.Tk):
             rows = [[str(entry['index'] + 1), *row] for entry in reversed(entries)
                     for row in entry['rows']]
             reference = self._reference_grid(current, ['Груз', 'y', 'f(y)', 'x*'],
-                                             rows, [55, 50, 90, 55])
+                                             rows, [45, 40, 75, 45])
             reference.pack(fill='both', expand=True)
             self.reference_grids.append(reference)
         self._label(history, 'Принятые таблицы', size=10, bold=True).pack(anchor='w')
@@ -1115,10 +1097,10 @@ class App(tk.Tk):
         self.review_list.bind('<Double-1>', lambda e: self.open_selected_review())
         self.review_list.bind('<Return>', lambda e: self.open_selected_review())
         actions = tk.Frame(parent, bg=BG)
-        actions.pack(side='bottom', fill='x', pady=(8, 0), before=self.reference_notebook)
-        ttk.Button(actions, text='Исходные данные ↗', command=self.open_source,
+        actions.pack(side='bottom', fill='x', pady=(8, 0), before=outer)
+        Button(actions, text='Условие ↗', command=self.open_source,
                    style='Small.TButton').pack(side='left', fill='x', expand=True)
-        button = ttk.Button(actions, text='Открыть таблицу', command=self.open_selected_review,
+        button = Button(actions, text='Открыть таблицу', command=self.open_selected_review,
                             style='Small.TButton')
         button.pack(side='right', fill='x', expand=True, padx=(6, 0))
         if self.accepted:
@@ -1189,8 +1171,8 @@ class App(tk.Tk):
         grid.pack(fill='both', expand=True)
         actions = tk.Frame(content, bg=BG)
         actions.pack(fill='x', pady=(16, 0))
-        ttk.Button(actions, text='Копировать таблицу', command=grid.copy_table).pack(side='left')
-        ttk.Button(actions, text='Закрыть', command=window.destroy).pack(side='right')
+        Button(actions, text='Копировать таблицу', command=grid.copy_table).pack(side='left')
+        Button(actions, text='Закрыть', command=window.destroy).pack(side='right')
         window.bind('<Escape>', lambda e: window.destroy())
         return window
 
@@ -1213,7 +1195,7 @@ class App(tk.Tk):
         text.pack(fill='both', expand=True)
         text.insert('1.0', self.description or 'Для этой задачи описание не задано.')
         text.configure(state='disabled')
-        ttk.Button(window, text='Закрыть', command=window.destroy).pack(anchor='e', padx=24, pady=20)
+        Button(window, text='Закрыть', command=window.destroy).pack(anchor='e', padx=24, pady=20)
         window.bind('<Escape>', lambda e: window.destroy())
         return window
 
@@ -1259,8 +1241,7 @@ class App(tk.Tk):
         labels = [f"Груз {entry['index'] + 1} · " +
                   ('Вычисления' if entry['phase'] == 'candidates' else 'Максимумы')
                   for entry in self.accepted]
-        selector = ttk.Combobox(content, state='readonly', values=labels,
-                                font=(self.family, self.font_size + 1))
+        selector = Combobox(content, state='readonly', values=labels)
         selector.pack(fill='x', pady=(0, 16))
         table = tk.Frame(content, bg=BG)
         table.pack(fill='both', expand=True)
@@ -1278,10 +1259,10 @@ class App(tk.Tk):
         select_table()
         actions = tk.Frame(content, bg=BG)
         actions.pack(side='bottom', fill='x', pady=(16, 0), before=table)
-        ttk.Button(actions, text='Копировать таблицу',
+        Button(actions, text='Копировать таблицу',
                    command=lambda: window.review_grid.copy_table()).pack(side='left')
-        ttk.Button(actions, text='Исходные данные', command=self.open_source).pack(side='left', padx=12)
-        ttk.Button(actions, text='Закрыть', command=window.destroy).pack(side='right')
+        Button(actions, text='Исходные данные', command=self.open_source).pack(side='left', padx=12)
+        Button(actions, text='Закрыть', command=window.destroy).pack(side='right')
         window.bind('<Escape>', lambda e: window.destroy())
         return window
 
@@ -1304,14 +1285,14 @@ class App(tk.Tk):
         used = sum(w * x for w, x in zip(self.problem.weights, plan))
         objective = sum(self.problem.values[i][x] for i, x in enumerate(plan))
         metrics = tk.Frame(self.content, bg=BG)
-        metrics.pack(fill='x', pady=(0, 18))
+        metrics.pack(fill='x', pady=(0, 14))
         for i in range(3):
             metrics.columnconfigure(i, weight=1, uniform='metric')
         for i, (label, value, subtitle) in enumerate([
-            ('МАКСИМАЛЬНАЯ ЦЕННОСТЬ', fmt_number(objective), 'Оптимальный результат'),
-            ('ИСПОЛЬЗОВАНО РЕСУРСА', f'{used} / {self.problem.capacity}',
+            ('Ценность плана', fmt_number(objective), 'Оптимальный результат'),
+            ('Использовано ресурса', f'{used} / {self.problem.capacity}',
              f'Свободно: {self.problem.capacity - used}'),
-            ('ВАША РАБОТА', f'{self.lesson.errors} ошибок', f'Подсказок: {self.lesson.hints}')]):
+            ('Статистика', f'{self.lesson.errors} ошибок', f'Подсказок: {self.lesson.hints}')]):
             outer, card = self._card(metrics, padding=14 if self.compact else 20, bg=PALE if i == 0 else WHITE)
             outer.grid(row=0, column=i, sticky='nsew', padx=(0 if i == 0 else 9, 0 if i == 2 else 9))
             bg = PALE if i == 0 else WHITE
@@ -1322,7 +1303,7 @@ class App(tk.Tk):
             self._label(card, subtitle, size=10, color=MUTED, bg=bg).pack(anchor='w')
         outer, body = self._card(self.content, padding=22)
         outer.pack(fill='both', expand=True)
-        self._label(body, 'ВАШ ОПТИМАЛЬНЫЙ ПЛАН', size=9, bold=True, color=MUTED).pack(anchor='w')
+        self._label(body, 'Состав рюкзака', size=9, bold=True, color=MUTED).pack(anchor='w')
         rows = [[self._item_name(i), str(self.lesson.accepted_states[i]), str(x),
                  str(self.problem.weights[i] * x), fmt_number(self.problem.values[i][x])]
                 for i, x in enumerate(plan)]
@@ -1344,10 +1325,10 @@ class App(tk.Tk):
         self._label(body, 'Суммарный расход не превышает ёмкость. Свободный ресурс допустим.',
                     size=9, color=MUTED).pack(side='bottom', anchor='w', pady=(10, 0), before=bar)
         self._footer_message()
-        ttk.Button(self.footer, text='Сохранить отчёт  ↓', command=self.export_report,
+        Button(self.footer, text='Сохранить отчёт  ↓', command=self.export_report,
                    style='Primary.TButton').pack(side='right')
-        ttk.Button(self.footer, text='К условию', command=self.return_to_editor).pack(side='right', padx=10)
-        ttk.Button(self.footer, text='Принятые таблицы', command=self.open_history).pack(side='right')
+        Button(self.footer, text='К условию', command=self.return_to_editor).pack(side='right', padx=10)
+        Button(self.footer, text='Принятые таблицы', command=self.open_history).pack(side='right')
 
     def report_text(self):
         if not self.lesson or self.lesson.phase != 'done' or self.final_plan is None:
