@@ -1,66 +1,25 @@
-name: "Загрузка рюкзака — tests / EXE"
-
+name: "Загрузка рюкзака — runtime comparison"
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
-  tests:
-    name: Test Knapsack-Practicum
+  original:
     runs-on: windows-latest
-    timeout-minutes: 15
-    defaults:
-      run:
-        working-directory: knapsack-practicum
+    timeout-minutes: 10
+    env:
+      PYTHONIOENCODING: utf-8
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - name: Run tests
-        run: python -m unittest discover -v
-      - name: Smoke test
-        run: python app.py --smoke-test
-
-  build:
-    name: Build Knapsack-Practicum.exe
-    if: github.event_name == 'workflow_dispatch'
-    needs: tests
-    runs-on: windows-latest
-    timeout-minutes: 20
-    defaults:
-      run:
-        working-directory: knapsack-practicum
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
-        with:
-          python-version: '3.12'
-      - name: Install build dependencies
-        run: python -m pip install -r ../.github/requirements-build.txt
-      - name: Build Windows executable and include variants
-        run: python build.py
-      - name: Smoke test packaged executable
-        shell: pwsh
-        run: |
-          $appProcess = Start-Process -FilePath './dist/Knapsack-Practicum.exe' -ArgumentList '--smoke-test' -PassThru
-          if (-not $appProcess.WaitForExit(30000)) {
-            $appProcess.Kill()
-            throw 'Packaged application did not close within 30 seconds.'
-          }
-          if ($appProcess.ExitCode -ne 0) {
-            throw "Packaged application exited with code $($appProcess.ExitCode)."
-          }
-      - name: Upload executable
+      - run: python -m pip install 'Pillow>=12,<13'
+      - name: Walk through original Delphi application
+        run: python -X utf8 -u qa/lab3-parity-2026-11-23/original_runtime.py
+      - name: Upload runtime observations
+        if: always()
         uses: actions/upload-artifact@v6
         with:
-          name: Knapsack-Practicum-windows-x64
-          path: knapsack-practicum/dist/
-          if-no-files-found: error
-          retention-days: 30
+          name: lab3-original-runtime
+          path: qa/lab3-parity-2026-11-23/runtime-original/
