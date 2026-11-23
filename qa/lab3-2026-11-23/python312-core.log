@@ -1,0 +1,31 @@
+test_exact_numeric_input (test_solver.SolverTests.test_exact_numeric_input) ... ok
+test_exponent_is_bounded_before_fraction_expansion (test_solver.SolverTests.test_exponent_is_bounded_before_fraction_expansion) ... ok
+test_manual_example_and_ties (test_solver.SolverTests.test_manual_example_and_ties) ... ok
+test_model_validation (test_solver.SolverTests.test_model_validation) ... ok
+test_random_models_and_every_suffix_against_enumeration (test_solver.SolverTests.test_random_models_and_every_suffix_against_enumeration) ... ok
+test_resource_budget (test_solver.SolverTests.test_resource_budget) ... ok
+test_unused_capacity_zero_quantity_and_unavailable_items (test_solver.SolverTests.test_unused_capacity_zero_quantity_and_unavailable_items) ... ok
+test_all_equal_optima_accepted (test_lesson.LessonTests.test_all_equal_optima_accepted) ... ok
+test_answer_fractions_can_be_larger_than_each_input (test_lesson.LessonTests.test_answer_fractions_can_be_larger_than_each_input) ... ok
+test_hints_are_counted_without_advancing (test_lesson.LessonTests.test_hints_are_counted_without_advancing) ... ok
+test_restoration_rejects_invalid_and_suboptimal_plans (test_lesson.LessonTests.test_restoration_rejects_invalid_and_suboptimal_plans) ... ok
+test_restoration_requires_states_matching_the_actual_alternative (test_lesson.LessonTests.test_restoration_requires_states_matching_the_actual_alternative) ... ok
+test_shape_mismatch_and_wrong_phase (test_lesson.LessonTests.test_shape_mismatch_and_wrong_phase) ... ok
+test_states_use_weighted_resource_and_legacy_call_computes_them (test_lesson.LessonTests.test_states_use_weighted_resource_and_legacy_call_computes_them) ... ok
+test_summary_checks_maximum_and_integer_argmax (test_lesson.LessonTests.test_summary_checks_maximum_and_integer_argmax) ... ok
+test_wrong_states_do_not_advance_or_publish_accepted_plan (test_lesson.LessonTests.test_wrong_states_do_not_advance_or_publish_accepted_plan) ... ok
+test_wrong_values_never_advance_or_destroy_answers (test_lesson.LessonTests.test_wrong_values_never_advance_or_destroy_answers) ... ok
+test_bad_json_duplicate_keys_nonfinite_and_size (test_formats.FormatTests.test_bad_json_duplicate_keys_nonfinite_and_size) ... ok
+test_exact_roundtrip_and_automatic_extension (test_formats.FormatTests.test_exact_roundtrip_and_automatic_extension) ... ok
+test_excessive_json_nesting_is_a_controlled_validation_error (test_formats.FormatTests.test_excessive_json_nesting_is_a_controlled_validation_error) ... ok
+test_failed_atomic_replace_preserves_old_file_and_removes_temp (test_formats.FormatTests.test_failed_atomic_replace_preserves_old_file_and_removes_temp) ... ok
+test_raw_json_decimals_keep_the_exact_optimum (test_formats.FormatTests.test_raw_json_decimals_keep_the_exact_optimum) ... ok
+test_schema_version_and_validation (test_formats.FormatTests.test_schema_version_and_validation) ... ok
+test_all_manual_optima_and_alternatives (test_presets.PresetTests.test_all_manual_optima_and_alternatives) ... ok
+test_distributed_json_matches_presets (test_presets.PresetTests.test_distributed_json_matches_presets) ... ok
+test_manual_example_intermediate_tables (test_presets.PresetTests.test_manual_example_intermediate_tables) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.036s
+
+OK

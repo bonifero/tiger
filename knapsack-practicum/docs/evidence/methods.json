@@ -1,0 +1,44 @@
+[
+  {
+    "name": "FormCreate",
+    "virtual_address": "0x460288",
+    "end_bound": "0x4602a0",
+    "table_file_offset": "0x5f467"
+  },
+  {
+    "name": "Button1Click",
+    "virtual_address": "0x4602c4",
+    "end_bound": "0x4605c3",
+    "table_file_offset": "0x5f467"
+  },
+  {
+    "name": "Button2Click",
+    "virtual_address": "0x46064c",
+    "end_bound": "0x46093b",
+    "table_file_offset": "0x5f467"
+  },
+  {
+    "name": "Button3Click",
+    "virtual_address": "0x4609e4",
+    "end_bound": "0x461214",
+    "table_file_offset": "0x5f467"
+  },
+  {
+    "name": "Button4Click",
+    "virtual_address": "0x46137c",
+    "end_bound": "0x4619f0",
+    "table_file_offset": "0x5f467"
+  },
+  {
+    "name": "Button5Click",
+    "virtual_address": "0x461abc",
+    "end_bound": "0x461f00",
+    "table_file_offset": "0x5f467"
+  },
+  {
+    "name": "Button6Click",
+    "virtual_address": "0x462004",
+    "end_bound": "0x46231c",
+    "table_file_offset": "0x5f467"
+  }
+]
