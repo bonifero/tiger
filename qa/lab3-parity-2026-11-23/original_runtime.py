@@ -75,26 +75,36 @@ class Probe:
         U.SetForegroundWindow(self.main);time.sleep(.2)
         # Match HWNDs against the decoded DFM's exact initial positions.
         origin=W.POINT(0,0);U.ClientToScreen(self.main,C.byref(origin))
-        anchors={'n':('TEdit',432,24),'b':('TEdit',224,120),'accept_n':('TButton',552,16),
+        self.anchors={'n':('TEdit',432,24),'b':('TEdit',224,120),'accept_n':('TButton',552,16),
                  'accept_data':('TButton',368,104),'next':('TButton',384,104),
                  'check_candidates':('TButton',16,600),'check_summary':('TButton',480,600),
                  'check_plan':('TButton',624,600),'values':('TStringGrid',144,192),
                  'weights':('TStringGrid',24,192),'candidates':('TStringGrid',16,432),
                  'summary':('TStringGrid',480,424),'restore':('TStringGrid',624,424)}
         self.controls={}
-        for name,(klass,x,y) in anchors.items():
-            matching=[h for h in enum(self.main) if cls(h)==klass]
-            self.controls[name]=min(matching,key=lambda h:abs(rect(h)[0]-origin.x-x)+abs(rect(h)[1]-origin.y-y))
-        assert len(set(self.controls.values()))==len(self.controls),self.controls
+        self.resolve('n')
+        self.resolve('accept_n')
+    def resolve(self,name):
+        if name in self.controls:return self.controls[name]
+        klass,x,y=self.anchors[name]
+        origin=W.POINT(0,0);U.ClientToScreen(self.main,C.byref(origin))
+        matching=[h for h in enum(self.main) if cls(h)==klass]
+        matching=[h for h in matching if abs(rect(h)[0]-origin.x-x)+abs(rect(h)[1]-origin.y-y)<12]
+        if not matching:raise RuntimeError(f'Control {name} not created: {[info(h) for h in enum(self.main)]}')
+        self.controls[name]=matching[0]
+        return matching[0]
     def snapshot(self,name):
         time.sleep(.1)
+        for name in self.anchors:
+            try:self.resolve(name)
+            except RuntimeError:pass
         windows=[dict(info(h),children=[info(c) for c in enum(h)]) for h in owned(self.proc.pid) if U.IsWindowVisible(h)]
         self.events.append(dict(event=name,windows=windows,controls={k:info(h) for k,h in self.controls.items()}))
         (OUT/'observations.json').write_text(json.dumps(self.events,ensure_ascii=False,indent=2),encoding='utf-8')
         ImageGrab.grab(all_screens=True).crop(tuple(rect(self.main))).save(OUT/f'{name}.png')
         print(name,[(k,text(h)) for k,h in self.controls.items() if U.IsWindowVisible(h) and 'TButton'==cls(h)],flush=True)
     def click(self,name):
-        h=self.controls[name];assert U.IsWindowVisible(h),(name,'hidden')
+        h=self.resolve(name);assert U.IsWindowVisible(h),(name,'hidden')
         U.PostMessageW(h,0xF5,0,0);self.actions+=1;time.sleep(.16)
     def dialogs(self,label):
         for i in range(4):
@@ -107,9 +117,9 @@ class Probe:
                 else:U.PostMessageW(h,0x10,0,0)
             time.sleep(.15)
     def edit(self,name,value):
-        b=C.create_unicode_buffer(str(value));U.SendMessageW(self.controls[name],0xC,0,C.addressof(b));self.actions+=1
+        b=C.create_unicode_buffer(str(value));U.SendMessageW(self.resolve(name),0xC,0,C.addressof(b));self.actions+=1
     def cell(self,name,row,col,value,width=64):
-        h=self.controls[name]
+        h=self.resolve(name)
         # DFM/default dimensions: columns64px (+1 gridline), rows24px (+1).
         x=2+col*(width+1)+12;y=2+row*25+10
         U.PostMessageW(h,0x201,1,(y<<16)|x);U.PostMessageW(h,0x202,0,(y<<16)|x)
