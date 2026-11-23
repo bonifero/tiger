@@ -1017,7 +1017,8 @@ class App(tk.Tk):
                 ['Количество xⱼ'] + [''] * len(self.problem.weights)]
         self.answer_grid = DataGrid(parent, columns, rows,
                                     editable={(r, c + 1) for r in (0, 1) for c in range(len(self.problem.weights))},
-                                    widths=[230] + [125] * len(self.problem.weights), font_family=self.family,
+                                    widths=([155] + [75] * len(self.problem.weights)) if self.compact else
+                                           ([230] + [125] * len(self.problem.weights)), font_family=self.family,
                                     font_size=self.table_font_size, height=300, dense=self.compact)
         self.answer_grid.pack(fill='both', expand=True)
         ttk.Button(parent, text='Открыть все принятые максимумы', command=self.open_summary_sheet,
@@ -1070,6 +1071,18 @@ class App(tk.Tk):
             reference.pack(fill='both', expand=True)
             self.reference_grids.append(reference)
         else:
+            self.restore_source_label = self._label(current,
+                f'B = {self.problem.capacity} · Веса aⱼ по грузам', size=10, bold=True,
+                wraplength=280)
+            self.restore_source_label.pack(anchor='w', pady=(0, 7))
+            weights = self._reference_grid(current,
+                [str(i + 1) for i in range(len(self.problem.weights))],
+                [[str(weight) for weight in self.problem.weights]],
+                [max(45, 15 + 8 * len(str(weight))) for weight in self.problem.weights])
+            weights.freeze_first = False
+            weights.canvas.configure(height=weights.header_height + weights.row_height)
+            weights.pack(fill='x', pady=(0, 12))
+            self.restore_weights_grid = weights
             self._label(current, 'Все принятые максимумы', size=10, bold=True,
                         wraplength=280).pack(anchor='w', pady=(0, 8))
             entries = [entry for entry in self.accepted if entry['phase'] == 'summary']
@@ -1256,6 +1269,7 @@ class App(tk.Tk):
         actions.pack(side='bottom', fill='x', pady=(16, 0), before=table)
         ttk.Button(actions, text='Копировать таблицу',
                    command=lambda: window.review_grid.copy_table()).pack(side='left')
+        ttk.Button(actions, text='Исходные данные', command=self.open_source).pack(side='left', padx=12)
         ttk.Button(actions, text='Закрыть', command=window.destroy).pack(side='right')
         window.bind('<Escape>', lambda e: window.destroy())
         return window

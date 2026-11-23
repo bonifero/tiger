@@ -100,6 +100,25 @@ class UsabilityTests(unittest.TestCase):
         self.assertEqual(self.app.reference_grids[0].rows, expected)
         self.assertEqual(len(expected), 16)  # 1 state for item 1, five for items 2–4.
         self.assertTrue(self.app.reference_grids[0].winfo_ismapped())
+        self.app.update()
+        grid = self.app.answer_grid
+        self.assertLessEqual(grid.positions[-1], grid.canvas.winfo_width())
+        self.assertFalse(grid.horizontal.winfo_ismapped())
+
+    def test_restore_shows_original_weights_and_capacity_beside_answers(self):
+        self.app.set_problem(Problem('Разные веса', 5, (2, 3), ((0, 5, 9), (0, 8))))
+        self.app.begin()
+        while self.app.lesson.phase in ('candidates', 'summary'):
+            self.accept_table()
+        self.assertEqual(self.app.lesson.phase, 'restore')
+        self.assertEqual(self.app.restore_weights_grid.columns, ('1', '2'))
+        self.assertEqual(self.app.restore_weights_grid.rows, [['2', '3']])
+        self.assertFalse(self.app.restore_weights_grid.editable)
+        self.assertIn('B = 5', self.app.restore_source_label.cget('text'))
+        self.assertTrue(self.app.restore_weights_grid.winfo_ismapped())
+        self.assertEqual(len(self.app.answer_grid.rows), 2)
+        self.assertTrue(all(cell == '' for row in self.app.answer_grid.rows for cell in row[1:]))
+        self.assertEqual(len(self.app.reference_grids[0].rows), 7)
 
     def test_finished_lesson_retains_every_candidate_and_summary_table(self):
         self.app.begin()
@@ -124,6 +143,19 @@ class UsabilityTests(unittest.TestCase):
             self.assertFalse(window.review_grid.editable)
         window.review_grid.copy_table()
         self.assertIn('\t'.join(self.app.accepted[-1]['rows'][0]), self.app.clipboard_get())
+        lesson, history = self.app.lesson, list(self.app.accepted)
+        source_button = next(w for w in widgets(window)
+                             if isinstance(w, ttk.Button) and w.cget('text') == 'Исходные данные')
+        source_button.invoke()
+        self.app.update()
+        source_window = next(w for w in self.app.winfo_children()
+                             if w.winfo_class() == 'Toplevel' and w is not window)
+        source_grid = next(w for w in widgets(source_window) if isinstance(w, DataGrid))
+        self.assertEqual(source_grid.rows[0][1:3], ['1', '4'])
+        self.assertIs(self.app.lesson, lesson)
+        self.assertEqual(self.app.accepted, history)
+        self.assertEqual(self.app.screen, 'result')
+        source_window.destroy()
         window.destroy()
 
     def test_rejected_source_attempts_count_through_result_and_reset_for_new_session(self):

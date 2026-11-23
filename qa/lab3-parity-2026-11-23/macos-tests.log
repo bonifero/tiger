@@ -58,12 +58,13 @@ test_impossible_trailing_quantities_are_hidden_but_full_model_payload_is_preserv
 test_readonly_cell_and_table_can_be_copied (test_usability.UsabilityTests.test_readonly_cell_and_table_can_be_copied) ... ok
 test_rejected_source_attempts_count_through_result_and_reset_for_new_session (test_usability.UsabilityTests.test_rejected_source_attempts_count_through_result_and_reset_for_new_session) ... ok
 test_restore_has_all_accepted_states_visible_in_inline_table (test_usability.UsabilityTests.test_restore_has_all_accepted_states_visible_in_inline_table) ... ok
+test_restore_shows_original_weights_and_capacity_beside_answers (test_usability.UsabilityTests.test_restore_shows_original_weights_and_capacity_beside_answers) ... ok
 test_small_window_preserves_actions_and_reference_at_all_phases (test_usability.UsabilityTests.test_small_window_preserves_actions_and_reference_at_all_phases) ... ok
 test_step_references_only_show_source_and_accepted_answers (test_usability.UsabilityTests.test_step_references_only_show_source_and_accepted_answers) ... ok
 test_zoom_keeps_distant_answer_visible_and_retains_value (test_usability.UsabilityTests.test_zoom_keeps_distant_answer_visible_and_retains_value) ... ok
 test_zoom_keeps_distant_editor_cell_selected_and_visible (test_usability.UsabilityTests.test_zoom_keeps_distant_editor_cell_selected_and_visible) ... ok
 
 ----------------------------------------------------------------------
-Ran 64 tests in 14.164s
+Ran 65 tests in 14.515s
 
 OK
