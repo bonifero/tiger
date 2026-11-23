@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 EXE = ROOT / 'source/Лаб_3/Загрузка_рюкзака.exe'
 OUT = ROOT / 'qa/lab3-parity-2026-11-23/runtime-original'
 OUT.mkdir(parents=True, exist_ok=True)
+ERROR_PROBES = os.environ.get('LAB3_ERROR_PROBES') == '1'
 U=C.WinDLL('user32', use_last_error=True)
 U.SetProcessDPIAware()
 CALLBACK=C.WINFUNCTYPE(W.BOOL,W.HWND,W.LPARAM)
@@ -169,14 +170,32 @@ def main():
                         value=own+exhaustive(values,weights,4,j+1,y+x)
                         p.cell('candidates',y+1,x+1,value);row.append((value,x))
                 best=max(v for v,x in row);choice=min(x for v,x in row if v==best);summaries.append((y,best,choice))
+            if ERROR_PROBES and j == 3:
+                p.cell('candidates',1,1,999)
+                p.click('check_candidates');p.dialogs('error-candidate');p.snapshot('error-candidate-retained')
+                assert U.IsWindowVisible(p.resolve('check_candidates'))
+                p.cell('candidates',1,1,0)
             p.snapshot(f'06-stage-{j+1}-candidates');p.click('check_candidates');p.dialogs(f'07-stage-{j+1}-candidates');p.snapshot(f'07-stage-{j+1}-summary-empty')
             for y,best,choice in summaries:
                 p.cell('summary',y+1,0,best);p.cell('summary',y+1,1,choice)
+            if ERROR_PROBES and j == 2:
+                # Both x=0 and x=1 yield 19 at y=2, but the original expects its first maximum.
+                p.cell('summary',3,1,1)
+                p.click('check_summary');p.dialogs('error-tied-maximum');p.snapshot('error-tied-maximum-retained')
+                assert U.IsWindowVisible(p.resolve('check_summary'))
+                p.cell('summary',3,1,0)
             p.snapshot(f'08-stage-{j+1}-summary-filled');p.click('check_summary');p.dialogs(f'09-stage-{j+1}-summary');p.snapshot(f'09-stage-{j+1}-accepted')
         p.snapshot('10-restore')
         for j,(y,x) in enumerate(zip([0,0,1,2],[0,1,1,2])):
             p.cell('restore',j+1,1,y,width=50);p.cell('restore',j+1,2,x,width=50)
+        if ERROR_PROBES:
+            p.cell('restore',2,1,1,width=50)
+            p.click('check_plan');p.dialogs('error-restore');p.snapshot('error-restore-retained')
+            assert U.IsWindowVisible(p.resolve('check_plan'))
+            p.cell('restore',2,1,0,width=50)
         p.snapshot('11-restore-filled');p.click('check_plan');p.dialogs('12-plan-accepted');p.snapshot('12-result')
+        assert not U.IsWindowVisible(p.resolve('check_plan')), 'Original rejected final plan'
+        (OUT/'scenario.json').write_text(json.dumps(dict(error_probes=ERROR_PROBES, expected_error_count=4 if ERROR_PROBES else 1, expected_value=40, expected_weight=4, plan=[0,1,1,2], states=[0,0,1,2], result_button_hidden=True),indent=2))
     except Exception:
         p.snapshot('failure')
         (OUT/'failure.txt').write_text(traceback.format_exc(),encoding='utf-8')
