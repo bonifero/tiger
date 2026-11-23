@@ -1,0 +1,243 @@
+Test Knapsack-Practicum	Run tests	﻿2026-11-23T18:21:43.6142748Z ##[group]Run python -m unittest discover -v
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:43.6143152Z ^[[36;1mpython -m unittest discover -v^[[0m
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:43.7069455Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:43.7069800Z env:
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:43.7070049Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:43.7070472Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:43.7070820Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:43.7071159Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:43.7071467Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:43.7071706Z ##[endgroup]
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:47.9864235Z test_abandon_lesson_cancel_then_confirm (test_acceptance.AcceptanceTests.test_abandon_lesson_cancel_then_confirm) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:48.0644753Z test_all_six_tasks_all_ten_optima_through_interface (test_acceptance.AcceptanceTests.test_all_six_tasks_all_ten_optima_through_interface) ... invalid command name "3155448962432_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:48.0645613Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:48.0645852Z "3155448962432_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:48.0646025Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:52.1945341Z ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:52.2578244Z test_context_menu_paste_marks_name_dirty (test_acceptance.AcceptanceTests.test_context_menu_paste_marks_name_dirty) ... bgerror failed to handle background error.
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:52.2579429Z     Original error: invalid command name "3155448018304_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:52.2580092Z     Error in bgerror: can't invoke "tk" command: application has been destroyed
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:52.3455440Z ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:53.2998079Z test_custom_boundary_and_nonlinear_tasks (test_acceptance.AcceptanceTests.test_custom_boundary_and_nonlinear_tasks) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:53.3612406Z test_explanation_requires_explicit_hint_and_has_no_attempt_limit (test_acceptance.AcceptanceTests.test_explanation_requires_explicit_hint_and_has_no_attempt_limit) ... bgerror failed to handle background error.
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:53.3613313Z     Original error: invalid command name "3155447442496_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:53.3613657Z     Error in bgerror: can't invoke "tk" command: application has been destroyed
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:53.6205989Z ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:53.6819227Z test_file_dialog_cancellation_and_save_failure_keep_edits (test_acceptance.AcceptanceTests.test_file_dialog_cancellation_and_save_failure_keep_edits) ... bgerror failed to handle background error.
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:53.6820898Z     Original error: invalid command name "3155447580096_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:53.6821453Z     Error in bgerror: can't invoke "tk" command: application has been destroyed
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:53.7810208Z ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.6658224Z test_invalid_editor_values_do_not_start_lesson (test_acceptance.AcceptanceTests.test_invalid_editor_values_do_not_start_lesson) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7240622Z test_keyboard_tab_return_escape_and_readonly_cells (test_acceptance.AcceptanceTests.test_keyboard_tab_return_escape_and_readonly_cells) ... invalid command name "3155448022912_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7241336Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7241497Z "3155448022912_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7241678Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7243152Z invalid command name "3155448001728_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7243855Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7244004Z "3155448001728_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7244164Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7247336Z invalid command name "3155447999680_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7248035Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7248195Z "3155447999680_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7248345Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7251611Z invalid command name "3155447992064_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7252313Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7252589Z "3155447992064_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.7252802Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8021069Z FOCUS START 1100x749+0+0 True
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8168972Z FOCUS REMOVE entry= .!frame3.!frame2.!frame.!frame.!datagrid.!canvas.!entry focus= .!frame3.!frame2.!frame.!frame.!datagrid.!canvas.!entry grid_current= True size= 1100x749+0+0 resize= None
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8205459Z   File "D:\a\tiger\tiger\knapsack-practicum\test_acceptance.py", line 147, in test_keyboard_tab_return_escape_and_readonly_cells
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8206340Z     g.entry.event_generate('<Tab>')
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8208151Z   File "C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\tkinter\__init__.py", line 1934, in event_generate
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8208851Z     self.tk.call(args)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8224882Z   File "C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\tkinter\__init__.py", line 1968, in __call__
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8225577Z     return self.func(*args)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8226193Z   File "D:\a\tiger\tiger\knapsack-practicum\app.py", line 271, in <lambda>
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8226869Z     self.entry.bind('<Tab>', lambda e: self._next_editable(1, editing=True))
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8227871Z   File "D:\a\tiger\tiger\knapsack-practicum\app.py", line 343, in _next_editable
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8228200Z     self.commit()
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8228483Z   File "D:\a\tiger\tiger\knapsack-practicum\app.py", line 305, in commit
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8228763Z     self._remove_entry()
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8229308Z   File "D:\a\tiger\tiger\knapsack-practicum\test_acceptance.py", line 139, in traced_remove
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8229645Z     traceback.print_stack(limit=7)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8334980Z FOCUS REMOVE entry= .!frame3.!frame2.!frame.!frame.!datagrid.!canvas.!entry2 focus= . grid_current= True size= 1100x749+0+0 resize= None
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8336736Z   File "D:\a\tiger\tiger\knapsack-practicum\test_acceptance.py", line 153, in test_keyboard_tab_return_escape_and_readonly_cells
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8337482Z     self.click_cell(g, 0, 4)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8338032Z   File "D:\a\tiger\tiger\knapsack-practicum\test_acceptance.py", line 54, in click_cell
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8338647Z     grid.canvas.event_generate('<Button-1>', x=x, y=y)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8339322Z   File "C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\tkinter\__init__.py", line 1934, in event_generate
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8339919Z     self.tk.call(args)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8340443Z   File "C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\tkinter\__init__.py", line 1968, in __call__
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8341022Z     return self.func(*args)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8341461Z   File "D:\a\tiger\tiger\knapsack-practicum\app.py", line 227, in _click
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8342284Z     self.commit()
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8342662Z   File "D:\a\tiger\tiger\knapsack-practicum\app.py", line 305, in commit
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8343101Z     self._remove_entry()
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8343606Z   File "D:\a\tiger\tiger\knapsack-practicum\test_acceptance.py", line 139, in traced_remove
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8344159Z     traceback.print_stack(limit=7)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8386290Z FOCUS REMOVE entry= .!frame3.!frame2.!frame.!frame.!datagrid.!canvas.!entry3 focus= .!frame3.!frame2.!frame.!frame.!datagrid.!canvas grid_current= True size= 1100x749+0+0 resize= None
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8388605Z   File "D:\a\tiger\tiger\knapsack-practicum\test_acceptance.py", line 153, in test_keyboard_tab_return_escape_and_readonly_cells
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8389552Z     self.click_cell(g, 0, 4)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8390224Z   File "D:\a\tiger\tiger\knapsack-practicum\test_acceptance.py", line 55, in click_cell
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8390843Z     self.app.update()
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8396295Z   File "C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\tkinter\__init__.py", line 1373, in update
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8397843Z     self.tk.call('update')
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8398836Z   File "C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\tkinter\__init__.py", line 1968, in __call__
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8399442Z     return self.func(*args)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8399907Z   File "D:\a\tiger\tiger\knapsack-practicum\app.py", line 283, in _focus_out
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8401498Z     self.commit()
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8401905Z   File "D:\a\tiger\tiger\knapsack-practicum\app.py", line 305, in commit
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8402361Z     self._remove_entry()
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8402875Z   File "D:\a\tiger\tiger\knapsack-practicum\test_acceptance.py", line 139, in traced_remove
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8403436Z     traceback.print_stack(limit=7)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8455897Z FOCUS RETURN entry= None focus= .!frame3.!frame2.!frame.!frame.!datagrid.!canvas grid_current= True size= 1100x749+0+0 resize= None
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:54.8461124Z ERROR
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:55.5768792Z test_minimum_window_keeps_review_and_restore_actions_visible (test_acceptance.AcceptanceTests.test_minimum_window_keeps_review_and_restore_actions_visible) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:56.0522368Z test_new_table_and_individual_limits (test_acceptance.AcceptanceTests.test_new_table_and_individual_limits) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:56.1150667Z test_pending_cell_is_protected_on_close (test_acceptance.AcceptanceTests.test_pending_cell_is_protected_on_close) ... invalid command name "3155417145664_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:56.1151288Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:56.1151437Z "3155417145664_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:56.1151595Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:56.2092443Z ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:56.3520576Z test_pending_cell_is_protected_on_replace (test_acceptance.AcceptanceTests.test_pending_cell_is_protected_on_replace) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.1407363Z test_resize_and_all_zoom_levels_preserve_active_input (test_acceptance.AcceptanceTests.test_resize_and_all_zoom_levels_preserve_active_input) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.3528545Z test_save_reload_and_declined_import (test_acceptance.AcceptanceTests.test_save_reload_and_declined_import) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.4077916Z test_wrong_maximum_and_restore_can_be_corrected (test_acceptance.AcceptanceTests.test_wrong_maximum_and_restore_can_be_corrected) ... invalid command name "3155505635776_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.4078574Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.4078729Z "3155505635776_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.4078892Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.6805829Z ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.6877589Z test_bad_json_duplicate_keys_nonfinite_and_size (test_formats.FormatTests.test_bad_json_duplicate_keys_nonfinite_and_size) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7009250Z test_exact_roundtrip_and_automatic_extension (test_formats.FormatTests.test_exact_roundtrip_and_automatic_extension) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7028397Z test_excessive_json_nesting_is_a_controlled_validation_error (test_formats.FormatTests.test_excessive_json_nesting_is_a_controlled_validation_error) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7144490Z test_failed_atomic_replace_preserves_old_file_and_removes_temp (test_formats.FormatTests.test_failed_atomic_replace_preserves_old_file_and_removes_temp) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7158913Z test_raw_json_decimals_keep_the_exact_optimum (test_formats.FormatTests.test_raw_json_decimals_keep_the_exact_optimum) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7160640Z test_schema_version_and_validation (test_formats.FormatTests.test_schema_version_and_validation) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7166327Z test_all_equal_optima_accepted (test_lesson.LessonTests.test_all_equal_optima_accepted) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7169195Z test_answer_fractions_can_be_larger_than_each_input (test_lesson.LessonTests.test_answer_fractions_can_be_larger_than_each_input) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7170603Z test_hints_are_counted_without_advancing (test_lesson.LessonTests.test_hints_are_counted_without_advancing) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7174013Z test_restoration_rejects_invalid_and_suboptimal_plans (test_lesson.LessonTests.test_restoration_rejects_invalid_and_suboptimal_plans) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7178780Z test_restoration_requires_states_matching_the_actual_alternative (test_lesson.LessonTests.test_restoration_requires_states_matching_the_actual_alternative) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7179725Z test_shape_mismatch_and_wrong_phase (test_lesson.LessonTests.test_shape_mismatch_and_wrong_phase) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7182469Z test_states_use_weighted_resource_and_legacy_call_computes_them (test_lesson.LessonTests.test_states_use_weighted_resource_and_legacy_call_computes_them) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7183649Z test_summary_checks_maximum_and_integer_argmax (test_lesson.LessonTests.test_summary_checks_maximum_and_integer_argmax) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7186790Z test_wrong_states_do_not_advance_or_publish_accepted_plan (test_lesson.LessonTests.test_wrong_states_do_not_advance_or_publish_accepted_plan) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7188050Z test_wrong_values_never_advance_or_destroy_answers (test_lesson.LessonTests.test_wrong_values_never_advance_or_destroy_answers) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7211158Z test_all_manual_optima_and_alternatives (test_presets.PresetTests.test_all_manual_optima_and_alternatives) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7243975Z test_distributed_json_matches_presets (test_presets.PresetTests.test_distributed_json_matches_presets) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7245700Z test_manual_example_intermediate_tables (test_presets.PresetTests.test_manual_example_intermediate_tables) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7247810Z test_exact_numeric_input (test_solver.SolverTests.test_exact_numeric_input) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7250900Z test_exponent_is_bounded_before_fraction_expansion (test_solver.SolverTests.test_exponent_is_bounded_before_fraction_expansion) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7252763Z test_manual_example_and_ties (test_solver.SolverTests.test_manual_example_and_ties) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7255280Z test_model_validation (test_solver.SolverTests.test_model_validation) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7821352Z test_random_models_and_every_suffix_against_enumeration (test_solver.SolverTests.test_random_models_and_every_suffix_against_enumeration) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7855507Z test_resource_budget (test_solver.SolverTests.test_resource_budget) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.7856961Z test_unused_capacity_zero_quantity_and_unavailable_items (test_solver.SolverTests.test_unused_capacity_zero_quantity_and_unavailable_items) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.8423580Z test_compact_window_keeps_three_editor_rows_at_140_percent (test_ui.InterfaceTests.test_compact_window_keeps_three_editor_rows_at_140_percent) ... bgerror failed to handle background error.
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.8424272Z     Original error: invalid command name "3155505708928_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:57.8424610Z     Error in bgerror: can't invoke "tk" command: application has been destroyed
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.0446343Z ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.1508549Z test_editor_roundtrip_and_ragged_limits (test_ui.InterfaceTests.test_editor_roundtrip_and_ragged_limits) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2024128Z test_error_keeps_input_and_step_rescale_keeps_input (test_ui.InterfaceTests.test_error_keeps_input_and_step_rescale_keeps_input) ... invalid command name "3155505900928_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2024750Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2024904Z "3155505900928_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2025078Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2026316Z invalid command name "3155505921280_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2026646Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2026860Z "3155505921280_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2027082Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2029845Z invalid command name "3155505920640_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2030148Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2030440Z "3155505920640_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2030672Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2376369Z ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2889186Z test_failed_import_preserves_edited_problem (test_ui.InterfaceTests.test_failed_import_preserves_edited_problem) ... invalid command name "3155505893312_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2890174Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2890414Z "3155505893312_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2890676Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2891517Z invalid command name "3155505900224_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2891997Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2892225Z "3155505900224_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2892781Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.2996177Z ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.4821970Z test_full_workflow_accepts_alternate_optimum_with_states (test_ui.InterfaceTests.test_full_workflow_accepts_alternate_optimum_with_states) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5458178Z test_large_grid_draws_only_viewport (test_ui.InterfaceTests.test_large_grid_draws_only_viewport) ... invalid command name "3155505919552_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5458722Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5458889Z "3155505919552_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5459077Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5460096Z invalid command name "3155505919296_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5460526Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5460753Z "3155505919296_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5460975Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5463751Z invalid command name "3155505935296_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5464050Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5464267Z "3155505935296_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5464505Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5467791Z invalid command name "3155505931904_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5468077Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5468285Z "3155505931904_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5468495Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5471998Z invalid command name "3155505931392_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5472268Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5472590Z "3155505931392_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5472815Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5476371Z invalid command name "3155505906560_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5476682Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5476884Z "3155505906560_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5477096Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5480600Z invalid command name "3155506038912_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5480886Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5481088Z "3155506038912_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5481301Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5484927Z invalid command name "3155506040448_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5485228Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5485453Z "3155506040448_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5485668Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5489059Z invalid command name "3155506042624_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5489341Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5489563Z "3155506042624_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5489773Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5493368Z invalid command name "3155506043008_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5493671Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5493888Z "3155506043008_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5494450Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5497623Z invalid command name "3155506041664_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5497911Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5498125Z "3155506041664_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5498354Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5501890Z invalid command name "3155505898560_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5502171Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5502378Z "3155505898560_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.5502601Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.6017370Z ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.6907200Z test_review_contains_only_accepted_tables (test_ui.InterfaceTests.test_review_contains_only_accepted_tables) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.7429331Z test_stale_focus_event_does_not_commit_replacement_editor (test_ui.InterfaceTests.test_stale_focus_event_does_not_commit_replacement_editor) ... invalid command name "3155505904896_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.7429984Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.7430143Z "3155505904896_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.7430338Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.7431283Z invalid command name "3155540739328_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.7431588Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.7431790Z "3155540739328_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.7431959Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.7434382Z invalid command name "3155506037504_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.7434683Z     while executing
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.7434871Z "3155506037504_redraw"
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.7435079Z     ("after" script)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.7560526Z ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.8132219Z test_tab_and_tsv_paste_respect_read_only_cells (test_ui.InterfaceTests.test_tab_and_tsv_paste_respect_read_only_cells) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9487038Z test_underfilled_plan_and_export (test_ui.InterfaceTests.test_underfilled_plan_and_export) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9487571Z 
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9487689Z ======================================================================
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9488371Z ERROR: test_keyboard_tab_return_escape_and_readonly_cells (test_acceptance.AcceptanceTests.test_keyboard_tab_return_escape_and_readonly_cells)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9489149Z ----------------------------------------------------------------------
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9489573Z Traceback (most recent call last):
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9490619Z   File "D:\a\tiger\tiger\knapsack-practicum\test_acceptance.py", line 155, in test_keyboard_tab_return_escape_and_readonly_cells
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9491312Z     g.entry.event_generate('<Return>')
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9491635Z     ^^^^^^^^^^^^^^^^^^^^^^
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9491972Z AttributeError: 'NoneType' object has no attribute 'event_generate'
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9492297Z 
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9492439Z ----------------------------------------------------------------------
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9492681Z Ran 51 tests in 12.203s
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9492785Z 
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:58.9492841Z FAILED (errors=1)
+Test Knapsack-Practicum	Run tests	2026-11-23T18:21:59.1011842Z ##[error]Process completed with exit code 1.

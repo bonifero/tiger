@@ -1,0 +1,18 @@
+test_minimum_window_keeps_review_and_restore_actions_visible (test_acceptance.AcceptanceTests.test_minimum_window_keeps_review_and_restore_actions_visible) ... FAIL
+
+======================================================================
+FAIL: test_minimum_window_keeps_review_and_restore_actions_visible (test_acceptance.AcceptanceTests.test_minimum_window_keeps_review_and_restore_actions_visible)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/tiger-lab3-qa/test_acceptance.py", line 327, in test_minimum_window_keeps_review_and_restore_actions_visible
+    assert_button('Открыть таблицу')
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/tiger-lab3-qa/test_acceptance.py", line 324, in assert_button
+    self.assertGreaterEqual(button.winfo_height(), button.winfo_reqheight(), text)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 not greater than or equal to 38 : Открыть таблицу
+
+----------------------------------------------------------------------
+Ran 1 test in 0.438s
+
+FAILED (failures=1)

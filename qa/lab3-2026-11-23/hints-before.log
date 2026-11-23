@@ -1,0 +1,20 @@
+test_explanation_requires_explicit_hint_and_has_no_attempt_limit (test_acceptance.AcceptanceTests.test_explanation_requires_explicit_hint_and_has_no_attempt_limit) ... FAIL
+
+======================================================================
+FAIL: test_explanation_requires_explicit_hint_and_has_no_attempt_limit (test_acceptance.AcceptanceTests.test_explanation_requires_explicit_hint_and_has_no_attempt_limit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/tiger-lab3-qa/test_acceptance.py", line 278, in test_explanation_requires_explicit_hint_and_has_no_attempt_limit
+    self.assertEqual(self.app.message_var.get(),
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     'Ответ неверный. Проверьте отмеченные поля. Пояснение доступно по кнопке «Подсказка».')
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'Проверьте отмеченные ячейки. Учтите остав[38 chars]уза.' != 'Ответ неверный. Проверьте отмеченные поля[39 chars]ка».'
+- Проверьте отмеченные ячейки. Учтите оставшийся ресурс и результат следующего груза.
++ Ответ неверный. Проверьте отмеченные поля. Пояснение доступно по кнопке «Подсказка».
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.354s
+
+FAILED (failures=1)

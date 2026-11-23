@@ -1,0 +1,343 @@
+original	Set up job	﻿2026-11-23T20:31:25.3561473Z Current runner version: '2.338.2'
+original	Set up job	2026-11-23T20:31:25.3773631Z ##[group]Runner Image Provisioner
+original	Set up job	2026-11-23T20:31:25.3774523Z Hosted Compute Agent
+original	Set up job	2026-11-23T20:31:25.3775096Z Version: 20261111.635
+original	Set up job	2026-11-23T20:31:25.3775694Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+original	Set up job	2026-11-23T20:31:25.3776431Z Build Date: 2026-11-11T01:49:01Z
+original	Set up job	2026-11-23T20:31:25.3777063Z Worker ID: {8f8c0c0b-078a-4865-837a-656556214df6}
+original	Set up job	2026-11-23T20:31:25.3777718Z Region: eastus
+original	Set up job	2026-11-23T20:31:25.3778230Z Cloud: Azure
+original	Set up job	2026-11-23T20:31:25.3778711Z ##[endgroup]
+original	Set up job	2026-11-23T20:31:25.3780043Z ##[group]Operating System
+original	Set up job	2026-11-23T20:31:25.3780685Z Microsoft Windows Server 2025
+original	Set up job	2026-11-23T20:31:25.3781253Z 10.0.26100
+original	Set up job	2026-11-23T20:31:25.3781778Z Datacenter
+original	Set up job	2026-11-23T20:31:25.3782306Z ##[endgroup]
+original	Set up job	2026-11-23T20:31:25.3782838Z ##[group]Runner Image
+original	Set up job	2026-11-23T20:31:25.3783398Z Image: windows-2025-vs2026
+original	Set up job	2026-11-23T20:31:25.3783967Z Version: 20261116.315.1
+original	Set up job	2026-11-23T20:31:25.3785108Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261116.315/images/windows/Windows2025-VS2026-Readme.md
+original	Set up job	2026-11-23T20:31:25.3787608Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261116.315
+original	Set up job	2026-11-23T20:31:25.3788592Z ##[endgroup]
+original	Set up job	2026-11-23T20:31:25.3789630Z ##[group]GITHUB_TOKEN Permissions
+original	Set up job	2026-11-23T20:31:25.3791513Z Contents: read
+original	Set up job	2026-11-23T20:31:25.3792143Z Metadata: read
+original	Set up job	2026-11-23T20:31:25.3792717Z ##[endgroup]
+original	Set up job	2026-11-23T20:31:25.3794812Z Secret source: Actions
+original	Set up job	2026-11-23T20:31:25.3795755Z Cache mode: write
+original	Set up job	2026-11-23T20:31:25.3796434Z Prepare workflow directory
+original	Set up job	2026-11-23T20:31:25.4881909Z Prepare all required actions
+original	Set up job	2026-11-23T20:31:25.4937672Z Getting action download info
+original	Set up job	2026-11-23T20:31:25.6732621Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+original	Set up job	2026-11-23T20:31:25.8626735Z Download action repository 'actions/setup-python@v6' (SHA:ece7cb06caefa5fff74198d8649806c4678c61a1)
+original	Set up job	2026-11-23T20:31:26.2237742Z Download action repository 'actions/upload-artifact@v6' (SHA:b7c566a772e6b6bfb58ed0dc250532a479d7789f)
+original	Set up job	2026-11-23T20:31:27.0124699Z Complete job name: original
+original	Run actions/checkout@v6	﻿2026-11-23T20:31:27.5733960Z ##[group]Run actions/checkout@v6
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5735359Z with:
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5736056Z   repository: bonifero/tiger
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5744156Z   token: ***
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5744880Z   ssh-strict: true
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5745579Z   ssh-user: git
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5746290Z   persist-credentials: true
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5747088Z   clean: true
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5747809Z   sparse-checkout-cone-mode: true
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5748673Z   fetch-depth: 1
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5749369Z   fetch-tags: false
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5750081Z   show-progress: true
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5750801Z   lfs: false
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5751468Z   submodules: false
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5752194Z   set-safe-directory: true
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5753026Z   allow-unsafe-pr-checkout: false
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5754157Z env:
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5754851Z   PYTHONIOENCODING: utf-8
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5755637Z   LAB3_ERROR_PROBES: 1
+original	Run actions/checkout@v6	2026-11-23T20:31:27.5756341Z ##[endgroup]
+original	Run actions/checkout@v6	2026-11-23T20:31:27.7538750Z Syncing repository: bonifero/tiger
+original	Run actions/checkout@v6	2026-11-23T20:31:27.7541706Z ##[group]Getting Git version info
+original	Run actions/checkout@v6	2026-11-23T20:31:27.7542726Z Working directory is 'D:\a\tiger\tiger'
+original	Run actions/checkout@v6	2026-11-23T20:31:27.8484836Z [command]"C:\Program Files\Git\bin\git.exe" version
+original	Run actions/checkout@v6	2026-11-23T20:31:28.1296514Z git version 2.56.1.windows.1
+original	Run actions/checkout@v6	2026-11-23T20:31:28.1348512Z ##[endgroup]
+original	Run actions/checkout@v6	2026-11-23T20:31:28.1378876Z Temporarily overriding HOME='D:\a\_temp\8d75eed4-af50-42e8-9a79-1ac7a1477dd1' before making global git config changes
+original	Run actions/checkout@v6	2026-11-23T20:31:28.1380547Z Adding repository directory to the temporary git global config as a safe directory
+original	Run actions/checkout@v6	2026-11-23T20:31:28.1383377Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tiger\tiger
+original	Run actions/checkout@v6	2026-11-23T20:31:28.2031307Z Deleting the contents of 'D:\a\tiger\tiger'
+original	Run actions/checkout@v6	2026-11-23T20:31:28.2083324Z ##[group]Determining repository object format
+original	Run actions/checkout@v6	2026-11-23T20:31:28.2083982Z ##[endgroup]
+original	Run actions/checkout@v6	2026-11-23T20:31:28.2084495Z ##[group]Initializing the repository
+original	Run actions/checkout@v6	2026-11-23T20:31:28.2085000Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\tiger\tiger
+original	Run actions/checkout@v6	2026-11-23T20:31:28.2934871Z Initialized empty Git repository in D:/a/tiger/tiger/.git/
+original	Run actions/checkout@v6	2026-11-23T20:31:28.2987105Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/bonifero/tiger
+original	Run actions/checkout@v6	2026-11-23T20:31:28.3599332Z ##[endgroup]
+original	Run actions/checkout@v6	2026-11-23T20:31:28.3600271Z ##[group]Disabling automatic garbage collection
+original	Run actions/checkout@v6	2026-11-23T20:31:28.3608773Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+original	Run actions/checkout@v6	2026-11-23T20:31:28.3980256Z ##[endgroup]
+original	Run actions/checkout@v6	2026-11-23T20:31:28.3981028Z ##[group]Setting up auth
+original	Run actions/checkout@v6	2026-11-23T20:31:28.3982618Z Removing SSH command configuration
+original	Run actions/checkout@v6	2026-11-23T20:31:28.3992767Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+original	Run actions/checkout@v6	2026-11-23T20:31:28.4378892Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+original	Run actions/checkout@v6	2026-11-23T20:31:29.7602827Z Removing HTTP extra header
+original	Run actions/checkout@v6	2026-11-23T20:31:29.7615767Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+original	Run actions/checkout@v6	2026-11-23T20:31:29.8051469Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+original	Run actions/checkout@v6	2026-11-23T20:31:30.3409265Z Removing includeIf entries pointing to credentials config files
+original	Run actions/checkout@v6	2026-11-23T20:31:30.3424938Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+original	Run actions/checkout@v6	2026-11-23T20:31:30.3827093Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+original	Run actions/checkout@v6	2026-11-23T20:31:30.9191659Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-badfa378-5130-4df6-9978-e7865832af67.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+original	Run actions/checkout@v6	2026-11-23T20:31:30.9601385Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/tiger/tiger/.git.path D:\a\_temp\git-credentials-badfa378-5130-4df6-9978-e7865832af67.config
+original	Run actions/checkout@v6	2026-11-23T20:31:30.9994556Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path D:\a\_temp\git-credentials-badfa378-5130-4df6-9978-e7865832af67.config
+original	Run actions/checkout@v6	2026-11-23T20:31:31.0421378Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-badfa378-5130-4df6-9978-e7865832af67.config
+original	Run actions/checkout@v6	2026-11-23T20:31:31.0809250Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-badfa378-5130-4df6-9978-e7865832af67.config
+original	Run actions/checkout@v6	2026-11-23T20:31:31.1238459Z ##[endgroup]
+original	Run actions/checkout@v6	2026-11-23T20:31:31.1239314Z ##[group]Fetching the repository
+original	Run actions/checkout@v6	2026-11-23T20:31:31.1252840Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b58bc02626215a4b8c3cff93b720aa1b15cf676e:refs/remotes/origin/qa/lab3-original-parity-20261123
+original	Run actions/checkout@v6	2026-11-23T20:31:32.4131557Z From https://github.com/bonifero/tiger
+original	Run actions/checkout@v6	2026-11-23T20:31:32.4132716Z  * [new ref]         b58bc02626215a4b8c3cff93b720aa1b15cf676e -> origin/qa/lab3-original-parity-20261123
+original	Run actions/checkout@v6	2026-11-23T20:31:32.4190486Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/qa/lab3-original-parity-20261123
+original	Run actions/checkout@v6	2026-11-23T20:31:32.4612303Z   origin/qa/lab3-original-parity-20261123
+original	Run actions/checkout@v6	2026-11-23T20:31:32.4670049Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/qa/lab3-original-parity-20261123
+original	Run actions/checkout@v6	2026-11-23T20:31:32.5075984Z b58bc02626215a4b8c3cff93b720aa1b15cf676e
+original	Run actions/checkout@v6	2026-11-23T20:31:32.5120187Z ##[endgroup]
+original	Run actions/checkout@v6	2026-11-23T20:31:32.5120857Z ##[group]Determining the checkout info
+original	Run actions/checkout@v6	2026-11-23T20:31:32.5121869Z ##[endgroup]
+original	Run actions/checkout@v6	2026-11-23T20:31:32.5132536Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+original	Run actions/checkout@v6	2026-11-23T20:31:32.5722873Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+original	Run actions/checkout@v6	2026-11-23T20:31:32.6119913Z ##[group]Checking out the ref
+original	Run actions/checkout@v6	2026-11-23T20:31:32.6128895Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B qa/lab3-original-parity-20261123 refs/remotes/origin/qa/lab3-original-parity-20261123
+original	Run actions/checkout@v6	2026-11-23T20:31:32.8044272Z Switched to a new branch 'qa/lab3-original-parity-20261123'
+original	Run actions/checkout@v6	2026-11-23T20:31:32.8067568Z branch 'qa/lab3-original-parity-20261123' set up to track 'origin/qa/lab3-original-parity-20261123'.
+original	Run actions/checkout@v6	2026-11-23T20:31:32.8121902Z ##[endgroup]
+original	Run actions/checkout@v6	2026-11-23T20:31:32.8600562Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+original	Run actions/checkout@v6	2026-11-23T20:31:32.8962310Z b58bc02626215a4b8c3cff93b720aa1b15cf676e
+original	Run actions/setup-python@v6	﻿2026-11-23T20:31:33.1702803Z ##[group]Run actions/setup-python@v6
+original	Run actions/setup-python@v6	2026-11-23T20:31:33.1703206Z with:
+original	Run actions/setup-python@v6	2026-11-23T20:31:33.1703455Z   python-version: 3.12
+original	Run actions/setup-python@v6	2026-11-23T20:31:33.1703729Z   check-latest: false
+original	Run actions/setup-python@v6	2026-11-23T20:31:33.1707310Z   token: ***
+original	Run actions/setup-python@v6	2026-11-23T20:31:33.1707566Z   update-environment: true
+original	Run actions/setup-python@v6	2026-11-23T20:31:33.1707865Z   allow-prereleases: false
+original	Run actions/setup-python@v6	2026-11-23T20:31:33.1708141Z   freethreaded: false
+original	Run actions/setup-python@v6	2026-11-23T20:31:33.1708380Z env:
+original	Run actions/setup-python@v6	2026-11-23T20:31:33.1708594Z   PYTHONIOENCODING: utf-8
+original	Run actions/setup-python@v6	2026-11-23T20:31:33.1708859Z   LAB3_ERROR_PROBES: 1
+original	Run actions/setup-python@v6	2026-11-23T20:31:33.1709115Z ##[endgroup]
+original	Run actions/setup-python@v6	2026-11-23T20:31:33.3775476Z ##[group]Installed versions
+original	Run actions/setup-python@v6	2026-11-23T20:31:33.3999547Z Successfully set up CPython (3.12.10)
+original	Run actions/setup-python@v6	2026-11-23T20:31:33.4000350Z ##[endgroup]
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	﻿2026-11-23T20:31:33.5721200Z ##[group]Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:33.5721847Z ^[[36;1mpython -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'^[[0m
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:33.6376782Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:33.6377391Z env:
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:33.6377692Z   PYTHONIOENCODING: utf-8
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:33.6378062Z   LAB3_ERROR_PROBES: 1
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:33.6378548Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:33.6379348Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:33.6380128Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:33.6380822Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:33.6381591Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:33.6382144Z ##[endgroup]
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:43.6164521Z Collecting Pillow<13,>=12
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:43.8843821Z   Downloading pillow-12.3.0-cp312-cp312-win_amd64.whl.metadata (9.3 kB)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:43.9369301Z Collecting pyautogui==0.9.54
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:43.9606814Z   Downloading PyAutoGUI-0.9.54.tar.gz (61 kB)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:44.1545474Z   Installing build dependencies: started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:47.3473181Z   Installing build dependencies: finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:47.3488955Z   Getting requirements to build wheel: started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:48.0392820Z   Getting requirements to build wheel: finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:48.0436934Z   Preparing metadata (pyproject.toml): started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:48.4409988Z   Preparing metadata (pyproject.toml): finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:48.4753821Z Collecting pymsgbox (from pyautogui==0.9.54)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:48.4986047Z   Downloading pymsgbox-2.0.1-py3-none-any.whl.metadata (4.4 kB)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:48.5524963Z Collecting pytweening>=1.0.4 (from pyautogui==0.9.54)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:48.5757795Z   Downloading pytweening-1.2.0.tar.gz (171 kB)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:48.6723879Z   Installing build dependencies: started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:50.3041780Z   Installing build dependencies: finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:50.3058105Z   Getting requirements to build wheel: started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:50.8796792Z   Getting requirements to build wheel: finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:50.8834438Z   Preparing metadata (pyproject.toml): started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:51.2158443Z   Preparing metadata (pyproject.toml): finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:51.2500729Z Collecting pyscreeze>=0.1.21 (from pyautogui==0.9.54)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:51.2749027Z   Downloading pyscreeze-1.0.1.tar.gz (27 kB)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:51.3331119Z   Installing build dependencies: started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:54.9166401Z   Installing build dependencies: finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:54.9182178Z   Getting requirements to build wheel: started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:55.6143122Z   Getting requirements to build wheel: finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:55.6185384Z   Preparing metadata (pyproject.toml): started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:55.9400058Z   Preparing metadata (pyproject.toml): finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:55.9819707Z Collecting pygetwindow>=0.0.5 (from pyautogui==0.9.54)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:56.0052292Z   Downloading PyGetWindow-0.0.9.tar.gz (9.7 kB)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:56.0406382Z   Installing build dependencies: started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:57.6876138Z   Installing build dependencies: finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:57.6891969Z   Getting requirements to build wheel: started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:58.3444195Z   Getting requirements to build wheel: finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:58.3481500Z   Preparing metadata (pyproject.toml): started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:58.6578239Z   Preparing metadata (pyproject.toml): finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:58.6855284Z Collecting mouseinfo (from pyautogui==0.9.54)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:58.7079815Z   Downloading MouseInfo-0.1.3.tar.gz (10 kB)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:31:58.7421562Z   Installing build dependencies: started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:00.3785579Z   Installing build dependencies: finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:00.3801583Z   Getting requirements to build wheel: started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:01.2002537Z   Getting requirements to build wheel: finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:01.2039696Z   Preparing metadata (pyproject.toml): started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:01.5651292Z   Preparing metadata (pyproject.toml): finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:01.5983729Z Collecting pyrect (from pygetwindow>=0.0.5->pyautogui==0.9.54)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:01.6215060Z   Downloading PyRect-0.2.0.tar.gz (17 kB)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:01.7744414Z   Installing build dependencies: started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:06.1548270Z   Installing build dependencies: finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:06.1564123Z   Getting requirements to build wheel: started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:07.1219003Z   Getting requirements to build wheel: finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:07.1256048Z   Preparing metadata (pyproject.toml): started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:07.4369331Z   Preparing metadata (pyproject.toml): finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:07.4712452Z Collecting pyperclip (from mouseinfo->pyautogui==0.9.54)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:07.4941005Z   Downloading pyperclip-1.11.0-py3-none-any.whl.metadata (2.4 kB)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:07.5386410Z Downloading pillow-12.3.0-cp312-cp312-win_amd64.whl (7.2 MB)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:07.6755079Z    ---------------------------------------- 7.2/7.2 MB 63.9 MB/s  0:00:00
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:07.6980912Z Downloading pymsgbox-2.0.1-py3-none-any.whl (10.0 kB)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:07.7649310Z Downloading pyperclip-1.11.0-py3-none-any.whl (11 kB)
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:07.8144377Z Building wheels for collected packages: pyautogui, pygetwindow, pyscreeze, pytweening, mouseinfo, pyrect
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:07.8172939Z   Building wheel for pyautogui (pyproject.toml): started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:08.2333024Z   Building wheel for pyautogui (pyproject.toml): finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:08.2357173Z   Created wheel for pyautogui: filename=pyautogui-0.9.54-py3-none-any.whl size=37707 sha256=d0d7a661e4d128d5fbee99caffc4796940c398008729ab5a81b7921eadb86604
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:08.2359024Z   Stored in directory: c:\users\runneradmin\appdata\local\pip\cache\wheels\d9\d6\47\04075995b093ecc87c212c9a3dbd34e59456c6fe504d65c3e4
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:08.2413761Z   Building wheel for pygetwindow (pyproject.toml): started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:08.6090059Z   Building wheel for pygetwindow (pyproject.toml): finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:08.6112442Z   Created wheel for pygetwindow: filename=pygetwindow-0.0.9-py3-none-any.whl size=11137 sha256=7201a6d2cc91b8a08e55a14c48f529c58a3766961a9b0a97c503de279a7ef437
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:08.6114661Z   Stored in directory: c:\users\runneradmin\appdata\local\pip\cache\wheels\b3\39\81\34dd7a2eca5f885f1f6e2796761970daf66a2d98ac1904f5f4
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:08.6165628Z   Building wheel for pyscreeze (pyproject.toml): started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:09.0089893Z   Building wheel for pyscreeze (pyproject.toml): finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:09.0113839Z   Created wheel for pyscreeze: filename=pyscreeze-1.0.1-py3-none-any.whl size=14481 sha256=af312143dbf08866f009e6f0c04eba1920355784e53c769b43f1aabdf73dabc7
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:09.0116127Z   Stored in directory: c:\users\runneradmin\appdata\local\pip\cache\wheels\cd\3a\c2\7f2839239a069aa3c9564f6777cbb29d733720ef673f104f0d
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:09.0171309Z   Building wheel for pytweening (pyproject.toml): started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:09.4035486Z   Building wheel for pytweening (pyproject.toml): finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:09.4058578Z   Created wheel for pytweening: filename=pytweening-1.2.0-py3-none-any.whl size=8135 sha256=acdf32a29fb792980eff9cc3a0cab8950d5cb82ff7ab0bcd35f9ee6e92bf9ec6
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:09.4060716Z   Stored in directory: c:\users\runneradmin\appdata\local\pip\cache\wheels\23\d5\13\4e9bdadbfe3c78e47c675e7410c0eed2fbb63c5ea6cf1b40e7
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:09.4114848Z   Building wheel for mouseinfo (pyproject.toml): started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:09.7916885Z   Building wheel for mouseinfo (pyproject.toml): finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:09.7939669Z   Created wheel for mouseinfo: filename=mouseinfo-0.1.3-py3-none-any.whl size=10959 sha256=2c960139c494d74bdc31206af9a987c60eb887d2801b51e99dcdb6d65953bc2f
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:09.7941889Z   Stored in directory: c:\users\runneradmin\appdata\local\pip\cache\wheels\b1\9b\f3\08650eb7f00af32f07789f3c6a101e0d7fc762b9891ae843bb
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:09.7992454Z   Building wheel for pyrect (pyproject.toml): started
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:10.1647935Z   Building wheel for pyrect (pyproject.toml): finished with status 'done'
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:10.1670426Z   Created wheel for pyrect: filename=pyrect-0.2.0-py2.py3-none-any.whl size=11304 sha256=607597e3e227a7760918deae44330284e570f3b225de9c0dbbd014ab6aa599dc
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:10.1672634Z   Stored in directory: c:\users\runneradmin\appdata\local\pip\cache\wheels\0b\1e\d7\0c74bd8f60b39c14d84e307398786002aa7ddc905927cc03c5
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:10.1702522Z Successfully built pyautogui pygetwindow pyscreeze pytweening mouseinfo pyrect
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:10.2099988Z Installing collected packages: pytweening, pyscreeze, pyrect, pyperclip, pymsgbox, pygetwindow, Pillow, mouseinfo, pyautogui
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:11.3401217Z 
+original	Run python -m pip install 'Pillow>=12,<13' 'pyautogui==0.9.54'	2026-11-23T20:32:11.3423978Z Successfully installed Pillow-12.3.0 mouseinfo-0.1.3 pyautogui-0.9.54 pygetwindow-0.0.9 pymsgbox-2.0.1 pyperclip-1.11.0 pyrect-0.2.0 pyscreeze-1.0.1 pytweening-1.2.0
+original	Walk through original Delphi application	﻿2026-11-23T20:32:12.6829900Z ##[group]Run python -X utf8 -u qa/lab3-parity-2026-11-23/original_runtime.py
+original	Walk through original Delphi application	2026-11-23T20:32:12.6830560Z ^[[36;1mpython -X utf8 -u qa/lab3-parity-2026-11-23/original_runtime.py^[[0m
+original	Walk through original Delphi application	2026-11-23T20:32:12.6906211Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+original	Walk through original Delphi application	2026-11-23T20:32:12.6906574Z env:
+original	Walk through original Delphi application	2026-11-23T20:32:12.6906765Z   PYTHONIOENCODING: utf-8
+original	Walk through original Delphi application	2026-11-23T20:32:12.6906999Z   LAB3_ERROR_PROBES: 1
+original	Walk through original Delphi application	2026-11-23T20:32:12.6907287Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+original	Walk through original Delphi application	2026-11-23T20:32:12.6907744Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+original	Walk through original Delphi application	2026-11-23T20:32:12.6909085Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+original	Walk through original Delphi application	2026-11-23T20:32:12.6909498Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+original	Walk through original Delphi application	2026-11-23T20:32:12.6909900Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+original	Walk through original Delphi application	2026-11-23T20:32:12.6910214Z ##[endgroup]
+original	Walk through original Delphi application	2026-11-23T20:32:16.6952802Z 00-initial [('accept_n', '???????')]
+original	Walk through original Delphi application	2026-11-23T20:32:18.3630884Z 01-condition-empty [('accept_data', '??????? ??????')]
+original	Walk through original Delphi application	2026-11-23T20:32:19.8520466Z 02-invalid-condition-dialog-0 [('accept_data', '??????? ??????')]
+original	Walk through original Delphi application	2026-11-23T20:32:20.4528093Z 02-condition-error [('accept_data', '??????? ??????')]
+original	Walk through original Delphi application	2026-11-23T20:32:26.8563890Z 03-condition-filled [('accept_data', '??????? ??????')]
+original	Walk through original Delphi application	2026-11-23T20:32:28.3570933Z 04-condition-accepted-dialog-0 [('next', '???1')]
+original	Walk through original Delphi application	2026-11-23T20:32:28.9407609Z 04-ready [('next', '???1')]
+original	Walk through original Delphi application	2026-11-23T20:32:29.9240933Z 05-stage-4-empty [('check_candidates', '??????? ?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:35.3823079Z error-candidate-dialog-0 [('check_candidates', '??????? ?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:35.9828472Z error-candidate-retained [('check_candidates', '??????? ?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:36.3603324Z 06-stage-4-candidates [('check_candidates', '??????? ?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:37.8564290Z 07-stage-4-candidates-dialog-0 [('check_candidates', '??????? ?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:38.4502276Z 07-stage-4-summary-empty [('check_summary', '?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:41.0523787Z 08-stage-4-summary-filled [('check_summary', '?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:42.5549746Z 09-stage-4-summary-dialog-0 [('check_summary', '?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:43.1546710Z 09-stage-4-accepted [('next', 'Перейти к шагу 2')]
+original	Walk through original Delphi application	2026-11-23T20:32:44.1519049Z 05-stage-3-empty [('check_candidates', '??????? ?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:48.0277480Z 06-stage-3-candidates [('check_candidates', '??????? ?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:49.5311756Z 07-stage-3-candidates-dialog-0 [('check_candidates', '??????? ?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:50.1159316Z 07-stage-3-summary-empty [('check_summary', '?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:54.3898512Z error-tied-maximum-dialog-0 [('check_summary', '?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:54.9700906Z error-tied-maximum-retained [('check_summary', '?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:55.3567239Z 08-stage-3-summary-filled [('check_summary', '?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:56.8404715Z 09-stage-3-summary-dialog-0 [('check_summary', '?????????')]
+original	Walk through original Delphi application	2026-11-23T20:32:57.4284870Z 09-stage-3-accepted [('next', 'Перейти к шагу 3')]
+original	Walk through original Delphi application	2026-11-23T20:32:58.4327496Z 05-stage-2-empty [('check_candidates', '??????? ?????????')]
+original	Walk through original Delphi application	2026-11-23T20:33:02.3220117Z 06-stage-2-candidates [('check_candidates', '??????? ?????????')]
+original	Walk through original Delphi application	2026-11-23T20:33:03.8259808Z 07-stage-2-candidates-dialog-0 [('check_candidates', '??????? ?????????')]
+original	Walk through original Delphi application	2026-11-23T20:33:04.4279560Z 07-stage-2-summary-empty [('check_summary', '?????????')]
+original	Walk through original Delphi application	2026-11-23T20:33:07.1060306Z 08-stage-2-summary-filled [('check_summary', '?????????')]
+original	Walk through original Delphi application	2026-11-23T20:33:08.6107452Z 09-stage-2-summary-dialog-0 [('check_summary', '?????????')]
+original	Walk through original Delphi application	2026-11-23T20:33:09.1965797Z 09-stage-2-accepted [('next', 'Перейти к шагу 4')]
+original	Walk through original Delphi application	2026-11-23T20:33:10.2005213Z 05-stage-1-empty [('check_candidates', '??????? ?????????')]
+original	Walk through original Delphi application	2026-11-23T20:33:11.6115932Z 06-stage-1-candidates [('check_candidates', '??????? ?????????')]
+original	Walk through original Delphi application	2026-11-23T20:33:13.1011719Z 07-stage-1-candidates-dialog-0 [('check_candidates', '??????? ?????????')]
+original	Walk through original Delphi application	2026-11-23T20:33:13.7052796Z 07-stage-1-summary-empty [('check_summary', '?????????')]
+original	Walk through original Delphi application	2026-11-23T20:33:14.3458452Z 08-stage-1-summary-filled [('check_summary', '?????????')]
+original	Walk through original Delphi application	2026-11-23T20:33:15.8380312Z 09-stage-1-summary-dialog-0 [('check_summary', '?????????')]
+original	Walk through original Delphi application	2026-11-23T20:33:16.4398557Z 09-stage-1-accepted [('check_plan', '??????')]
+original	Walk through original Delphi application	2026-11-23T20:33:16.5921911Z 10-restore [('check_plan', '??????')]
+original	Walk through original Delphi application	2026-11-23T20:33:20.3371508Z error-restore-dialog-0 [('check_plan', '??????')]
+original	Walk through original Delphi application	2026-11-23T20:33:20.9433005Z error-restore-retained [('check_plan', '??????')]
+original	Walk through original Delphi application	2026-11-23T20:33:21.3459687Z 11-restore-filled [('check_plan', '??????')]
+original	Walk through original Delphi application	2026-11-23T20:33:22.8399837Z 12-plan-accepted-dialog-0 [('check_plan', '??????')]
+original	Walk through original Delphi application	2026-11-23T20:33:23.4557493Z 12-result []
+original	Upload runtime observations	﻿2026-11-23T20:33:23.7188464Z ##[group]Run actions/upload-artifact@v6
+original	Upload runtime observations	2026-11-23T20:33:23.7188822Z with:
+original	Upload runtime observations	2026-11-23T20:33:23.7189016Z   name: lab3-original-runtime
+original	Upload runtime observations	2026-11-23T20:33:23.7189302Z   path: qa/lab3-parity-2026-11-23/runtime-original/
+original	Upload runtime observations	2026-11-23T20:33:23.7189609Z   if-no-files-found: warn
+original	Upload runtime observations	2026-11-23T20:33:23.7189823Z   compression-level: 6
+original	Upload runtime observations	2026-11-23T20:33:23.7190024Z   overwrite: false
+original	Upload runtime observations	2026-11-23T20:33:23.7190231Z   include-hidden-files: false
+original	Upload runtime observations	2026-11-23T20:33:23.7190452Z env:
+original	Upload runtime observations	2026-11-23T20:33:23.7190622Z   PYTHONIOENCODING: utf-8
+original	Upload runtime observations	2026-11-23T20:33:23.7190835Z   LAB3_ERROR_PROBES: 1
+original	Upload runtime observations	2026-11-23T20:33:23.7191121Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+original	Upload runtime observations	2026-11-23T20:33:23.7191591Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+original	Upload runtime observations	2026-11-23T20:33:23.7192051Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+original	Upload runtime observations	2026-11-23T20:33:23.7192447Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+original	Upload runtime observations	2026-11-23T20:33:23.7192840Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+original	Upload runtime observations	2026-11-23T20:33:23.7193193Z ##[endgroup]
+original	Upload runtime observations	2026-11-23T20:33:23.9225474Z With the provided path, there will be 48 files uploaded
+original	Upload runtime observations	2026-11-23T20:33:23.9231222Z Artifact name is valid!
+original	Upload runtime observations	2026-11-23T20:33:23.9232565Z Root directory input is valid!
+original	Upload runtime observations	2026-11-23T20:33:24.1492134Z Beginning upload of artifact content to blob storage
+original	Upload runtime observations	2026-11-23T20:33:24.3838830Z Uploaded bytes 1748601
+original	Upload runtime observations	2026-11-23T20:33:24.4015563Z Finished uploading artifact content to blob storage!
+original	Upload runtime observations	2026-11-23T20:33:24.4017679Z SHA256 digest of uploaded artifact zip is ebf3c19600738b19c632c85310d30b9456031bab116dc6a6060bb5e5f0e5d0ac
+original	Upload runtime observations	2026-11-23T20:33:24.4020219Z Finalizing artifact upload
+original	Upload runtime observations	2026-11-23T20:33:24.8225351Z Artifact lab3-original-runtime.zip successfully finalized. Artifact ID 14861315161
+original	Upload runtime observations	2026-11-23T20:33:24.8226545Z Artifact lab3-original-runtime has been successfully uploaded! Final size is 1748601 bytes. Artifact ID is 14861315161
+original	Upload runtime observations	2026-11-23T20:33:24.8235020Z Artifact download URL: https://github.com/bonifero/tiger/actions/runs/45260227124/artifacts/14861315161
+original	Post Run actions/setup-python@v6	﻿2026-11-23T20:33:24.8570819Z Post job cleanup.
+original	Post Run actions/checkout@v6	﻿2026-11-23T20:33:25.0402761Z Post job cleanup.
+original	Post Run actions/checkout@v6	2026-11-23T20:33:25.2699407Z [command]"C:\Program Files\Git\bin\git.exe" version
+original	Post Run actions/checkout@v6	2026-11-23T20:33:25.3055880Z git version 2.56.1.windows.1
+original	Post Run actions/checkout@v6	2026-11-23T20:33:25.3130615Z Temporarily overriding HOME='D:\a\_temp\a183268b-e85d-46e3-aac0-6e90fecc8b05' before making global git config changes
+original	Post Run actions/checkout@v6	2026-11-23T20:33:25.3131487Z Adding repository directory to the temporary git global config as a safe directory
+original	Post Run actions/checkout@v6	2026-11-23T20:33:25.3141703Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tiger\tiger
+original	Post Run actions/checkout@v6	2026-11-23T20:33:25.3614738Z Removing SSH command configuration
+original	Post Run actions/checkout@v6	2026-11-23T20:33:25.3630554Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+original	Post Run actions/checkout@v6	2026-11-23T20:33:25.4050180Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+original	Post Run actions/checkout@v6	2026-11-23T20:33:25.9835650Z Removing HTTP extra header
+original	Post Run actions/checkout@v6	2026-11-23T20:33:25.9845877Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.0234359Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.5720392Z Removing includeIf entries pointing to credentials config files
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.5732290Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.6083654Z includeif.gitdir:D:/a/tiger/tiger/.git.path
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.6084230Z includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.6084935Z includeif.gitdir:/github/workspace/.git.path
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.6085618Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.6127387Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/tiger/tiger/.git.path
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.6474808Z D:\a\_temp\git-credentials-badfa378-5130-4df6-9978-e7865832af67.config
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.6523420Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/tiger/tiger/.git.path D:\a\_temp\git-credentials-badfa378-5130-4df6-9978-e7865832af67.config
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.6920428Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.7275890Z D:\a\_temp\git-credentials-badfa378-5130-4df6-9978-e7865832af67.config
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.7320198Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path D:\a\_temp\git-credentials-badfa378-5130-4df6-9978-e7865832af67.config
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.7720443Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.8143018Z /github/runner_temp/git-credentials-badfa378-5130-4df6-9978-e7865832af67.config
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.8186819Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-badfa378-5130-4df6-9978-e7865832af67.config
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.8588624Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.8951780Z /github/runner_temp/git-credentials-badfa378-5130-4df6-9978-e7865832af67.config
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.8997541Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-badfa378-5130-4df6-9978-e7865832af67.config
+original	Post Run actions/checkout@v6	2026-11-23T20:33:26.9394032Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+original	Post Run actions/checkout@v6	2026-11-23T20:33:27.5120341Z Removing credentials config 'D:\a\_temp\git-credentials-badfa378-5130-4df6-9978-e7865832af67.config'
+original	Complete job	﻿2026-11-23T20:33:27.5313493Z Cleaning up orphan processes
