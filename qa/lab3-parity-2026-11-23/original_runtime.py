@@ -95,8 +95,8 @@ class Probe:
         return matching[0]
     def snapshot(self,name):
         time.sleep(.1)
-        for name in self.anchors:
-            try:self.resolve(name)
+        for control_name in self.anchors:
+            try:self.resolve(control_name)
             except RuntimeError:pass
         windows=[dict(info(h),children=[info(c) for c in enum(h)]) for h in owned(self.proc.pid) if U.IsWindowVisible(h)]
         self.events.append(dict(event=name,windows=windows,controls={k:info(h) for k,h in self.controls.items()}))
@@ -108,7 +108,7 @@ class Probe:
         U.PostMessageW(h,0xF5,0,0);self.actions+=1;time.sleep(.16)
     def dialogs(self,label):
         for i in range(4):
-            dialogs=[h for h in owned(self.proc.pid) if h!=self.main and U.IsWindowVisible(h)]
+            dialogs=[h for h in owned(self.proc.pid) if h!=self.main and U.IsWindowVisible(h) and cls(h)!='TApplication' and rect(h)[2]>rect(h)[0]]
             if not dialogs:return
             self.snapshot(f'{label}-dialog-{i}')
             for h in dialogs:
@@ -171,7 +171,7 @@ def main():
             p.snapshot(f'08-stage-{j+1}-summary-filled');p.click('check_summary');p.dialogs(f'09-stage-{j+1}-summary');p.snapshot(f'09-stage-{j+1}-accepted')
         p.snapshot('10-restore')
         for j,(y,x) in enumerate(zip([0,0,1,2],[0,1,1,2])):
-            p.cell('restore',1,j,y,width=50);p.cell('restore',2,j,x,width=50)
+            p.cell('restore',j+1,1,y,width=50);p.cell('restore',j+1,2,x,width=50)
         p.snapshot('11-restore-filled');p.click('check_plan');p.dialogs('12-plan-accepted');p.snapshot('12-result')
     except Exception:
         p.snapshot('failure')
