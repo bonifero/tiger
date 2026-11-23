@@ -127,7 +127,7 @@ class Probe:
         editor=wait(lambda:next((e for e in enum(h) if cls(e)=='TInplaceEdit' and U.IsWindowVisible(e)),None),2)
         b=C.create_unicode_buffer(str(value));U.SendMessageW(editor,0xC,0,C.addressof(b))
         # VCL records edit text on the normal edit-change/focus transition.
-        U.PostMessageW(editor,0x100,0xD,0);U.PostMessageW(editor,0x101,0xD,0)
+        U.PostMessageW(editor,0x100,0x9,0);U.PostMessageW(editor,0x101,0x9,0)
         self.actions+=1;time.sleep(.025)
     def close(self):
         U.PostMessageW(self.main,0x10,0,0)
