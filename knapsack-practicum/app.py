@@ -1,27 +1,1585 @@
-"""Стартовое окно будущего практикума: Задача о загрузке рюкзака."""
-import tkinter as tk
-from tkinter import ttk
+"""An offline, keyboard-friendly dynamic programming classroom.
 
-TITLE = 'Загрузка рюкзака'
-DESCRIPTION = 'Задача о загрузке рюкзака'
-STATUS = "Заготовка: функциональность пока не реализована."
+The canvas table keeps a small, visible set of items even for wide problems.
+Only answers already accepted by the lesson are available in the review drawer.
+"""
+from __future__ import annotations
+
+import sys
+import tkinter as tk
+from tkinter import ttk, filedialog, messagebox, simpledialog, font as tkfont
+from pathlib import Path
+from dataclasses import replace
+
+from model import Problem, parse_number, fmt_number
+from lesson import Lesson
+from formats import load, save
+from presets import PRESETS
+from controls import Button, Combobox, Card, CONTROL_FONT_SIZE, install as install_controls
+
+TITLE = 'Рюкзак · Практикум'
+BG = '#f3f5f9'
+INK = '#17243b'
+NAVY = '#12233c'
+BLUE = '#315fea'
+MUTED = '#68768b'
+LINE = '#e2e8f1'
+WHITE = '#ffffff'
+PALE = '#edf2ff'
+GREEN = '#17795a'
+GREEN_BG = '#eaf6ef'
+RED = '#bf3946'
+RED_BG = '#fff0f1'
+
+
+class NavButton(Button):
+    """Keyboard-accessible navigation using the same compact control typography."""
+    def __init__(self, parent, *, command, text):
+        super().__init__(parent, text=text, command=command, style='Breadcrumb.TButton')
+        self.bind('<Return>', lambda e: self.invoke())
+
+
+
+class DataGrid(tk.Frame):
+    """Virtual table with a single native edit control and TSV paste.
+
+    Values are strings; read-only and unavailable cells remain part of the model.
+    Row and column coordinates in ``invalid`` use the table's own coordinates.
+    """
+
+    def __init__(self, parent, columns, rows, *, editable=None, widths=None,
+                 on_change=None, font_family='Segoe UI', font_size=11, height=300, dense=False):
+        super().__init__(parent, bg=WHITE, highlightthickness=1,
+                         highlightbackground=LINE)
+        self.columns = tuple(columns)
+        self.rows = [[str(v) if v is not None else '—' for v in row] for row in rows]
+        self.editable = set(editable or ())
+        self.widths = [round(w * font_size / 11) for w in (widths or [110] * len(columns))]
+        self.on_change = on_change
+        self.freeze_first = not any(c == 0 for _, c in self.editable)
+        self.family = font_family
+        self.font_size = font_size
+        self.cell_padding = 8 if dense else 15
+        self.row_height = max(25 if dense else 32, round(font_size * (2.5 if dense else 2.9)))
+        self.header_height = self.row_height + (4 if dense else 6)
+        self.invalid = set()
+        self.selected = None
+        self.entry = None
+        self.entry_window = None
+        self.positions = [0]
+        for width in self.widths:
+            self.positions.append(self.positions[-1] + width)
+        self.canvas = tk.Canvas(self, bg=WHITE, highlightthickness=0,
+                                bd=0, height=height, takefocus=1)
+        self.canvas.grid(row=0, column=0, sticky='nsew')
+        self.horizontal = ttk.Scrollbar(self, orient='horizontal', command=self._xview)
+        self.horizontal.grid(row=1, column=0, sticky='ew')
+        self.vertical = ttk.Scrollbar(self, orient='vertical', command=self._yview)
+        self.vertical.grid(row=0, column=1, sticky='ns')
+        self.canvas.configure(xscrollcommand=self._set_horizontal,
+                              yscrollcommand=self._set_vertical,
+                              scrollregion=(0, 0, self.positions[-1],
+                                            self.header_height + len(self.rows) * self.row_height))
+        self.rowconfigure(0, weight=1)
+        self.columnconfigure(0, weight=1)
+        self.canvas.bind('<Configure>', self._redraw)
+        self.canvas.bind('<Button-1>', self._click)
+        self.canvas.bind('<Double-1>', self._click)
+        self.canvas.bind('<Return>', self._edit_selected)
+        self.canvas.bind('<F2>', self._edit_selected)
+        self.canvas.bind('<Key>', self._type)
+        self.canvas.bind('<Tab>', lambda e: self._next_editable(1))
+        self.canvas.bind('<Shift-Tab>', lambda e: self._next_editable(-1))
+        self.canvas.bind('<ISO_Left_Tab>', lambda e: self._next_editable(-1))
+        for key, dr, dc in [('Up', -1, 0), ('Down', 1, 0), ('Left', 0, -1), ('Right', 0, 1)]:
+            self.canvas.bind('<' + key + '>', lambda e, r=dr, c=dc: self._move(r, c))
+        self._bind_paste(self.canvas)
+        self.canvas.bind('<<Copy>>', self._copy)
+        self.canvas.bind('<MouseWheel>', self._wheel)
+        self.canvas.bind('<Shift-MouseWheel>', lambda e: self._wheel(e, horizontal=True))
+        self.canvas.bind('<Button-4>', lambda e: self._scroll_units(-3))
+        self.canvas.bind('<Button-5>', lambda e: self._scroll_units(3))
+        self._initial_redraw_job = self.after_idle(self._initial_redraw)
+
+    def _initial_redraw(self):
+        self._initial_redraw_job = None
+        self._redraw()
+
+    def destroy(self):
+        if self._initial_redraw_job:
+            self.after_cancel(self._initial_redraw_job)
+            self._initial_redraw_job = None
+        super().destroy()
+
+    def _set_horizontal(self, first, last):
+        self.horizontal.set(first, last)
+        if float(first) <= 0 and float(last) >= 1:
+            self.horizontal.grid_remove()
+        else:
+            self.horizontal.grid()
+
+    def _set_vertical(self, first, last):
+        self.vertical.set(first, last)
+        if float(first) <= 0 and float(last) >= 1:
+            self.vertical.grid_remove()
+        else:
+            self.vertical.grid()
+
+    def _xview(self, *args):
+        self.commit()
+        self.canvas.xview(*args)
+        self._redraw()
+
+    def _yview(self, *args):
+        self.commit()
+        self.canvas.yview(*args)
+        self._redraw()
+
+    def _scroll_units(self, amount, horizontal=False):
+        self.commit()
+        if horizontal:
+            self.canvas.xview_scroll(amount, 'units')
+        else:
+            self.canvas.yview_scroll(amount, 'units')
+        self._redraw()
+        return 'break'
+
+    def _wheel(self, event, horizontal=False):
+        # Windows sends multiples of 120; Cocoa sends small integral deltas.
+        amount = -int(event.delta / 120) if abs(event.delta) >= 120 else -int(event.delta)
+        return self._scroll_units(amount or (-1 if event.delta > 0 else 1), horizontal)
+
+    def _redraw(self, _event=None):
+        self.canvas.delete('cells')
+        if not self.rows and not self.columns:
+            return
+        top = self.canvas.canvasy(0)
+        left = self.canvas.canvasx(0)
+        bottom = top + self.canvas.winfo_height()
+        right = left + self.canvas.winfo_width()
+        first = max(0, int((top - self.header_height) // self.row_height))
+        last = min(len(self.rows), int((bottom - self.header_height) // self.row_height) + 2)
+        visible_columns = [c for c in range(len(self.columns))
+                           if self.positions[c + 1] >= left and self.positions[c] <= right]
+        for r in range(first, last):
+            y0 = self.header_height + r * self.row_height
+            y1 = y0 + self.row_height
+            for c in visible_columns:
+                x0, x1 = self.positions[c:c + 2]
+                enabled = (r, c) in self.editable
+                value = self.rows[r][c]
+                fill = WHITE if r % 2 == 0 else '#fafbfe'
+                color = INK
+                if value == '—':
+                    fill, color = '#f5f7fa', '#bdc5d1'
+                elif c == 0 and not enabled:
+                    fill, color = '#f7f9fc', MUTED
+                if (r, c) == self.selected and enabled:
+                    fill = PALE
+                if (r, c) in self.invalid:
+                    fill = RED_BG
+                self.canvas.create_rectangle(x0, y0, x1, y1, fill=fill,
+                                             outline='#edf1f7', tags='cells')
+                label = value if value else ('·' if enabled else '')
+                self.canvas.create_text(x0 + self.cell_padding if c == 0 else (x0 + x1) / 2,
+                                        (y0 + y1) / 2, text=label, anchor='w' if c == 0 else 'center', fill=color if value else '#bec7d6',
+                                        width=max(20, x1 - x0 - 2 * self.cell_padding),
+                                        font=(self.family, self.font_size), tags='cells')
+        if self.selected is not None:
+            r, c = self.selected
+            x0, x1 = self.positions[c:c + 2]
+            y0 = self.header_height + r * self.row_height
+            self.canvas.create_rectangle(x0 + 1, y0 + 1, x1 - 1,
+                                         y0 + self.row_height - 1, outline=BLUE,
+                                         width=2, tags='cells')
+        # Frozen headers keep a large table legible while scrolling.
+        if self.freeze_first and left > 0 and self.columns:
+            for r in range(first, last):
+                y0 = self.header_height + r * self.row_height
+                self.canvas.create_rectangle(left, y0, left + self.widths[0],
+                    y0 + self.row_height, fill='#f7f9fc', outline=LINE, tags='cells')
+                self.canvas.create_text(left + self.cell_padding, y0 + self.row_height / 2,
+                    text=self.rows[r][0], anchor='w', fill=MUTED,
+                    font=(self.family, self.font_size), width=self.widths[0] - 2 * self.cell_padding, tags='cells')
+        header_columns = visible_columns[:]
+        if self.freeze_first:
+            header_columns = [c for c in header_columns if c != 0] + [0]
+        for c in header_columns:
+            x0, x1 = self.positions[c:c + 2]
+            if c == 0 and self.freeze_first:
+                x0, x1 = left, left + self.widths[0]
+            self.canvas.create_rectangle(x0, top, x1, top + self.header_height,
+                                         fill='#f6f8fc', outline=LINE, tags='cells')
+            self.canvas.create_text(x0 + self.cell_padding if c == 0 else (x0 + x1) / 2,
+                                    top + self.header_height / 2, text=self.columns[c],
+                                    anchor='w' if c == 0 else 'center', fill=MUTED,
+                                    width=max(20, x1 - x0 - 2 * self.cell_padding),
+                                    font=(self.family, self.font_size - 1, 'bold'), tags='cells')
+        if self.entry_window:
+            self.canvas.tag_raise(self.entry_window)
+
+    def _cell_at(self, event):
+        from bisect import bisect_right
+        if event.y < self.header_height:
+            return None
+        x, y = self.canvas.canvasx(event.x), self.canvas.canvasy(event.y)
+        row = int((y - self.header_height) // self.row_height)
+        col = bisect_right(self.positions, x) - 1
+        if self.freeze_first and event.x < self.widths[0]:
+            col = 0
+        if 0 <= row < len(self.rows) and 0 <= col < len(self.columns):
+            return row, col
+        return None
+
+    def _click(self, event):
+        self.commit()
+        cell = self._cell_at(event)
+        if cell is not None:
+            self.selected = cell
+            self._redraw()
+            if cell in self.editable:
+                self._start_edit()
+            else:
+                self.canvas.focus_set()
+        return 'break'
+
+    def _edit_selected(self, _event=None):
+        if self.selected is None and self.editable:
+            self.selected = min(self.editable)
+        self._start_edit()
+        return 'break'
+
+    def _type(self, event):
+        if event.char and event.char.isprintable() and not (event.state & 0x0c):
+            if self.selected in self.editable:
+                self._start_edit(replacement=event.char)
+                return 'break'
+        return None
+
+    def _start_edit(self, replacement=None):
+        if self.selected not in self.editable:
+            return
+        self.commit()
+        r, c = self.selected
+        self._ensure_visible(r, c)
+        x0, x1 = self.positions[c:c + 2]
+        y0 = self.header_height + r * self.row_height
+        self.entry = tk.Entry(self.canvas, font=(self.family, self.font_size),
+                              bg=WHITE, fg=INK, insertbackground=BLUE, justify='left' if c == 0 else 'center',
+                              relief='flat', bd=0, highlightthickness=2,
+                              highlightbackground=BLUE, highlightcolor=BLUE)
+        self._entry_var = tk.StringVar(self, value=self.rows[r][c] if replacement is None else replacement)
+        self.entry.configure(textvariable=self._entry_var)
+        entry, variable = self.entry, self._entry_var
+        def edited(*_):
+            if self.entry is entry and variable.get() != self.rows[r][c] and self.on_change:
+                self.on_change()
+        variable.trace_add('write', edited)
+        if replacement is not None:
+            edited()
+        self.entry_window = self.canvas.create_window(x0 + 1, y0 + 1, anchor='nw',
+                                                      window=self.entry,
+                                                      width=x1 - x0 - 2,
+                                                      height=self.row_height - 2)
+        self.entry.focus_set()
+        if replacement is None:
+            self.entry.selection_range(0, 'end')
+        for key, dr, dc in [('Up', -1, 0), ('Down', 1, 0), ('Left', 0, -1), ('Right', 0, 1)]:
+            self.entry.bind('<' + key + '>', lambda e, r=dr, c=dc: self._move(r, c, editing=True))
+        self.entry.bind('<Return>', lambda e: self._move(1, 0, editing=True))
+        self.entry.bind('<Tab>', lambda e: self._next_editable(1, editing=True))
+        self.entry.bind('<Shift-Tab>', lambda e: self._next_editable(-1, editing=True))
+        self.entry.bind('<ISO_Left_Tab>', lambda e: self._next_editable(-1, editing=True))
+        self.entry.bind('<Escape>', self._cancel_edit)
+        self._bind_paste(self.entry)
+        self.entry.bind('<FocusOut>', self._focus_out)
+
+    def _focus_out(self, event):
+        # Windows may deliver queued focus events after an editor was replaced,
+        # or after focus has already returned to the current editor.
+        if (self.winfo_exists() and event.widget is self.entry
+                and self.focus_get() is not self.entry):
+            self.commit()
+
+    def _cancel_edit(self, _event=None):
+        self._remove_entry()
+        self.canvas.focus_set()
+        return 'break'
+
+    def _remove_entry(self):
+        entry, window = self.entry, self.entry_window
+        self.entry = self.entry_window = None
+        if window:
+            self.canvas.delete(window)
+        if entry:
+            entry.destroy()
+
+    def commit(self):
+        if self.entry is not None and self.selected is not None:
+            value = self.entry.get().strip()
+            r, c = self.selected
+            changed = self.rows[r][c] != value
+            self.rows[r][c] = value
+            self.invalid.discard((r, c))
+            self._remove_entry()
+            self._redraw()
+            if changed and self.on_change:
+                self.on_change()
+
+    def _ensure_visible(self, r, c):
+        total_h = self.header_height + len(self.rows) * self.row_height
+        total_w = self.positions[-1]
+        x0, x1 = self.positions[c:c + 2]
+        y0 = self.header_height + r * self.row_height
+        top, left = self.canvas.canvasy(0), self.canvas.canvasx(0)
+        view_h, view_w = self.canvas.winfo_height(), self.canvas.winfo_width()
+        if y0 < top + self.header_height:
+            self.canvas.yview_moveto((y0 - self.header_height) / max(total_h, 1))
+        elif y0 + self.row_height > top + view_h:
+            self.canvas.yview_moveto((y0 + self.row_height - view_h) / max(total_h, 1))
+        frozen_width = self.widths[0] if self.freeze_first else 0
+        if x0 < left + frozen_width:
+            self.canvas.xview_moveto((x0 - frozen_width) / max(total_w, 1))
+        elif x1 > left + view_w:
+            self.canvas.xview_moveto((x1 - view_w) / max(total_w, 1))
+        self._redraw()
+
+    def _move(self, dr, dc, editing=False):
+        self.commit()
+        if self.selected is None:
+            self.selected = min(self.editable) if self.editable else (0, 0)
+        else:
+            r, c = self.selected
+            self.selected = (max(0, min(len(self.rows) - 1, r + dr)),
+                             max(0, min(len(self.columns) - 1, c + dc)))
+        if self.rows and self.columns:
+            self._ensure_visible(*self.selected)
+            if editing:
+                self._start_edit()
+            if self.entry is None:
+                # Read-only cells still need focus for the next arrow key.
+                self.canvas.focus_set()
+        return 'break'
+
+    def _next_editable(self, direction, editing=False):
+        self.commit()
+        cells = sorted(self.editable)
+        if not cells:
+            return None
+        if self.selected in self.editable:
+            index = (cells.index(self.selected) + direction) % len(cells)
+        else:
+            index = 0 if direction > 0 else len(cells) - 1
+        self.selected = cells[index]
+        self._ensure_visible(*self.selected)
+        if editing:
+            self._start_edit()
+        return 'break'
+
+    def _bind_paste(self, widget):
+        widget.bind('<<Paste>>', self._paste)
+        # Tk's native macOS binding only covers Command + Latin v.
+        # Bind the physical shortcuts as well, including the Russian layout.
+        for modifier in ('Control', 'Command'):
+            for key in ('v', 'V', 'Cyrillic_em', 'Cyrillic_EM'):
+                widget.bind(f'<{modifier}-KeyPress-{key}>', self._paste)
+        widget.bind('<Shift-Insert>', self._paste)
+        widget.bind('<Button-3>', self._paste_menu)
+        if self.tk.call('tk', 'windowingsystem') == 'aqua':
+            widget.bind('<Button-2>', self._paste_menu)
+            widget.bind('<Control-Button-1>', self._paste_menu)
+
+    def _paste_menu(self, event):
+        self.commit()
+        if event.widget is self.canvas:
+            cell = self._cell_at(event)
+            if cell is not None:
+                self.selected = cell
+        self._redraw()
+        self.canvas.focus_set()
+        if not hasattr(self, '_clipboard_menu'):
+            self._clipboard_menu = tk.Menu(self, tearoff=False)
+        menu = self._clipboard_menu
+        menu.delete(0, 'end')
+        menu.add_command(label='Копировать', command=self._copy,
+                         state='normal' if self.selected is not None else 'disabled')
+        menu.add_command(label='Вставить', command=self._paste,
+                         state='normal' if self.selected in self.editable else 'disabled')
+        try:
+            menu.tk_popup(event.x_root, event.y_root)
+        finally:
+            menu.grab_release()
+        return 'break'
+
+    def _paste(self, _event=None):
+        try:
+            raw = self.clipboard_get()
+        except tk.TclError:
+            return 'break'
+        if self.selected not in self.editable:
+            return 'break'
+        # A single value keeps normal native selection/insertion behavior.
+        if '\t' not in raw and '\n' not in raw.rstrip('\r\n') and self.entry is not None:
+            if self.entry.selection_present():
+                self.entry.delete('sel.first', 'sel.last')
+            self.entry.insert('insert', raw.strip())
+            return 'break'
+        self.commit()
+        row0, col0 = self.selected
+        changes = []
+        for dr, line in enumerate(raw.rstrip('\r\n').splitlines()):
+            for dc, value in enumerate(line.split('\t')):
+                cell = row0 + dr, col0 + dc
+                if cell in self.editable and self.rows[cell[0]][cell[1]] != value.strip():
+                    changes.append((cell, value.strip()))
+        for (r, c), value in changes:
+            self.rows[r][c] = value
+            self.invalid.discard((r, c))
+        self._redraw()
+        self.canvas.focus_set()
+        if changes and self.on_change:
+            self.on_change()
+        return 'break'
+
+    def _copy(self, _event=None):
+        if self.selected is not None:
+            self.commit()
+            r, c = self.selected
+            self.clipboard_clear()
+            self.clipboard_append(self.rows[r][c])
+        return 'break'
+
+    def copy_table(self):
+        rows = self.get_rows()
+        text = '\n'.join('\t'.join(row) for row in [self.columns, *rows])
+        self.clipboard_clear()
+        self.clipboard_append(text)
+
+    def view_state(self):
+        self.commit()
+        return {'selected': self.selected, 'invalid': self.invalid.copy(),
+                'x': self.canvas.xview()[0], 'y': self.canvas.yview()[0]}
+
+    def restore_view(self, state):
+        self.update_idletasks()
+        self.selected = state['selected']
+        self.invalid = state['invalid'] & self.editable
+        self.canvas.xview_moveto(state['x'])
+        self.canvas.yview_moveto(state['y'])
+        if self.selected is not None:
+            self._ensure_visible(*self.selected)
+        self._redraw()
+
+    def get_rows(self):
+        self.commit()
+        return [row[:] for row in self.rows]
+
+    def set_value(self, row, col, value):
+        """Programmatic input, also used by UI acceptance tests."""
+        if (row, col) not in self.editable:
+            raise ValueError('Эта ячейка недоступна для ввода.')
+        self.commit()
+        changed = self.rows[row][col] != str(value)
+        self.rows[row][col] = str(value)
+        self.invalid.discard((row, col))
+        self._redraw()
+        if changed and self.on_change:
+            self.on_change()
+
+    def mark_invalid(self, cells):
+        self.commit()
+        self.invalid = {cell for cell in cells if cell in self.editable}
+        if self.invalid:
+            self.selected = min(self.invalid)
+            self._ensure_visible(*self.selected)
+            self.canvas.focus_set()
+        self._redraw()
+
+
+class App(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title(TITLE)
+        width = max(980, min(1380, self.winfo_screenwidth() - 40))
+        height = max(620, min(920, self.winfo_screenheight() - 100))
+        self.geometry(f'{width}x{height}')
+        self.minsize(980, 620)
+        self.compact = height < 820
+        self._resize_job = None
+        self.configure(bg=BG)
+        families = set(tkfont.families(self))
+        self.family = next((f for f in ('Segoe UI', 'SF Pro Text', 'Helvetica Neue', 'Arial')
+                            if f in families), 'TkDefaultFont')
+        self.font_size = 11
+        self.table_font_size = 11
+        self.zoom = tk.StringVar(value='100%')
+        self.lesson = None
+        self.problem = None
+        self.final_plan = None
+        self.accepted = []
+        self.dirty = False
+        self.screen = 'editor'
+        self.answer_grid = None
+        self.editor_grid = None
+        self._pending_editor = None
+        self._style()
+        self._build_shell()
+        self.protocol('WM_DELETE_WINDOW', self.close)
+        self.bind('<Control-s>', lambda e: self.save_file())
+        self.bind('<Command-s>', lambda e: self.save_file())
+        self.set_problem(PRESETS[0])
+        self.bind('<Configure>', self._on_resize, add='+')
+
+    def _on_resize(self, event):
+        if event.widget is not self or (event.height < 820) == self.compact:
+            return
+        if self._resize_job:
+            self.after_cancel(self._resize_job)
+        self._resize_job = self.after(120, self._apply_compact_layout)
+
+    def _apply_compact_layout(self):
+        if self._resize_job:
+            self.after_cancel(self._resize_job)
+        self._resize_job = None
+        compact = self.winfo_height() < 820
+        if compact != self.compact:
+            self.compact = compact
+            self.header.configure(height=64)
+            self.content.configure(padx=16 if compact else 24, pady=16 if compact else 24)
+            self.footer.configure(padx=16 if compact else 24, pady=12)
+            self.rescale()
+
+    def _style(self):
+        style = ttk.Style(self)
+        style.theme_use('clam')
+        style.configure('.', font=(self.family, self.font_size), background=BG,
+                        foreground=INK, bordercolor=LINE)
+        style.configure('Reference.TNotebook', background=WHITE, borderwidth=0)
+        style.configure('Reference.TNotebook.Tab', padding=(9, 7), font=(self.family, 9, 'bold'), background=BG)
+        style.map('Reference.TNotebook.Tab', background=[('selected', PALE)], foreground=[('selected', BLUE)])
+        style.configure('TEntry', fieldbackground=WHITE, padding=(9, 8), borderwidth=1)
+        style.configure('TSpinbox', fieldbackground=WHITE, padding=(7, 8), arrowsize=12)
+        install_controls(self, self.family, self.font_size)
+        for orient, sticky in [('Horizontal', 'we'), ('Vertical', 'ns')]:
+            style.layout(f'{orient}.TScrollbar', [(f'{orient}.Scrollbar.trough',
+                {'sticky': 'nsew', 'children': [(f'{orient}.Scrollbar.thumb',
+                    {'expand': '1', 'sticky': 'nsew'})]})])
+            style.configure(f'{orient}.TScrollbar', background='#cbd6e8', troughcolor='#f4f6fa',
+                            borderwidth=0, arrowsize=10, width=10)
+
+    def _label(self, parent, text='', *, size=None, bold=False, color=INK,
+               bg=WHITE, **kwargs):
+        return tk.Label(parent, text=text, font=(self.family, size or self.font_size,
+                        'bold' if bold else 'normal'), fg=color, bg=bg, **kwargs)
+
+    def _card(self, parent, *, padding=18, bg=WHITE):
+        padding = min(padding, 12 if self.compact else 18)
+        outer = Card(parent, tint=bg)
+        inner = tk.Frame(outer, bg=bg, padx=max(0, padding - 10), pady=max(0, padding - 10))
+        inner.pack(fill='both', expand=True, padx=10, pady=10)
+        return outer, inner
+
+    def _build_shell(self):
+        self.workspace = tk.Frame(self, bg=BG)
+        self.workspace.pack(side='left', fill='both', expand=True)
+        self.header = tk.Frame(self.workspace, bg=WHITE, height=64)
+        self.header.pack(fill='x')
+        self.header.pack_propagate(False)
+        brand = tk.Frame(self.header, bg=WHITE)
+        brand.pack(side='left', padx=24)
+        mark = tk.Canvas(brand, width=30, height=34, bg=WHITE, highlightthickness=0)
+        mark.pack(side='left', padx=(0, 10))
+        mark.create_line(11, 8, 11, 3, 19, 3, 19, 8, fill=NAVY, width=2,
+                         smooth=True, capstyle='round')
+        mark.create_line(7, 12, 3, 17, 3, 28, fill=NAVY, width=2,
+                         smooth=True, capstyle='round')
+        mark.create_line(23, 12, 27, 17, 27, 28, fill=NAVY, width=2,
+                         smooth=True, capstyle='round')
+        mark.create_polygon(6, 17, 6, 9, 15, 6, 24, 9, 24, 17, 24, 31,
+                            6, 31, fill=BLUE, outline=NAVY, width=1.5, smooth=True)
+        mark.create_line(8, 15, 15, 12, 22, 15, fill=WHITE, width=1.5, smooth=True)
+        mark.create_polygon(9, 21, 9, 19, 21, 19, 21, 21, 21, 27, 9, 27,
+                            fill=PALE, outline=NAVY, width=1, smooth=True)
+        mark.create_line(11, 21, 19, 21, fill=NAVY, width=1)
+        mark.create_line(18, 21, 18, 23, fill=NAVY, width=1)
+
+        self._label(brand, 'Рюкзак', size=15, bold=True).pack(side='left')
+        self._label(self.header, '/', size=15, color=LINE).pack(side='left', padx=(0, 12))
+        nav = tk.Frame(self.header, bg=WHITE)
+        nav.pack(side='left')
+        self.nav_buttons = []
+        for index, (label, callback) in enumerate([
+                ('Условие', self.return_to_editor),
+                ('Решение', self.navigate_to_lesson),
+                ('Итог', self.navigate_to_result)]):
+            if index:
+                self._label(nav, '›', size=13, color=MUTED).pack(side='left', padx=3)
+            button = NavButton(nav, text=label, command=callback)
+            button.pack(side='left')
+            self.nav_buttons.append(button)
+        zoom_box = tk.Frame(self.header, bg=WHITE)
+        zoom_box.pack(side='right', padx=24)
+        self._label(zoom_box, 'Таблица', size=CONTROL_FONT_SIZE, color=MUTED).pack(side='left', padx=(0, 10))
+        zoom = Combobox(zoom_box, textvariable=self.zoom, values=['80%', '100%', '120%', '140%'],
+                        state='readonly', width=5)
+        zoom.pack(side='left')
+        zoom.bind('<<ComboboxSelected>>', self.rescale)
+        tk.Frame(self.workspace, bg=LINE, height=1).pack(fill='x')
+        self.footer = tk.Frame(self.workspace, bg=WHITE, highlightbackground=LINE, highlightthickness=1,
+                               padx=16 if self.compact else 24, pady=12)
+        self.footer.pack(side='bottom', fill='x')
+        self.content = tk.Frame(self.workspace, bg=BG, padx=16 if self.compact else 24,
+                                pady=16 if self.compact else 24)
+        self.content.pack(fill='both', expand=True)
+        self.message_var = tk.StringVar(value='')
+        self.hint_var = tk.StringVar(value='')
+
+    def _clear_content(self):
+        for child in self.content.winfo_children():
+            child.destroy()
+        for child in self.footer.winfo_children():
+            child.destroy()
+        self.answer_grid = None
+        self.editor_grid = None
+        self.hint_var.set('')
+        self._update_navigation()
+
+    def _update_navigation(self):
+        for i, button in enumerate(self.nav_buttons):
+            selected = i == {'editor': 0, 'lesson': 1, 'result': 2}[self.screen]
+            button.state(['selected'] if selected else ['!selected'])
+        self.nav_buttons[1].configure(state='normal' if self.lesson else 'disabled')
+        self.nav_buttons[2].configure(state='normal' if self.lesson and self.lesson.phase == 'done' else 'disabled')
+
+    def _heading(self, eyebrow, title, subtitle):
+        top = tk.Frame(self.content, bg=BG)
+        top.pack(fill='x', pady=(0, 5))
+        self._label(top, eyebrow, size=9, color=MUTED, bg=BG, anchor='w').pack(side='left')
+        row = tk.Frame(self.content, bg=BG)
+        row.pack(fill='x')
+        self._label(row, title, size=20 if self.compact else 23, bold=True,
+                    bg=BG, anchor='w').pack(side='left')
+        self._label(self.content, subtitle, size=10, color=MUTED, bg=BG, anchor='w',
+                    wraplength=1000, justify='left').pack(fill='x', pady=(5, 16))
+        return row
+
+    def _footer_message(self):
+        area = tk.Frame(self.footer, bg=WHITE)
+        area.pack(side='left', fill='both', expand=True)
+        self.message_label = self._label(area, text='', color=MUTED, anchor='w',
+                                         width=1, wraplength=280, justify='left')
+        self.message_label.configure(textvariable=self.message_var)
+        self.message_label.pack(fill='x', anchor='w')
+        label = self.message_label
+        def fit_message(event):
+            width = max(1, event.width - 4)
+            if int(label.cget('wraplength')) != width:
+                label.configure(wraplength=width)
+        area.bind('<Configure>', fit_message)
+        return area
+
+    def _message(self, text, error=False, success=False):
+        self.message_var.set(text)
+        if hasattr(self, 'message_label') and self.message_label.winfo_exists():
+            self.message_label.configure(fg=RED if error else GREEN if success else MUTED)
+
+    def _confirm_replace(self):
+        if self.screen == 'editor':
+            self.editor_grid.commit()
+        if self.lesson and self.lesson.phase != 'done':
+            return messagebox.askyesno('Начать заново?',
+                                       'Принятые шаги и введённые ответы будут сброшены. Продолжить?', parent=self)
+        if self.dirty:
+            return messagebox.askyesno('Заменить условие?',
+                                       'В условии есть несохранённые изменения. Продолжить?', parent=self)
+        return True
+
+    def set_problem(self, problem):
+        self.problem = problem
+        self.lesson = None
+        self._suspended_lesson = None
+        self.editor_errors = 0
+        self.final_plan = None
+        self.accepted = []
+        self.dirty = False
+        self.name_var = tk.StringVar(value=problem.name)
+        self.capacity_var = tk.StringVar(value=str(problem.capacity))
+        self.count_var = tk.StringVar(value=str(len(problem.weights)))
+        self.limit_var = tk.StringVar(value=str(max(len(v) - 1 for v in problem.values)))
+        self._applied_limit = int(self.limit_var.get())
+        # Compare actual values: writing an unchanged value must preserve progress.
+        variables = (self.name_var, self.capacity_var, self.count_var, self.limit_var)
+        self._editor_field_values = {str(variable): variable.get() for variable in variables}
+        for variable in variables:
+            variable.trace_add('write', self.mark_dirty)
+        self.description = problem.description
+        self._pending_editor = None
+        self.screen = 'editor'
+        self.show_editor()
+        self._message('Укажите веса и полную ценность каждого количества. F(0) должно быть равно 0; проверим при переходе к решению.')
+
+    def mark_dirty(self, *trace):
+        if trace:
+            name = trace[0]
+            value = self.getvar(name)
+            if self._editor_field_values.get(name) == value:
+                return
+            self._editor_field_values[name] = value
+        self.dirty = True
+        if self.screen == 'editor' and self.lesson is not None:
+            self.lesson = None
+            self._suspended_lesson = None
+            self.final_plan = None
+            self.accepted = []
+            self.editor_errors = 0
+            self._update_navigation()
+            self.begin_button.configure(text='Начать практикум  →')
+            self._message('Условие изменено. Предыдущее решение сброшено; начните практикум заново.')
+
+    def show_editor(self):
+        self.screen = 'editor'
+        self._clear_content()
+        self._heading('Подготовка / 01', 'Условие задачи',
+                      'Выберите вариант или задайте собственные веса и ценности.')
+        picker = tk.Frame(self.content, bg=BG)
+        picker.pack(fill='x', pady=(0, 10 if self.compact else 16))
+        self.preset_var = tk.StringVar(value=self.problem.name)
+        self.preset_box = Combobox(picker, values=[p.name for p in PRESETS],
+                                       textvariable=self.preset_var, state='readonly', width=32)
+        self.preset_box.pack(side='left')
+        self.preset_box.bind('<<ComboboxSelected>>', self.choose_preset)
+        Button(picker, text='Новая таблица', command=self.new_table,
+               style='Danger.TButton').pack(side='left', padx=(8, 0))
+        Button(picker, text='Открыть JSON', command=self.open_file).pack(side='right')
+        Button(picker, text='Сохранить', command=self.save_file).pack(side='right', padx=8)
+        layout = tk.Frame(self.content, bg=BG)
+        layout.pack(fill='both', expand=True)
+        layout.columnconfigure(0, weight=1)
+        layout.rowconfigure(0, weight=1)
+        left, inner = self._card(layout)
+        left.grid(row=0, column=0, sticky='nsew', padx=(0, 16))
+        inner.rowconfigure(4, weight=1)
+        inner.columnconfigure(0, weight=1)
+        title_row = tk.Frame(inner, bg=WHITE)
+        if not self.compact:
+            title_row.grid(row=0, column=0, sticky='ew')
+        self._label(title_row, 'Параметры задачи', size=12, bold=True).pack(side='left')
+        self._label(title_row, 'Исходные данные', size=9, color=MUTED).pack(side='right')
+        dims = tk.Frame(inner, bg=WHITE)
+        dims.grid(row=2, column=0, sticky='ew', pady=(0 if self.compact else 12, 0))
+        for label, var, frm, to in [('Ёмкость B', self.capacity_var, 1, 200),
+                                    ('Типов грузов', self.count_var, 1, 12),
+                                    ('Лимит x', self.limit_var, 0, 200)]:
+            field = tk.Frame(dims, bg=WHITE)
+            field.pack(side='left', padx=(0, 14))
+            self._label(field, label, size=9, color=MUTED).pack(
+                side='left', anchor='w',
+                padx=(0, 6), pady=0)
+            spin = ttk.Spinbox(field, from_=frm, to=to, textvariable=var, width=4)
+            spin.pack(side='left', anchor='w')
+        Button(dims, text='Применить лимиты', command=self.apply_limits,
+                   style='Small.TButton').pack(side='left', anchor='s')
+        table_heading = tk.Frame(inner, bg=WHITE)
+        table_heading.grid(row=3, column=0, sticky='ew', pady=(16, 10))
+        self._label(table_heading, 'Веса и таблица ценностей', bold=True).pack(side='left')
+        labels = self.problem.labels or tuple(f'Груз {i + 1}' for i in range(len(self.problem.weights)))
+        if self._pending_editor is None:
+            raw_rows = [[labels[i], str(self.problem.weights[i]), str(len(vals) - 1),
+                         *[fmt_number(v) for v in vals]] for i, vals in enumerate(self.problem.values)]
+        else:
+            raw_rows = self._pending_editor
+        self._mount_editor_grid(inner, raw_rows)
+        footnote = 'Стрелки — переход  ·  Tab — следующая ячейка  ·  Ctrl/Cmd+V — вставить таблицу'
+        self._label(inner, footnote, size=9, color=MUTED, anchor='w',
+                    wraplength=760, justify='left').grid(row=5, column=0, sticky='ew', pady=(6, 0))
+        side = tk.Frame(layout, bg=BG, width=240 if self.compact else 280)
+        side.grid(row=0, column=1, sticky='ns')
+        side.grid_propagate(False)
+        self._editor_side(side)
+        self._footer_message()
+        self.begin_button = Button(self.footer,
+            text='Продолжить практикум  →' if self.lesson else 'Начать практикум  →',
+            style='Primary.TButton', command=self.begin)
+        self.begin_button.pack(side='right')
+
+    def _mount_editor_grid(self, parent, raw_rows):
+        max_columns = max(len(row) for row in raw_rows)
+        rows = [row + [None] * (max_columns - len(row)) for row in raw_rows]
+        editable = {(r, c) for r, row in enumerate(raw_rows) for c in range(len(row))}
+        self.editor_grid = DataGrid(parent, ['Название', 'Вес a', 'Лимит',
+                                             *[f'F({i})' for i in range(max_columns - 3)]], rows,
+                                    editable=editable, widths=([165, 75, 75] + [60] * (max_columns - 3)) if self.compact else
+                                        ([165, 75, 75] + [85] * (max_columns - 3)),
+                                    on_change=self.mark_dirty, font_family=self.family,
+                                    font_size=self.table_font_size)
+        self.editor_grid.grid(row=4, column=0, sticky='nsew')
+
+    def _editor_side(self, parent):
+        outer, card = self._card(parent)
+        outer.pack(fill='both', expand=True)
+        self._label(card, 'О ВАРИАНТЕ', size=8, bold=True, color=MUTED).pack(anchor='w')
+        self._label(card, textvariable=self.name_var, size=13, bold=True, wraplength=210 if self.compact else 240,
+                    justify='left', anchor='w').pack(fill='x', pady=(10, 12))
+        description = self.description or 'Задайте число типов грузов, доступный ресурс и ценность каждого количества.'
+        text = tk.Text(card, bg=WHITE, fg=MUTED, relief='flat', bd=0, wrap='word',
+                       font=(self.family, 10), height=5, width=20, highlightthickness=0,
+                       padx=0, pady=0, cursor='arrow', takefocus=0)
+        text.pack(fill='both', expand=True)
+        text.insert('1.0', description)
+        text.configure(state='disabled')
+        Button(card, text='Полное описание ↗', command=self.open_description).pack(fill='x', pady=(12, 14))
+        tk.Frame(card, bg=LINE, height=1).pack(fill='x')
+        self._label(card, 'Ограничение ресурса', size=9, color=MUTED).pack(anchor='w', pady=(14, 8))
+        self._label(card, 'Σ aⱼ · xⱼ ≤ B', size=17, color=BLUE).pack(anchor='w')
+        self._label(card, 'F(x) — ценность всего набора из x единиц.', size=9,
+                    color=MUTED, wraplength=210 if self.compact else 240,
+                    justify='left', anchor='w').pack(fill='x', pady=(10, 0))
+
+    @staticmethod
+    def _integer(raw, label, minimum, maximum):
+        value = parse_number(str(raw).strip())
+        if value.denominator != 1 or not minimum <= value <= maximum:
+            raise ValueError(f'{label}: нужно целое число от {minimum} до {maximum}.')
+        return int(value)
+
+    def _editor_value(self, row, column, label, bounds=None):
+        try:
+            value = parse_number(self.editor_grid.rows[row][column])
+            if bounds is not None:
+                low, high = bounds
+                if value.denominator != 1 or not low <= value <= high:
+                    raise ValueError(f'нужно целое число от {low} до {high}.')
+                return int(value)
+            if value < 0:
+                raise ValueError('ценность должна быть неотрицательной.')
+            if value.numerator.bit_length() > 256 or value.denominator.bit_length() > 256:
+                raise ValueError('числитель и знаменатель должны содержать не более 256 бит.')
+            return value
+        except (ValueError, TypeError, ZeroDivisionError) as exc:
+            self.editor_grid.mark_invalid({(row, column)})
+            raise ValueError(f'{label}: {exc}') from exc
+
+    def read_problem(self):
+        rows = self.editor_grid.get_rows()
+        self.editor_grid.mark_invalid(())
+        capacity = self._integer(self.capacity_var.get(), 'Ёмкость', 1, 200)
+        if self._integer(self.limit_var.get(), 'Общий лимит', 0, 200) != self._applied_limit:
+            raise ValueError('Общий лимит изменён: нажмите «Применить лимиты» и заполните новые ячейки.')
+        labels, weights, values = [], [], []
+        for i, row in enumerate(rows):
+            labels.append(row[0].strip() or f'Груз {i + 1}')
+            weights.append(self._editor_value(i, 1, f'Вес груза {i + 1}', (1, 10**12)))
+            limit = self._editor_value(i, 2, f'Лимит груза {i + 1}', (0, 200))
+            columns = [c for c in range(3, len(row))
+                       if c == 3 or (i, c) in self.editor_grid.editable]
+            if len(columns) != limit + 1:
+                self.editor_grid.mark_invalid({(i, 2)})
+                raise ValueError(f'Груз {i + 1}: после изменения лимита нажмите «Применить лимиты» и заполните новые ячейки.')
+            row_values = tuple(self._editor_value(i, c, f'Груз {i + 1}, F({c - 3})') for c in columns)
+            if row_values[0] != 0:
+                self.editor_grid.mark_invalid({(i, 3)})
+                raise ValueError(f'Груз {i + 1}: F(0) должна быть равна 0. Исправьте выделенную ячейку.')
+            values.append(row_values)
+        return Problem(name=self.name_var.get().strip() or 'Новая задача', capacity=capacity,
+                       weights=tuple(weights), values=tuple(values), labels=tuple(labels),
+                       description=self.description)
+
+    def apply_limits(self):
+        try:
+            rows = self.editor_grid.get_rows()
+            common_limit = self._integer(self.limit_var.get(), 'Общий лимит', 0, 200)
+            apply_to_all = common_limit != self._applied_limit
+            new_rows = []
+            first_new = None
+            for i, row in enumerate(rows):
+                limit = common_limit if apply_to_all else self._editor_value(
+                    i, 2, f'Лимит груза {i + 1}', (0, 200))
+                values = [row[c] for c in range(3, len(row))
+                          if c == 3 or (i, c) in self.editor_grid.editable]
+                if first_new is None and limit + 1 > len(values):
+                    first_new = (i, len(values) + 3)
+                values = (values + [''] * (limit + 1))[:limit + 1]
+                new_rows.append(row[:2] + [str(limit)] + values)
+            old_rows = [[value for c, value in enumerate(row)
+                         if (r, c) in self.editor_grid.editable] for r, row in enumerate(rows)]
+            if new_rows == old_rows:
+                self._message('Лимиты не изменились. Таблица сохранена.')
+                return
+            parent = self.editor_grid.master
+            self.editor_grid.destroy()
+            self._mount_editor_grid(parent, new_rows)
+            self._applied_limit = max(int(row[2]) for row in new_rows)
+            self.limit_var.set(str(self._applied_limit))
+            if first_new is not None:
+                # Bring newly added columns into view even in a compact window.
+                self.editor_grid.selected = first_new
+                self.editor_grid.update_idletasks()
+                self.editor_grid._ensure_visible(*first_new)
+            self.mark_dirty()
+            message = (f'Лимит {common_limit} применён ко всем грузам.' if apply_to_all
+                       else 'Лимиты грузов применены.')
+            self._message(message + (' Заполните новые значения ценностей.' if first_new else ' Таблица обновлена.'))
+        except (ValueError, TypeError, ZeroDivisionError) as exc:
+            self._message(str(exc), error=True)
+
+    def new_table(self):
+        try:
+            count = self._integer(self.count_var.get(), 'Число типов', 1, 12)
+            capacity = self._integer(self.capacity_var.get(), 'Ёмкость', 1, 200)
+            limit = self._integer(self.limit_var.get(), 'Лимит', 0, 200)
+            candidate = Problem(name='Своя задача', capacity=capacity, weights=(1,) * count,
+                                values=tuple((0,) * (limit + 1) for _ in range(count)),
+                                labels=tuple(f'Груз {i + 1}' for i in range(count)))
+            if not self._confirm_replace():
+                return
+            self.set_problem(candidate)
+            self.dirty = True
+        except (ValueError, TypeError, ZeroDivisionError) as exc:
+            self._message(str(exc), error=True)
+
+    def choose_preset(self, _event=None):
+        index = self.preset_box.current()
+        if index < 0:
+            return
+        if self._confirm_replace():
+            self.set_problem(PRESETS[index])
+        else:
+            self.preset_var.set(self.problem.name)
+
+    def open_file(self):
+        path = filedialog.askopenfilename(parent=self, title='Открыть условие',
+                                          filetypes=[('Условие рюкзака', '*.json'), ('Все файлы', '*.*')])
+        if not path:
+            return
+        try:
+            problem = load(path)
+            if self._confirm_replace():
+                self.set_problem(problem)
+                self._message(f'Условие загружено: {Path(path).name}')
+        except (ValueError, OSError, TypeError) as exc:
+            messagebox.showerror('Не удалось открыть условие', str(exc), parent=self)
+
+    def save_file(self):
+        try:
+            problem = self.read_problem() if self.screen == 'editor' else self.problem
+            path = filedialog.asksaveasfilename(parent=self, title='Сохранить условие',
+                                                defaultextension='.json',
+                                                initialfile='knapsack.json',
+                                                filetypes=[('Условие рюкзака', '*.json')])
+            if not path:
+                return
+            name = simpledialog.askstring('Название варианта',
+                                          'Название для программы и отчёта:',
+                                          initialvalue=problem.name, parent=self)
+            if name is None:
+                return
+            problem = replace(problem, name=name.strip() or problem.name)
+            save(path, problem)
+            self.problem = problem
+            self.name_var.set(problem.name)
+            self.dirty = False
+            self._message(f'Условие сохранено: {Path(path).name}')
+        except (ValueError, TypeError, OSError, ZeroDivisionError) as exc:
+            messagebox.showerror('Не удалось сохранить условие', str(exc), parent=self)
+
+    def begin(self):
+        self.editor_grid.commit()
+        if self.lesson is not None:
+            self.navigate_to_lesson()
+            return True
+        try:
+            problem = self.read_problem()
+            lesson = Lesson(problem)
+        except (ValueError, TypeError, ZeroDivisionError, ArithmeticError) as exc:
+            self.editor_errors += 1
+            self._message(str(exc), error=True)
+            return False
+        self.problem = problem
+        self.lesson = lesson
+        self._suspended_lesson = None
+        self.lesson.errors = self.editor_errors
+        self.final_plan = None
+        self.accepted = []
+        self._pending_editor = None
+        self.show_lesson()
+        self._message('Заполните все доступные ячейки. Недопустимые варианты отмечены прочерком.')
+        return True
+
+    def return_to_editor(self):
+        if self.screen == 'editor':
+            return
+        state = {'message': self.message_var.get(), 'color': self.message_label.cget('fg'),
+                 'hint': self.hint_var.get(), 'rows': None}
+        if self.screen == 'lesson' and self.answer_grid is not None:
+            state['rows'] = self.answer_grid.get_rows()
+            state['view'] = self.answer_grid.view_state()
+            state['reference_tab'] = self.reference_notebook.index('current')
+            state['history_selection'] = self.review_list.curselection()
+            state['history_scroll'] = self.review_list.yview()[0]
+        self._suspended_lesson = state
+        self.show_editor()
+        self._message('Прогресс решения сохранён. Можно вернуться через «Решение». Изменение условия сбросит прогресс.')
+
+    def _restore_lesson_progress(self):
+        state, self._suspended_lesson = self._suspended_lesson, None
+        if state is None:
+            return
+        if self.answer_grid is not None and state['rows'] is not None:
+            self.answer_grid.rows = state['rows']
+            self.answer_grid.restore_view(state['view'])
+            self.reference_notebook.select(state['reference_tab'])
+            self.review_list.selection_clear(0, 'end')
+            for index in state['history_selection']:
+                self.review_list.selection_set(index)
+            self.review_list.yview_moveto(state['history_scroll'])
+        self.hint_var.set(state['hint'])
+        self._message(state['message'], error=state['color'] == RED, success=state['color'] == GREEN)
+
+    def _stats(self, parent):
+        stats = tk.Frame(parent, bg=WHITE)
+        stats.pack(side='left', padx=(20, 0))
+        self.errors_label = self._label(stats, f'Ошибки  {self.lesson.errors}', size=10, color=MUTED)
+        self.errors_label.pack(side='left', padx=(0, 16))
+        self.hints_label = self._label(stats, f'Подсказки  {self.lesson.hints}', size=10, color=MUTED)
+        self.hints_label.pack(side='left')
+
+    def navigate_to_lesson(self):
+        if self.screen == 'editor':
+            self.editor_grid.commit()
+        if self.lesson is not None and self.screen != 'lesson':
+            self.show_lesson()
+            self._restore_lesson_progress()
+
+    def navigate_to_result(self):
+        if self.screen == 'editor':
+            self.editor_grid.commit()
+        if self.lesson is not None and self.lesson.phase == 'done' and self.screen != 'result':
+            self.show_result()
+            self._restore_lesson_progress()
+
+    def show_lesson(self):
+        if self.lesson is None:
+            return
+        if self.lesson.phase == 'done':
+            self.show_result()
+            return
+        self.screen = 'lesson'
+        self._clear_content()
+        phase = self.lesson.phase
+        restoring = phase == 'restore'
+        if restoring:
+            eyebrow, title = 'Решение / Обратный ход', 'Восстановление плана'
+            subtitle = 'Заполните состояния y и количества x для итогового плана.'
+        else:
+            stage = self.lesson.current_stage
+            name = self._item_name(stage.index)
+            eyebrow = f'Этап {self.lesson.stage_index + 1} из {len(self.problem.weights)} · {name}'
+            title = 'Таблица значений' if phase == 'candidates' else 'Максимумы и решения'
+            subtitle = ('Заполните доступные ячейки таблицы значений.'
+                        if phase == 'candidates' else
+                        'Заполните столбцы f(y) и x* для каждого состояния.')
+        title_row = self._heading(eyebrow, title, subtitle)
+        chip = 'Восстановление' if restoring else ('1 / 2  Вычисления' if phase == 'candidates' else '2 / 2  Максимумы')
+        self._label(title_row, chip, size=10, bold=True, color=BLUE, bg=PALE,
+                    padx=10, pady=5).pack(side='right', padx=(15, 0))
+        layout = tk.Frame(self.content, bg=BG)
+        layout.pack(fill='both', expand=True)
+        layout.columnconfigure(0, weight=1)
+        layout.rowconfigure(0, weight=1)
+        outer, main = self._card(layout, padding=20)
+        outer.grid(row=0, column=0, sticky='nsew', padx=(0, 16))
+        if restoring:
+            self._build_restore(main)
+        else:
+            self._build_stage(main)
+        side = tk.Frame(layout, bg=BG, width=330 if phase == 'summary' else 290)
+        side.grid(row=0, column=1, sticky='ns')
+        side.pack_propagate(False)
+        self._build_reference(side)
+        hint = self._label(self.content, '', size=10, color=BLUE, bg=BG,
+                           wraplength=1100, justify='left', anchor='w')
+        hint.configure(textvariable=self.hint_var)
+        hint.pack(fill='x', pady=(10, 0))
+        self._footer_message()
+        self._stats(self.footer)
+        self.check_button = Button(self.footer,
+            text='Проверить план  →' if restoring else 'Проверить таблицу  →',
+            style='Primary.TButton', command=self.check_answers)
+        self.check_button.pack(side='right')
+        Button(self.footer, text='Подсказка', command=self.show_hint).pack(side='right', padx=(12, 10))
+
+    def _item_name(self, index):
+        return self.problem.labels[index] if self.problem.labels else f'Груз {index + 1}'
+
+    def _build_stage(self, parent):
+        stage = self.lesson.current_stage
+        index = stage.index
+        phase = self.lesson.phase
+        top = tk.Frame(parent, bg=WHITE)
+        top.pack(fill='x')
+        self._label(top, self._item_name(index), size=12, bold=True).pack(side='left')
+        self._label(top, f'Вес: {self.problem.weights[index]}    ·    Ёмкость: {self.problem.capacity}',
+                    size=10, color=MUTED).pack(side='right')
+        formula = ('Fⱼ(x) + fⱼ₊₁(y + aⱼ · x)' if index < len(self.problem.weights) - 1 else 'Fⱼ(x)  ·  последний тип груза')
+        self._label(parent, formula if phase == 'candidates' else 'fⱼ(y) = max по допустимым x',
+                    size=13, color=BLUE, anchor='w').pack(fill='x', pady=(14, 7))
+        self._label(parent, 'y — ресурс, израсходованный до этого груза.  x — количество текущего груза.',
+                    size=10, color=MUTED, anchor='w', justify='left', wraplength=750).pack(fill='x', pady=(0, 14))
+        if phase == 'candidates':
+            # Quantities beyond B/a cannot occur in any state; keep them in the
+            # solver, but do not make students scroll past empty columns.
+            count = min(len(self.problem.values[index]),
+                        self.problem.capacity // self.problem.weights[index] + 1)
+            columns = ['y' if self.compact else 'Состояние y'] + [f'x = {x}' for x in range(count)]
+            rows = [[str(y)] + ['' if v is not None else None for v in stage.candidates[y][:count]]
+                    for y in stage.states]
+            editable = {(r, x + 1) for r, y in enumerate(stage.states)
+                        for x, value in enumerate(stage.candidates[y][:count]) if value is not None}
+            widths = ([80] + [75] * count) if self.compact else ([125] + [95] * count)
+        else:
+            columns = ['y', 'f(y)', 'x*']
+            rows = [[str(y), '', ''] for y in stage.states]
+            editable = {(r, c) for r in range(len(rows)) for c in (1, 2)}
+            widths = [80, 125, 100]
+        self.answer_grid = DataGrid(parent, columns, rows, editable=editable,
+                                    widths=widths, font_family=self.family,
+                                    font_size=self.table_font_size, height=280, dense=self.compact)
+        self.answer_grid.pack(fill='both', expand=True)
+        bottom = tk.Frame(parent, bg=WHITE)
+        bottom.pack(side='bottom', fill='x', pady=(12, 0), before=self.answer_grid)
+        self._label(bottom, '—  выбор не помещается в оставшийся ресурс', size=9, color=MUTED).pack(side='left')
+        if phase == 'summary':
+            Button(bottom, text='Посмотреть вычисления', style='Small.TButton',
+                       command=lambda: self.open_review(len(self.accepted) - 1)).pack(side='right')
+
+    def _build_restore(self, parent):
+        self._label(parent, 'Итоговый план', size=12, bold=True).pack(anchor='w')
+        self._label(parent, 'yⱼ₊₁ = yⱼ + aⱼ · xⱼ', size=14, color=BLUE).pack(anchor='w', pady=(14, 8))
+        self._label(parent, 'Введите ресурс y до каждого груза и его количество x. Любой оптимальный допустимый план будет принят.',
+                    color=MUTED, wraplength=740, justify='left', anchor='w').pack(fill='x', pady=(0, 20))
+        columns = ['Обратный ход'] + [f'Груз {i + 1}' for i in range(len(self.problem.weights))]
+        rows = [['Ресурс до груза yⱼ'] + [''] * len(self.problem.weights),
+                ['Количество xⱼ'] + [''] * len(self.problem.weights)]
+        self.answer_grid = DataGrid(parent, columns, rows,
+                                    editable={(r, c + 1) for r in (0, 1) for c in range(len(self.problem.weights))},
+                                    widths=([155] + [75] * len(self.problem.weights)) if self.compact else
+                                           ([230] + [125] * len(self.problem.weights)), font_family=self.family,
+                                    font_size=self.table_font_size, height=300, dense=self.compact)
+        self.answer_grid.pack(fill='both', expand=True)
+        Button(parent, text='Открыть все принятые максимумы', command=self.open_summary_sheet,
+                   style='Small.TButton').pack(side='bottom', anchor='w', pady=(15, 0), before=self.answer_grid)
+
+    def _reference_grid(self, parent, columns, rows, widths, *, height=160):
+        grid = DataGrid(parent, columns, rows, widths=widths,
+                        font_family=self.family, font_size=max(9, self.table_font_size - 2),
+                        height=height, dense=True)
+        return grid
+
+    def _build_reference(self, parent):
+        outer, host = self._card(parent, padding=10)
+        outer.pack(fill='both', expand=True)
+        self.reference_notebook = ttk.Notebook(host, style='Reference.TNotebook')
+        self.reference_notebook.pack(fill='both', expand=True)
+        current = tk.Frame(self.reference_notebook, bg=WHITE, padx=10, pady=10)
+        history = tk.Frame(self.reference_notebook, bg=WHITE, padx=10, pady=10)
+        self.reference_notebook.add(current, text='Справка')
+        self.reference_notebook.add(history, text='История')
+        self.reference_grids = []
+        phase = self.lesson.phase
+        if phase == 'candidates':
+            index = self.lesson.current_stage.index
+            self._label(current, f'Исходные F · {self._item_name(index)}', size=10,
+                        bold=True, wraplength=280, justify='left').pack(anchor='w')
+            vals = self.problem.values[index]
+            source = self._reference_grid(current, [f'x={x}' for x in range(len(vals))],
+                [[fmt_number(v) for v in vals]], [45] * len(vals), height=65)
+            source.freeze_first = False
+            source.canvas.configure(height=source.header_height + source.row_height)
+            source.pack(fill='x', pady=(7, 12))
+            self.reference_grids.append(source)
+            previous = next((entry for entry in reversed(self.accepted)
+                             if entry['phase'] == 'summary'), None)
+            if previous is not None:
+                self._label(current, f'Принятые максимумы · груз {previous["index"] + 1}',
+                            size=10, bold=True, wraplength=280).pack(anchor='w', pady=(0, 7))
+                reference = self._reference_grid(current, ['y', 'f(y)', 'x*'],
+                                                 previous['rows'], [50, 95, 55])
+                reference.pack(fill='both', expand=True)
+                self.reference_grids.append(reference)
+            else:
+                self._label(current, 'Принятых максимумов пока нет.', size=10,
+                            color=MUTED, wraplength=270, justify='left').pack(anchor='w')
+        elif phase == 'summary':
+            entry = self.accepted[-1]
+            self._label(current, f'Ваши принятые вычисления · груз {entry["index"] + 1}',
+                        size=10, bold=True, wraplength=360).pack(anchor='w', pady=(0, 8))
+            reference = self._reference_grid(current, ['y'] + [f'x={x}' for x in range(len(entry['columns']) - 1)], entry['rows'],
+                                             [40] + [48] * (len(entry['columns']) - 1))
+            reference.pack(fill='both', expand=True)
+            self.reference_grids.append(reference)
+        else:
+            self.restore_source_label = self._label(current,
+                f'B = {self.problem.capacity} · Веса aⱼ по грузам', size=10, bold=True,
+                wraplength=280)
+            self.restore_source_label.pack(anchor='w', pady=(0, 7))
+            weights = self._reference_grid(current,
+                [str(i + 1) for i in range(len(self.problem.weights))],
+                [[str(weight) for weight in self.problem.weights]],
+                [max(45, 15 + 8 * len(str(weight))) for weight in self.problem.weights])
+            weights.freeze_first = False
+            weights.canvas.configure(height=weights.header_height + weights.row_height)
+            weights.pack(fill='x', pady=(0, 12))
+            self.restore_weights_grid = weights
+            self._label(current, 'Все принятые максимумы', size=10, bold=True,
+                        wraplength=280).pack(anchor='w', pady=(0, 8))
+            entries = [entry for entry in self.accepted if entry['phase'] == 'summary']
+            rows = [[str(entry['index'] + 1), *row] for entry in reversed(entries)
+                    for row in entry['rows']]
+            reference = self._reference_grid(current, ['Груз', 'y', 'f(y)', 'x*'],
+                                             rows, [45, 40, 75, 45])
+            reference.pack(fill='both', expand=True)
+            self.reference_grids.append(reference)
+        self._label(history, 'Принятые таблицы', size=10, bold=True).pack(anchor='w')
+        self.review_list = tk.Listbox(history, bg=WHITE, fg=INK, bd=0, highlightthickness=0,
+                                     selectbackground=PALE, selectforeground=BLUE,
+                                     activestyle='none', font=(self.family, 10),
+                                     height=5, width=24, exportselection=False)
+        self.review_list.pack(fill='both', expand=True, pady=(8, 0))
+        for entry in self.accepted:
+            label = 'Вычисления' if entry['phase'] == 'candidates' else 'Максимумы'
+            self.review_list.insert('end', f'Груз {entry["index"] + 1} · {label}')
+        self.review_list.bind('<Double-1>', lambda e: self.open_selected_review())
+        self.review_list.bind('<Return>', lambda e: self.open_selected_review())
+        actions = tk.Frame(parent, bg=BG)
+        actions.pack(side='bottom', fill='x', pady=(8, 0), before=outer)
+        Button(actions, text='Условие ↗', command=self.open_source,
+                   style='Small.TButton').pack(side='left', fill='x', expand=True)
+        button = Button(actions, text='Открыть таблицу', command=self.open_selected_review,
+                            style='Small.TButton')
+        button.pack(side='right', fill='x', expand=True, padx=(6, 0))
+        if self.accepted:
+            self.review_list.selection_set(len(self.accepted) - 1)
+        else:
+            button.configure(state='disabled')
+
+    def check_answers(self):
+        if not self.lesson or self.lesson.phase == 'done' or self.answer_grid is None:
+            return False
+        rows = self.answer_grid.get_rows()
+        phase = self.lesson.phase
+        if phase == 'restore':
+            states, plan = rows[0][1:], rows[1][1:]
+            feedback = self.lesson.submit_plan(plan, states=states)
+            invalid = [(1 if kind == 0 else 0, j + 1) for kind, j in feedback.invalid]
+            if feedback.accepted:
+                self.final_plan = self.lesson.accepted_plan
+                self.show_result()
+                self._message('Практикум завершён. План допустим, его оптимальность подтверждена.', success=True)
+                return True
+        else:
+            stage = self.lesson.current_stage
+            values = {y: row[1:] for y, row in zip(stage.states, rows)}
+            if phase == 'candidates':
+                # Hidden trailing columns are all None. Test that first, so the
+                # complete model payload never indexes beyond the visible row.
+                payload = {y: [None if value is None else values[y][x]
+                               for x, value in enumerate(stage.candidates[y])] for y in stage.states}
+                feedback = self.lesson.submit_candidates(payload)
+            else:
+                payload = {y: tuple(values[y]) for y in stage.states}
+                feedback = self.lesson.submit_summary(payload)
+            invalid = [(stage.states.index(y), column + 1) for y, column in feedback.invalid
+                       if y in stage.states]
+            if feedback.accepted:
+                self.accepted.append({'phase': phase, 'index': stage.index,
+                                      'states': tuple(stage.states),
+                                      'columns': tuple(self.answer_grid.columns),
+                                      'rows': rows})
+                self.show_lesson()
+                self._message('Таблица принята. Продолжайте решение.', success=True)
+                return True
+        self.answer_grid.mark_invalid(invalid)
+        self._message(feedback.message, error=True)
+        self.errors_label.configure(text=f'Ошибки  {self.lesson.errors}', fg=RED)
+        return False
+
+    def show_hint(self):
+        if self.lesson and self.lesson.phase != 'done':
+            self.hint_var.set(self.lesson.hint())
+            self.hints_label.configure(text=f'Подсказки  {self.lesson.hints}')
+
+    def _table_window(self, title, subtitle, columns, rows, widths):
+        window = tk.Toplevel(self)
+        window.title(title + ' · Рюкзак')
+        window.geometry('1000x650')
+        window.minsize(700, 420)
+        window.configure(bg=BG)
+        window.transient(self)
+        content = tk.Frame(window, bg=BG, padx=24, pady=24)
+        content.pack(fill='both', expand=True)
+        self._label(content, title, size=22, bold=True, bg=BG).pack(anchor='w')
+        self._label(content, subtitle, color=MUTED, bg=BG, wraplength=920,
+                    justify='left').pack(anchor='w', pady=(9, 20))
+        grid = DataGrid(content, columns, rows, widths=widths,
+                        font_family=self.family, font_size=self.table_font_size)
+        grid.pack(fill='both', expand=True)
+        actions = tk.Frame(content, bg=BG)
+        actions.pack(fill='x', pady=(16, 0))
+        Button(actions, text='Копировать таблицу', command=grid.copy_table).pack(side='left')
+        Button(actions, text='Закрыть', command=window.destroy).pack(side='right')
+        window.bind('<Escape>', lambda e: window.destroy())
+        return window
+
+    def open_description(self):
+        window = tk.Toplevel(self)
+        window.title('Условие и примечания · Рюкзак')
+        window.geometry('760x520')
+        window.minsize(520, 350)
+        window.configure(bg=WHITE)
+        window.transient(self)
+        self._label(window, self.name_var.get(), size=19, bold=True,
+                    wraplength=680, justify='left').pack(anchor='w', padx=24, pady=(24, 15))
+        frame = tk.Frame(window, bg=WHITE)
+        frame.pack(fill='both', expand=True, padx=24)
+        text = tk.Text(frame, wrap='word', font=(self.family, self.font_size + 1),
+                       bg=WHITE, fg=INK, bd=0, relief='flat', highlightthickness=0, padx=0, pady=0)
+        scroll = ttk.Scrollbar(frame, command=text.yview)
+        scroll.pack(side='right', fill='y')
+        text.configure(yscrollcommand=scroll.set)
+        text.pack(fill='both', expand=True)
+        text.insert('1.0', self.description or 'Для этой задачи описание не задано.')
+        text.configure(state='disabled')
+        Button(window, text='Закрыть', command=window.destroy).pack(anchor='e', padx=24, pady=20)
+        window.bind('<Escape>', lambda e: window.destroy())
+        return window
+
+    def open_source(self):
+        p = self.problem
+        length = max(len(v) for v in p.values)
+        rows = [[self._item_name(i), str(p.weights[i]), str(len(vals) - 1),
+                 *[fmt_number(v) for v in vals], *[None] * (length - len(vals))]
+                for i, vals in enumerate(p.values)]
+        return self._table_window(p.name, f'Ёмкость B = {p.capacity}. {p.description}',
+            ['Груз', 'Вес a', 'Лимит', *[f'F({x})' for x in range(length)]], rows,
+            [200, 85, 85] + [90] * length)
+
+    def open_selected_review(self):
+        selection = self.review_list.curselection()
+        if selection:
+            return self.open_review(selection[0])
+        return None
+
+    def open_review(self, index):
+        if not 0 <= index < len(self.accepted):
+            return None
+        entry = self.accepted[index]
+        label = 'Вычисления' if entry['phase'] == 'candidates' else 'Максимумы'
+        return self._table_window(f"Груз {entry['index'] + 1} · {label}",
+                                 'Ваши ответы, принятые при проверке.', entry['columns'],
+                                 entry['rows'], [150] + [130] * (len(entry['columns']) - 1))
+
+    def open_history(self):
+        if not self.accepted:
+            return None
+        window = tk.Toplevel(self)
+        window.title('Принятые таблицы · Рюкзак')
+        window.geometry('1000x650')
+        window.minsize(700, 420)
+        window.configure(bg=BG)
+        window.transient(self)
+        content = tk.Frame(window, bg=BG, padx=24, pady=24)
+        content.pack(fill='both', expand=True)
+        self._label(content, 'Все принятые таблицы', size=22, bold=True, bg=BG).pack(anchor='w')
+        self._label(content, 'Выберите этап: вычисления и максимумы сохранены для каждого груза.',
+                    color=MUTED, bg=BG, wraplength=900, justify='left').pack(anchor='w', pady=(8, 16))
+        labels = [f"Груз {entry['index'] + 1} · " +
+                  ('Вычисления' if entry['phase'] == 'candidates' else 'Максимумы')
+                  for entry in self.accepted]
+        selector = Combobox(content, state='readonly', values=labels)
+        selector.pack(fill='x', pady=(0, 16))
+        table = tk.Frame(content, bg=BG)
+        table.pack(fill='both', expand=True)
+        def select_table(_event=None):
+            for child in table.winfo_children():
+                child.destroy()
+            entry = self.accepted[selector.current()]
+            window.review_grid = DataGrid(table, entry['columns'], entry['rows'],
+                widths=[150] + [130] * (len(entry['columns']) - 1),
+                font_family=self.family, font_size=self.table_font_size)
+            window.review_grid.pack(fill='both', expand=True)
+        window.review_selector = selector
+        selector.bind('<<ComboboxSelected>>', select_table)
+        selector.current(0)
+        select_table()
+        actions = tk.Frame(content, bg=BG)
+        actions.pack(side='bottom', fill='x', pady=(16, 0), before=table)
+        Button(actions, text='Копировать таблицу',
+                   command=lambda: window.review_grid.copy_table()).pack(side='left')
+        Button(actions, text='Исходные данные', command=self.open_source).pack(side='left', padx=12)
+        Button(actions, text='Закрыть', command=window.destroy).pack(side='right')
+        window.bind('<Escape>', lambda e: window.destroy())
+        return window
+
+    def open_summary_sheet(self):
+        summaries = [e for e in self.accepted if e['phase'] == 'summary']
+        rows = [[f"Груз {e['index'] + 1}", *row] for e in reversed(summaries) for row in e['rows']]
+        return self._table_window('Принятые максимумы',
+                                 'Проверенные максимумы и количества для каждого состояния.',
+                                 ['Тип груза', 'Состояние y', 'Максимум f(y)', 'Ваш выбор x*'],
+                                 rows, [160, 160, 220, 220])
+
+    def show_result(self):
+        if not self.lesson or self.lesson.phase != 'done' or self.final_plan is None:
+            return
+        self.screen = 'result'
+        self._clear_content()
+        self._heading('Практикум завершён', 'Лучший план найден',
+                      'Вы сравнили допустимые решения, нашли максимумы и восстановили оптимальную загрузку.')
+        plan = self.final_plan
+        used = sum(w * x for w, x in zip(self.problem.weights, plan))
+        objective = sum(self.problem.values[i][x] for i, x in enumerate(plan))
+        metrics = tk.Frame(self.content, bg=BG)
+        metrics.pack(fill='x', pady=(0, 14))
+        for i in range(3):
+            metrics.columnconfigure(i, weight=1, uniform='metric')
+        for i, (label, value, subtitle) in enumerate([
+            ('Ценность плана', fmt_number(objective), 'Оптимальный результат'),
+            ('Использовано ресурса', f'{used} / {self.problem.capacity}',
+             f'Свободно: {self.problem.capacity - used}'),
+            ('Статистика', f'{self.lesson.errors} ошибок', f'Подсказок: {self.lesson.hints}')]):
+            outer, card = self._card(metrics, padding=14 if self.compact else 20, bg=PALE if i == 0 else WHITE)
+            outer.grid(row=0, column=i, sticky='nsew', padx=(0 if i == 0 else 9, 0 if i == 2 else 9))
+            bg = PALE if i == 0 else WHITE
+            self._label(card, label, size=9, bold=True, color=BLUE if i == 0 else MUTED,
+                        bg=bg).pack(anchor='w')
+            self._label(card, value, size=(26 if self.compact else 30) if i < 2 else 24, bold=True,
+                        color=BLUE if i == 0 else INK, bg=bg).pack(anchor='w', pady=(8, 4) if self.compact else (14, 8))
+            self._label(card, subtitle, size=10, color=MUTED, bg=bg).pack(anchor='w')
+        outer, body = self._card(self.content, padding=22)
+        outer.pack(fill='both', expand=True)
+        self._label(body, 'Состав рюкзака', size=9, bold=True, color=MUTED).pack(anchor='w')
+        rows = [[self._item_name(i), str(self.lesson.accepted_states[i]), str(x),
+                 str(self.problem.weights[i] * x), fmt_number(self.problem.values[i][x])]
+                for i, x in enumerate(plan)]
+        grid = DataGrid(body, ['Груз', 'Ресурс до yⱼ', 'Количество xⱼ', 'Расход', 'Ценность'], rows,
+                        widths=[230, 130, 150, 140, 150] if self.compact else [280, 150, 170, 160, 180],
+                        font_family=self.family, font_size=self.table_font_size, height=220, dense=self.compact)
+        grid.pack(fill='both', expand=True, pady=(10, 10) if self.compact else (16, 18))
+        bar = tk.Canvas(body, height=10, bg='#e8edf5', bd=0, highlightthickness=0)
+        bar.pack(side='bottom', fill='x', before=grid)
+        colors = [BLUE, '#6a87ed', '#92a8f1', '#b5c5f7']
+        def draw_bar(event):
+            bar.delete('all')
+            x0 = 0
+            for i, count in enumerate(plan):
+                width = event.width * self.problem.weights[i] * count / self.problem.capacity
+                bar.create_rectangle(x0, 0, x0 + width, 10, fill=colors[i % len(colors)], outline='')
+                x0 += width
+        bar.bind('<Configure>', draw_bar)
+        self._label(body, 'Суммарный расход не превышает ёмкость. Свободный ресурс допустим.',
+                    size=9, color=MUTED).pack(side='bottom', anchor='w', pady=(10, 0), before=bar)
+        self._footer_message()
+        Button(self.footer, text='Сохранить отчёт  ↓', command=self.export_report,
+                   style='Primary.TButton').pack(side='right')
+        Button(self.footer, text='К условию', command=self.return_to_editor).pack(side='right', padx=10)
+        Button(self.footer, text='Принятые таблицы', command=self.open_history).pack(side='right')
+
+    def report_text(self):
+        if not self.lesson or self.lesson.phase != 'done' or self.final_plan is None:
+            raise ValueError('Отчёт доступен после завершения практикума.')
+        p = self.problem
+        used = sum(a * x for a, x in zip(p.weights, self.final_plan))
+        objective = sum(p.values[i][x] for i, x in enumerate(self.final_plan))
+        lines = ['ЛАБОРАТОРНАЯ РАБОТА 3 · ЗАДАЧА О ЗАГРУЗКЕ РЮКЗАКА', '',
+                 p.name, p.description, '', 'Условие', f'Ёмкость B = {p.capacity}',
+                 'Максимизировать Σ Fⱼ(xⱼ), Σ aⱼ·xⱼ ≤ B; xⱼ — целые неотрицательные.']
+        for i, vals in enumerate(p.values):
+            lines.append(f'{self._item_name(i)}: вес {p.weights[i]}, 0 ≤ x ≤ {len(vals) - 1}; '
+                         f'F(0…{len(vals) - 1}) = ' + ', '.join(fmt_number(v) for v in vals))
+        lines.extend(['', 'Принятые шаги динамического программирования'])
+        for entry in self.accepted:
+            label = 'вычисления' if entry['phase'] == 'candidates' else 'максимумы'
+            lines.extend(['', f"Груз {entry['index'] + 1} · {label}", '\t'.join(entry['columns'])])
+            lines.extend('\t'.join(row) for row in entry['rows'])
+        lines.extend(['', 'Оптимальный план'])
+        lines.extend(f'{self._item_name(i)}: y={self.lesson.accepted_states[i]}, x={x}'
+                     for i, x in enumerate(self.final_plan))
+        lines.extend([f'Максимальная ценность: {fmt_number(objective)}',
+                      f'Расход ресурса: {used} из {p.capacity}',
+                      f'Свободный ресурс: {p.capacity - used}',
+                      f'Ошибки: {self.lesson.errors}', f'Подсказки: {self.lesson.hints}', ''])
+        return '\n'.join(lines)
+
+    def export_report(self):
+        path = filedialog.asksaveasfilename(parent=self, title='Сохранить учебный отчёт',
+                                            initialfile='knapsack-report.txt', defaultextension='.txt',
+                                            filetypes=[('Текстовый отчёт', '*.txt')])
+        if path:
+            try:
+                Path(path).write_text(self.report_text(), encoding='utf-8')
+                self._message(f'Отчёт сохранён: {Path(path).name}')
+            except OSError as exc:
+                messagebox.showerror('Не удалось сохранить отчёт', str(exc), parent=self)
+
+    def rescale(self, _event=None):
+        factor = int(self.zoom.get().rstrip('%')) / 100
+        self.table_font_size = max(9, round(11 * factor))
+        pending = None
+        view = None
+        if self.screen == 'editor':
+            view = self.editor_grid.view_state()
+            self._pending_editor = self.editor_grid.get_rows()
+            self._pending_editor = [[row[c] for c in range(len(row))
+                                     if c < 4 or (r, c) in self.editor_grid.editable]
+                                    for r, row in enumerate(self._pending_editor)]
+        elif self.screen == 'lesson' and self.answer_grid is not None:
+            view = self.answer_grid.view_state()
+            pending = self.answer_grid.get_rows()
+        error = hasattr(self, 'message_label') and self.message_label.cget('fg') == RED
+        success = hasattr(self, 'message_label') and self.message_label.cget('fg') == GREEN
+        message = self.message_var.get()
+        hint = self.hint_var.get()
+        self._style()
+        if self.screen == 'editor':
+            self.show_editor()
+            if view is not None:
+                self.editor_grid.restore_view(view)
+        elif self.screen == 'lesson':
+            self.show_lesson()
+            if pending is not None:
+                self.answer_grid.rows = pending
+                self.answer_grid.restore_view(view)
+        else:
+            self.show_result()
+        self._message(message, error=error, success=success)
+        self.hint_var.set(hint)
+
+    def destroy(self):
+        if self._resize_job:
+            self.after_cancel(self._resize_job)
+            self._resize_job = None
+        super().destroy()
+
+    def close(self):
+        if self.screen == 'editor':
+            self.editor_grid.commit()
+        if self.dirty or (self.lesson and self.lesson.phase != 'done'):
+            if not messagebox.askyesno('Закрыть практикум?',
+                                       'Несохранённое условие и текущий ход решения будут потеряны.', parent=self):
+                return
+        self.destroy()
 
 
 def create_window():
-    root = tk.Tk()
-    root.title(TITLE)
-    root.geometry("640x220")
-    frame = ttk.Frame(root, padding=24)
-    frame.pack(fill="both", expand=True)
-    ttk.Label(frame, text=DESCRIPTION, wraplength=580).pack(pady=12)
-    ttk.Label(frame, text=STATUS, wraplength=580).pack(pady=12)
-    ttk.Button(frame, text="Закрыть", command=root.destroy).pack(pady=12)
-    return root
+    return App()
 
 
 def main():
-    create_window().mainloop()
+    app = create_window()
+    if '--smoke-test' in sys.argv:
+        app.after(150, app.destroy)
+    app.mainloop()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

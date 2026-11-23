@@ -1,0 +1,8 @@
+# Preserve whitespace in captured command output and extracted source documents.
+qa/**/*.log -whitespace
+qa/**/manual-extracted.txt -whitespace
+# Keep generated reverse-engineering dumps and test output collapsed in reviews.
+knapsack-practicum/docs/evidence/** linguist-generated=true
+qa/**/*.log linguist-generated=true
+qa/**/runtime-*/** linguist-generated=true
+qa/**/protocols/** linguist-generated=true

@@ -1,0 +1,19 @@
+{
+  "error_probes": true,
+  "expected_error_count": 4,
+  "expected_value": 40,
+  "expected_weight": 4,
+  "plan": [
+    0,
+    1,
+    1,
+    2
+  ],
+  "states": [
+    0,
+    0,
+    1,
+    2
+  ],
+  "result_button_hidden": true
+}

@@ -25,10 +25,12 @@ jobs:
           python-version: '3.12'
       - name: Run tests
         run: python -m unittest discover -v
+      - name: Smoke test
+        run: python app.py --smoke-test
 
   build:
     name: Build Knapsack-Practicum.exe
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
     needs: tests
     runs-on: windows-latest
     timeout-minutes: 20
@@ -42,12 +44,23 @@ jobs:
           python-version: '3.12'
       - name: Install build dependencies
         run: python -m pip install -r ../.github/requirements-build.txt
-      - name: Build Windows executable
-        run: python -m PyInstaller --noconfirm --clean --onefile --windowed --name Knapsack-Practicum --distpath dist --workpath .build app.py
+      - name: Build Windows executable and include variants
+        run: python build.py
+      - name: Smoke test packaged executable
+        shell: pwsh
+        run: |
+          $appProcess = Start-Process -FilePath './dist/Knapsack-Practicum.exe' -ArgumentList '--smoke-test' -PassThru
+          if (-not $appProcess.WaitForExit(30000)) {
+            $appProcess.Kill()
+            throw 'Packaged application did not close within 30 seconds.'
+          }
+          if ($appProcess.ExitCode -ne 0) {
+            throw "Packaged application exited with code $($appProcess.ExitCode)."
+          }
       - name: Upload executable
         uses: actions/upload-artifact@v6
         with:
           name: Knapsack-Practicum-windows-x64
-          path: knapsack-practicum/dist/Knapsack-Practicum.exe
+          path: knapsack-practicum/dist/
           if-no-files-found: error
           retention-days: 30

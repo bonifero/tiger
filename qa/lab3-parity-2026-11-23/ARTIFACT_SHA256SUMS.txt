@@ -1,0 +1,2 @@
+434a4dc9200073bd8a589084ea9bcd1940cbfe76846b480d21a4e12e98f2b547  Knapsack-Practicum.exe
+aad6b79312e16c2b0c4686f86cacb0fe8885e80578d338e40547587d4c8602ce  Knapsack-Practicum-windows-x64.zip
