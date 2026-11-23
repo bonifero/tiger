@@ -741,7 +741,7 @@ class App(tk.Tk):
         editable = {(r, c) for r, row in enumerate(raw_rows) for c in range(len(row)) if c != 3}
         self.editor_grid = DataGrid(parent, ['Название', 'Вес a', 'Лимит',
                                              *[f'F({i})' for i in range(max_columns - 3)]], rows,
-                                    editable=editable, widths=([125, 55, 55] + [60] * (max_columns - 3)) if self.compact else
+                                    editable=editable, widths=([165, 75, 75] + [60] * (max_columns - 3)) if self.compact else
                                         ([165, 75, 75] + [85] * (max_columns - 3)),
                                     on_change=self.mark_dirty, font_family=self.family,
                                     font_size=self.table_font_size)
