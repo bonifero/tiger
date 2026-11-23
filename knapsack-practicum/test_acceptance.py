@@ -156,6 +156,66 @@ class AcceptanceTests(unittest.TestCase):
         g.canvas.event_generate('<<Paste>>')
         self.assertEqual(g.rows[0][3], '0')
 
+    def test_arrow_keys_commit_input_and_move_in_all_four_directions(self):
+        g = self.app.editor_grid
+        self.click_cell(g, 0, 4)
+        g.entry.focus_force()
+        self.app.update()
+        for key, destination, value in [('Right', (0, 5), '12'),
+                                        ('Down', (1, 5), '34'),
+                                        ('Left', (1, 4), '56'),
+                                        ('Up', (0, 4), '78')]:
+            origin = g.selected
+            g.entry.delete(0, 'end')
+            g.entry.insert(0, value)
+            g.entry.event_generate('<' + key + '>')
+            self.app.update()
+            self.assertEqual(g.rows[origin[0]][origin[1]], value)
+            self.assertEqual(g.selected, destination)
+            self.assertIsNotNone(g.entry)
+            self.assertIs(self.app.focus_get(), g.entry)
+        g.entry.event_generate('<Left>')  # Immutable F(0).
+        self.app.update()
+        self.assertEqual(g.selected, (0, 3))
+        self.assertIsNone(g.entry)
+        self.assertIs(self.app.focus_get(), g.canvas)
+        g.canvas.event_generate('<Right>')
+        self.app.update()
+        self.assertEqual(g.selected, (0, 4))
+        g.canvas.event_generate('<KeyPress>', keysym='7')
+        self.app.update()
+        self.assertEqual(g.entry.get(), '7')
+        self.assertEqual(g.rows[0][3], '0')
+        g.entry.event_generate('<Up>')  # Stay within the top edge.
+        self.app.update()
+        self.assertEqual(g.selected, (0, 4))
+        self.assertEqual(g.rows[0][4], '7')
+
+    def test_arrows_scroll_lesson_and_leave_unavailable_cells_readonly(self):
+        self.app.set_problem(Problem('Scrolling', 200, (1, 1), ((0, 1), (0, 2))))
+        self.app.begin()
+        self.click_cell(self.app.answer_grid, 0, 2)
+        g = self.app.answer_grid
+        g.entry.focus_force()
+        self.app.update()
+        for row in range(25):
+            g.entry.delete(0, 'end')
+            g.entry.insert(0, str(row))
+            g.entry.event_generate('<Down>')
+            self.app.update()
+            self.assertEqual(g.rows[row][2], str(row))
+            self.assertEqual(g.selected, (row + 1, 2))
+        self.assertGreater(g.canvas.yview()[0], 0)
+        self.click_cell(g, 199, 2)
+        g.entry.event_generate('<Down>')
+        self.app.update()
+        self.assertEqual(g.selected, (200, 2))
+        self.assertIsNone(g.entry)
+        self.assertEqual(g.rows[200][2], '—')
+        g.canvas.event_generate('<Up>')
+        self.app.update()
+        self.assertEqual(g.selected, (199, 2))
+
     def test_pending_cell_is_protected_on_replace(self):
         g = self.app.editor_grid
         self.click_cell(g, 0, 4)

@@ -281,6 +281,8 @@ class DataGrid(tk.Frame):
         self.entry.focus_set()
         if replacement is None:
             self.entry.selection_range(0, 'end')
+        for key, dr, dc in [('Up', -1, 0), ('Down', 1, 0), ('Left', 0, -1), ('Right', 0, 1)]:
+            self.entry.bind('<' + key + '>', lambda e, r=dr, c=dc: self._move(r, c, editing=True))
         self.entry.bind('<Return>', lambda e: self._move(1, 0, editing=True))
         self.entry.bind('<Tab>', lambda e: self._next_editable(1, editing=True))
         self.entry.bind('<Shift-Tab>', lambda e: self._next_editable(-1, editing=True))
@@ -351,6 +353,9 @@ class DataGrid(tk.Frame):
             self._ensure_visible(*self.selected)
             if editing:
                 self._start_edit()
+            if self.entry is None:
+                # Read-only cells still need focus for the next arrow key.
+                self.canvas.focus_set()
         return 'break'
 
     def _next_editable(self, direction, editing=False):
