@@ -49,6 +49,57 @@ class InterfaceTests(unittest.TestCase):
         self.assertEqual(self.app.read_problem(), p)
         self.assertEqual(self.app.table_font_size, 15)
 
+    def test_common_limit_applies_to_existing_table_and_preserves_values(self):
+        original = self.app.editor_grid.get_rows()
+        self.app.limit_var.set('6')
+        with self.assertRaisesRegex(ValueError, 'Применить лимиты'):
+            self.app.read_problem()
+        self.app.zoom.set('120%')
+        self.app.rescale()  # A redraw must not consume the pending common limit.
+        self.app.apply_limits()
+        grid = self.app.editor_grid
+        self.assertEqual(grid.columns[-2:], ('F(5)', 'F(6)'))
+        for i, row in enumerate(grid.rows):
+            self.assertEqual(row[:2], original[i][:2])
+            self.assertEqual(row[2], '6')
+            self.assertEqual(row[3:8], original[i][3:8])
+            self.assertEqual(row[8:], ['', ''])
+            self.assertIn((i, 9), grid.editable)
+        self.assertEqual(grid.selected, (0, 8))
+        self.assertFalse(self.app.begin())  # Added values must not silently become zero.
+        self.app.limit_var.set('2')
+        self.app.apply_limits()
+        self.assertEqual(self.app.editor_grid.columns[-1], 'F(2)')
+        self.assertEqual(self.app.read_problem().quantities, (2, 2, 2, 2))
+        self.assertEqual(self.app.editor_grid.rows[0][3:], original[0][3:6])
+
+    def test_individual_limits_remain_independent_after_common_change(self):
+        self.app.limit_var.set('6')
+        self.app.apply_limits()
+        self.app.editor_grid.set_value(1, 2, '3')
+        self.app.apply_limits()
+        self.assertEqual([row[2] for row in self.app.editor_grid.rows], ['6', '3', '6', '6'])
+        self.assertNotIn((1, 7), self.app.editor_grid.editable)
+        self.app.editor_grid.set_value(0, 2, '8')
+        self.app.apply_limits()
+        self.assertEqual(self.app.limit_var.get(), '8')
+        self.app.apply_limits()  # Repeating the action must not overwrite per-row limits.
+        self.assertEqual([row[2] for row in self.app.editor_grid.rows], ['8', '3', '6', '6'])
+
+    def test_invalid_common_limit_keeps_existing_table(self):
+        grid = self.app.editor_grid
+        original = grid.get_rows()
+        for value in ('', '-1', '201', '3/2'):
+            self.app.limit_var.set(value)
+            self.app.apply_limits()
+            self.assertIs(self.app.editor_grid, grid)
+            self.assertEqual(grid.rows, original)
+            self.assertEqual(self.app.message_label.cget('fg'), '#bf3946')
+        self.app.limit_var.set('0')
+        self.app.apply_limits()
+        self.assertEqual(self.app.editor_grid.columns[-1], 'F(0)')
+        self.assertEqual(self.app.read_problem().quantities, (0, 0, 0, 0))
+
     def test_error_keeps_input_and_step_rescale_keeps_input(self):
         self.assertTrue(self.app.begin())
         grid = self.app.answer_grid

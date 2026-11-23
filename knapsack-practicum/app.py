@@ -656,6 +656,7 @@ class App(tk.Tk):
         self.capacity_var = tk.StringVar(value=str(problem.capacity))
         self.count_var = tk.StringVar(value=str(len(problem.weights)))
         self.limit_var = tk.StringVar(value=str(max(len(v) - 1 for v in problem.values)))
+        self._applied_limit = int(self.limit_var.get())
         # Observe values, including native paste/cut and spinbox actions.
         for variable in (self.name_var, self.capacity_var, self.count_var, self.limit_var):
             variable.trace_add('write', self.mark_dirty)
@@ -795,6 +796,8 @@ class App(tk.Tk):
         rows = self.editor_grid.get_rows()
         self.editor_grid.mark_invalid(())
         capacity = self._integer(self.capacity_var.get(), 'Ёмкость', 1, 200)
+        if self._integer(self.limit_var.get(), 'Общий лимит', 0, 200) != self._applied_limit:
+            raise ValueError('Общий лимит изменён: нажмите «Применить лимиты» и заполните новые ячейки.')
         labels, weights, values = [], [], []
         for i, row in enumerate(rows):
             labels.append(row[0].strip() or f'Груз {i + 1}')
@@ -813,19 +816,34 @@ class App(tk.Tk):
     def apply_limits(self):
         try:
             rows = self.editor_grid.get_rows()
+            common_limit = self._integer(self.limit_var.get(), 'Общий лимит', 0, 200)
+            apply_to_all = common_limit != self._applied_limit
             new_rows = []
+            first_new = None
             for i, row in enumerate(rows):
-                limit = self._editor_value(i, 2, f'Лимит груза {i + 1}', (0, 200))
+                limit = common_limit if apply_to_all else self._editor_value(
+                    i, 2, f'Лимит груза {i + 1}', (0, 200))
                 values = [row[c] for c in range(3, len(row))
                           if c == 3 or (i, c) in self.editor_grid.editable]
+                if first_new is None and limit + 1 > len(values):
+                    first_new = (i, len(values) + 3)
                 values = (values + [''] * (limit + 1))[:limit + 1]
                 values[0] = '0'
-                new_rows.append(row[:3] + values)
+                new_rows.append(row[:2] + [str(limit)] + values)
             parent = self.editor_grid.master
             self.editor_grid.destroy()
             self._mount_editor_grid(parent, new_rows)
+            self._applied_limit = max(int(row[2]) for row in new_rows)
+            self.limit_var.set(str(self._applied_limit))
+            if first_new is not None:
+                # Bring newly added columns into view even in a compact window.
+                self.editor_grid.selected = first_new
+                self.editor_grid.update_idletasks()
+                self.editor_grid._ensure_visible(*first_new)
             self.mark_dirty()
-            self._message('Лимиты применены. Заполните новые значения ценностей.')
+            message = (f'Лимит {common_limit} применён ко всем грузам.' if apply_to_all
+                       else 'Лимиты грузов применены.')
+            self._message(message + (' Заполните новые значения ценностей.' if first_new else ' Таблица обновлена.'))
         except (ValueError, TypeError, ZeroDivisionError) as exc:
             self._message(str(exc), error=True)
 
