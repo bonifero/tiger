@@ -4,6 +4,8 @@ import ctypes as C
 from ctypes import wintypes as W
 import hashlib, itertools, json, os, subprocess, sys, time, traceback
 from PIL import ImageGrab
+import pyautogui as gui
+gui.PAUSE = .025
 
 ROOT = Path(__file__).resolve().parents[2]
 EXE = ROOT / 'source/Лаб_3/Загрузка_рюкзака.exe'
@@ -105,7 +107,8 @@ class Probe:
         print(name,[(k,text(h)) for k,h in self.controls.items() if U.IsWindowVisible(h) and 'TButton'==cls(h)],flush=True)
     def click(self,name):
         h=self.resolve(name);assert U.IsWindowVisible(h),(name,'hidden')
-        U.PostMessageW(h,0xF5,0,0);self.actions+=1;time.sleep(.16)
+        left,top,right,bottom=rect(h)
+        gui.click((left+right)//2,(top+bottom)//2);self.actions+=1;time.sleep(.2)
     def dialogs(self,label):
         for i in range(4):
             dialogs=[h for h in owned(self.proc.pid) if h!=self.main and U.IsWindowVisible(h) and cls(h)!='TApplication' and rect(h)[2]>rect(h)[0]]
@@ -113,22 +116,22 @@ class Probe:
             self.snapshot(f'{label}-dialog-{i}')
             for h in dialogs:
                 buttons=[c for c in enum(h) if cls(c) in ('TButton','Button') and U.IsWindowVisible(c)]
-                if buttons:U.PostMessageW(buttons[0],0xF5,0,0)
+                if buttons:
+                    left,top,right,bottom=rect(buttons[0]);gui.click((left+right)//2,(top+bottom)//2)
                 else:U.PostMessageW(h,0x10,0,0)
             time.sleep(.15)
     def edit(self,name,value):
-        b=C.create_unicode_buffer(str(value));U.SendMessageW(self.resolve(name),0xC,0,C.addressof(b));self.actions+=1
+        h=self.resolve(name);left,top,right,bottom=rect(h)
+        gui.click((left+right)//2,(top+bottom)//2)
+        gui.hotkey('ctrl','a');gui.write(str(value));self.actions+=1
     def cell(self,name,row,col,value,width=64):
         h=self.resolve(name)
-        # DFM/default dimensions: columns64px (+1 gridline), rows24px (+1).
-        x=2+col*(width+1)+12;y=2+row*25+10
-        U.PostMessageW(h,0x201,1,(y<<16)|x);U.PostMessageW(h,0x202,0,(y<<16)|x)
-        U.PostMessageW(h,0x100,0x71,0);U.PostMessageW(h,0x101,0x71,0)
+        left,top,_,_=rect(h)
+        gui.click(left+2+col*(width+1)+12,top+2+row*25+10)
+        gui.press('f2')
         editor=wait(lambda:next((e for e in enum(h) if cls(e)=='TInplaceEdit' and U.IsWindowVisible(e)),None),2)
-        b=C.create_unicode_buffer(str(value));U.SendMessageW(editor,0xC,0,C.addressof(b))
-        # VCL records edit text on the normal edit-change/focus transition.
-        U.PostMessageW(editor,0x100,0x9,0);U.PostMessageW(editor,0x101,0x9,0)
-        self.actions+=1;time.sleep(.025)
+        gui.hotkey('ctrl','a');gui.write(str(value));gui.press('tab')
+        self.actions+=1
     def close(self):
         U.PostMessageW(self.main,0x10,0,0)
         try:self.proc.wait(3)
