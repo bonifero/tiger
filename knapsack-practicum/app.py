@@ -1308,9 +1308,9 @@ class App(tk.Tk):
                  str(self.problem.weights[i] * x), fmt_number(self.problem.values[i][x])]
                 for i, x in enumerate(plan)]
         grid = DataGrid(body, ['Груз', 'Ресурс до yⱼ', 'Количество xⱼ', 'Расход', 'Ценность'], rows,
-                        widths=[280, 150, 170, 160, 180], font_family=self.family,
-                        font_size=self.table_font_size, height=220)
-        grid.pack(fill='both', expand=True, pady=(16, 18))
+                        widths=[230, 130, 150, 140, 150] if self.compact else [280, 150, 170, 160, 180],
+                        font_family=self.family, font_size=self.table_font_size, height=220, dense=self.compact)
+        grid.pack(fill='both', expand=True, pady=(10, 10) if self.compact else (16, 18))
         bar = tk.Canvas(body, height=10, bg='#e8edf5', bd=0, highlightthickness=0)
         bar.pack(side='bottom', fill='x', before=grid)
         colors = [BLUE, '#6a87ed', '#92a8f1', '#b5c5f7']
