@@ -49,6 +49,9 @@ class UsabilityTests(unittest.TestCase):
         self.assertEqual(len(grid.columns), 6)  # y and x=0…4
         self.assertLessEqual(grid.positions[-1], grid.canvas.winfo_width())
         self.assertFalse(grid.horizontal.winfo_ismapped())
+        self.assertLessEqual(grid.header_height + len(grid.rows) * grid.row_height,
+                             grid.canvas.winfo_height())
+        self.assertFalse(grid.vertical.winfo_ismapped())
         self.assertTrue(self.app.reference_notebook.winfo_ismapped())
         self.assertTrue(self.app.check_button.winfo_ismapped())
 
@@ -209,11 +212,28 @@ class UsabilityTests(unittest.TestCase):
     def test_readonly_cell_and_table_can_be_copied(self):
         window = self.app.open_source()
         grid = next(w for w in widgets(window) if isinstance(w, DataGrid))
-        grid.selected = (0, 4)
-        self.app.update_idletasks()
-        grid.canvas.event_generate('<<Copy>>')
+        # Native Windows mapping/clipboard messages need a full event cycle.
+        # Select by clicking the displayed cell rather than mutating selection.
+        window.lift()
+        self.app.update()
+        self.assertTrue(grid.canvas.winfo_ismapped())
+        self.app.clipboard_clear()
+        self.app.clipboard_append('before-copy')
+        grid.canvas.focus_force()
+        grid.canvas.event_generate('<Button-1>', x=grid.positions[4] + 10,
+                                   y=grid.header_height + grid.row_height // 2)
+        grid.canvas.event_generate('<ButtonRelease-1>', x=grid.positions[4] + 10,
+                                   y=grid.header_height + grid.row_height // 2)
+        self.app.update()
+        self.assertEqual(grid.selected, (0, 4))
+        shortcut = '<Command-c>' if self.app.tk.call('tk', 'windowingsystem') == 'aqua' else '<Control-c>'
+        grid.canvas.event_generate(shortcut)
+        self.app.update()
         self.assertEqual(self.app.clipboard_get(), '10')
-        grid.copy_table()
+        copy_button = next(w for w in widgets(window)
+                           if isinstance(w, ttk.Button) and w.cget('text') == 'Копировать таблицу')
+        copy_button.invoke()
+        self.app.update()
         copied = self.app.clipboard_get()
         self.assertIn('F(1)', copied.splitlines()[0])
         self.assertIn('Предприятие 1\t1\t4\t0\t10\t17\t25\t36', copied)

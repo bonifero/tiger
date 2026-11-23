@@ -998,7 +998,7 @@ class App(tk.Tk):
             widths = [80, 125, 100]
         self.answer_grid = DataGrid(parent, columns, rows, editable=editable,
                                     widths=widths, font_family=self.family,
-                                    font_size=self.table_font_size, height=280)
+                                    font_size=self.table_font_size, height=280, dense=self.compact)
         self.answer_grid.pack(fill='both', expand=True)
         bottom = tk.Frame(parent, bg=WHITE)
         bottom.pack(side='bottom', fill='x', pady=(12, 0), before=self.answer_grid)
@@ -1018,7 +1018,7 @@ class App(tk.Tk):
         self.answer_grid = DataGrid(parent, columns, rows,
                                     editable={(r, c + 1) for r in (0, 1) for c in range(len(self.problem.weights))},
                                     widths=[230] + [125] * len(self.problem.weights), font_family=self.family,
-                                    font_size=self.table_font_size, height=300)
+                                    font_size=self.table_font_size, height=300, dense=self.compact)
         self.answer_grid.pack(fill='both', expand=True)
         ttk.Button(parent, text='Открыть все принятые максимумы', command=self.open_summary_sheet,
                    style='Small.TButton').pack(side='bottom', anchor='w', pady=(15, 0), before=self.answer_grid)
