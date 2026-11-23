@@ -541,8 +541,22 @@ class App(tk.Tk):
         self.header.pack_propagate(False)
         brand = tk.Frame(self.header, bg=WHITE)
         brand.pack(side='left', padx=24)
-        self._label(brand, '03', size=11, bold=True, color=WHITE, bg=NAVY,
-                    padx=8, pady=6).pack(side='left', padx=(0, 10))
+        mark = tk.Canvas(brand, width=30, height=34, bg=WHITE, highlightthickness=0)
+        mark.pack(side='left', padx=(0, 10))
+        mark.create_line(11, 8, 11, 3, 19, 3, 19, 8, fill=NAVY, width=2,
+                         smooth=True, capstyle='round')
+        mark.create_line(7, 12, 3, 17, 3, 28, fill=NAVY, width=2,
+                         smooth=True, capstyle='round')
+        mark.create_line(23, 12, 27, 17, 27, 28, fill=NAVY, width=2,
+                         smooth=True, capstyle='round')
+        mark.create_polygon(6, 17, 6, 9, 15, 6, 24, 9, 24, 17, 24, 31,
+                            6, 31, fill=BLUE, outline=NAVY, width=1.5, smooth=True)
+        mark.create_line(8, 15, 15, 12, 22, 15, fill=WHITE, width=1.5, smooth=True)
+        mark.create_polygon(9, 21, 9, 19, 21, 19, 21, 21, 21, 27, 9, 27,
+                            fill=PALE, outline=NAVY, width=1, smooth=True)
+        mark.create_line(11, 21, 19, 21, fill=NAVY, width=1)
+        mark.create_line(18, 21, 18, 23, fill=NAVY, width=1)
+
         self._label(brand, 'Рюкзак', size=15, bold=True).pack(side='left')
         self._label(self.header, '/', size=15, color=LINE).pack(side='left', padx=(0, 12))
         nav = tk.Frame(self.header, bg=WHITE)
