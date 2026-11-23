@@ -131,7 +131,15 @@ class AcceptanceTests(unittest.TestCase):
                 self.finish(p, exhaustive(p)[1][-1])
 
     def test_keyboard_tab_return_escape_and_readonly_cells(self):
+        import traceback
         g = self.app.editor_grid
+        original_remove = g._remove_entry
+        def traced_remove():
+            print('FOCUS REMOVE', 'entry=', g.entry, 'focus=', self.app.focus_get(), 'grid_current=', g is self.app.editor_grid, 'size=', self.app.geometry(), 'resize=', self.app._resize_job, flush=True)
+            traceback.print_stack(limit=7)
+            original_remove()
+        g._remove_entry = traced_remove
+        print('FOCUS START', self.app.geometry(), self.app.compact, flush=True)
         self.click_cell(g, 0, 4)
         g.entry.focus_force()
         for key in ('3', 'slash', '2'):
@@ -143,6 +151,7 @@ class AcceptanceTests(unittest.TestCase):
         g.entry.event_generate('<Escape>')
         self.assertEqual(g.rows[0][5], '17')
         self.click_cell(g, 0, 4)
+        print('FOCUS RETURN', 'entry=', g.entry, 'focus=', self.app.focus_get(), 'grid_current=', g is self.app.editor_grid, 'size=', self.app.geometry(), 'resize=', self.app._resize_job, flush=True)
         g.entry.event_generate('<Return>')
         self.assertEqual(g.selected, (1, 4))
         self.click_cell(g, 0, 3)
