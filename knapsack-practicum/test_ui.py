@@ -199,6 +199,14 @@ class InterfaceTests(unittest.TestCase):
         grid.commit()
         self.assertEqual(grid.rows[0][5], '123')
 
+    def test_destroy_before_idle_does_not_leave_background_errors(self):
+        errors = []
+        self.app.tk.createcommand('bgerror', errors.append)
+        grid = DataGrid(self.app, ['x'], [['0']])
+        grid.destroy()
+        self.app.update()
+        self.assertEqual(errors, [])
+
     def test_large_grid_draws_only_viewport(self):
         window = self.app.open_source()
         window.destroy()

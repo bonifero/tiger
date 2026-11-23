@@ -105,7 +105,17 @@ class DataGrid(tk.Frame):
         self.canvas.bind('<Shift-MouseWheel>', lambda e: self._wheel(e, horizontal=True))
         self.canvas.bind('<Button-4>', lambda e: self._scroll_units(-3))
         self.canvas.bind('<Button-5>', lambda e: self._scroll_units(3))
-        self.after_idle(self._redraw)
+        self._initial_redraw_job = self.after_idle(self._initial_redraw)
+
+    def _initial_redraw(self):
+        self._initial_redraw_job = None
+        self._redraw()
+
+    def destroy(self):
+        if self._initial_redraw_job:
+            self.after_cancel(self._initial_redraw_job)
+            self._initial_redraw_job = None
+        super().destroy()
 
     def _set_horizontal(self, first, last):
         self.horizontal.set(first, last)
@@ -228,10 +238,11 @@ class DataGrid(tk.Frame):
         cell = self._cell_at(event)
         if cell is not None:
             self.selected = cell
-            self.canvas.focus_set()
             self._redraw()
             if cell in self.editable:
                 self._start_edit()
+            else:
+                self.canvas.focus_set()
         return 'break'
 
     def _edit_selected(self, _event=None):
