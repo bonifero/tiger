@@ -125,14 +125,14 @@ class Probe:
     def edit(self,name,value):
         h=self.resolve(name);left,top,right,bottom=rect(h)
         gui.click((left+right)//2,(top+bottom)//2)
-        gui.hotkey('ctrl','a');gui.write(str(value));self.actions+=1
+        gui.press('home');gui.keyDown('shift');gui.press('end');gui.keyUp('shift');gui.press('backspace');gui.write(str(value));self.actions+=1
     def cell(self,name,row,col,value,width=64):
         h=self.resolve(name)
         left,top,_,_=rect(h)
         gui.click(left+2+col*(width+1)+12,top+2+row*25+10)
         gui.press('f2')
         editor=wait(lambda:next((e for e in enum(h) if cls(e)=='TInplaceEdit' and U.IsWindowVisible(e)),None),2)
-        gui.hotkey('ctrl','a');gui.write(str(value));gui.press('tab')
+        gui.press('home');gui.keyDown('shift');gui.press('end');gui.keyUp('shift');gui.press('backspace');gui.write(str(value));gui.press('tab')
         self.actions+=1
     def close(self):
         U.PostMessageW(self.main,0x10,0,0)
