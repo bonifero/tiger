@@ -1,552 +1,553 @@
-Test Knapsack-Practicum	Set up job	﻿2026-11-23T20:28:33.9147372Z Current runner version: '2.338.2'
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9203467Z ##[group]Runner Image Provisioner
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9204345Z Hosted Compute Agent
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9204913Z Version: 20261111.635
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9205536Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9207243Z Build Date: 2026-11-11T01:49:01Z
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9207988Z Worker ID: {eff926f6-9003-44ac-83b7-e6b9fd42c8c1}
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9208652Z Region: westus2
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9209215Z Cloud: Azure
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9209691Z ##[endgroup]
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9211222Z ##[group]Operating System
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9211882Z Microsoft Windows Server 2025
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9212493Z 10.0.26100
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9212976Z Datacenter
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9213454Z ##[endgroup]
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9213941Z ##[group]Runner Image
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9214537Z Image: windows-2025-vs2026
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9215114Z Version: 20261116.315.1
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9216207Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261116.315/images/windows/Windows2025-VS2026-Readme.md
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9218143Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261116.315
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9219113Z ##[endgroup]
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9220192Z ##[group]GITHUB_TOKEN Permissions
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9222337Z Contents: read
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9222962Z Metadata: read
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9223498Z ##[endgroup]
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9225672Z Secret source: Actions
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9227206Z Cache mode: write
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9227939Z Prepare workflow directory
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9711988Z Prepare all required actions
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:33.9759879Z Getting action download info
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:34.3159766Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:34.4558890Z Download action repository 'actions/setup-python@v6' (SHA:ece7cb06caefa5fff74198d8649806c4678c61a1)
-Test Knapsack-Practicum	Set up job	2026-11-23T20:28:34.7289864Z Complete job name: Test Knapsack-Practicum
-Test Knapsack-Practicum	Run actions/checkout@v6	﻿2026-11-23T20:28:34.9127600Z ##[group]Run actions/checkout@v6
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9128805Z with:
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9129292Z   repository: bonifero/tiger
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9133892Z   token: ***
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9134389Z   ssh-strict: true
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9134854Z   ssh-user: git
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9135330Z   persist-credentials: true
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9135849Z   clean: true
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9136429Z   sparse-checkout-cone-mode: true
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9137111Z   fetch-depth: 1
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9137688Z   fetch-tags: false
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9138258Z   show-progress: true
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9138855Z   lfs: false
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9139376Z   submodules: false
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9139953Z   set-safe-directory: true
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9140605Z   allow-unsafe-pr-checkout: false
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:34.9141617Z ##[endgroup]
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.0699385Z Syncing repository: bonifero/tiger
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.0701318Z ##[group]Getting Git version info
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.0702048Z Working directory is 'D:\a\tiger\tiger'
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.1705303Z [command]"C:\Program Files\Git\bin\git.exe" version
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.5345075Z git version 2.56.1.windows.1
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.5398527Z ##[endgroup]
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.5418420Z Temporarily overriding HOME='D:\a\_temp\31a76f9f-e354-4ce5-91dc-f6214c6a1442' before making global git config changes
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.5419820Z Adding repository directory to the temporary git global config as a safe directory
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.5428609Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tiger\tiger
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.6235412Z Deleting the contents of 'D:\a\tiger\tiger'
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.6242040Z ##[group]Determining repository object format
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.6244731Z ##[endgroup]
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.6245523Z ##[group]Initializing the repository
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.6253522Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\tiger\tiger
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.7204936Z Initialized empty Git repository in D:/a/tiger/tiger/.git/
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.7253236Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/bonifero/tiger
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.8076128Z ##[endgroup]
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.8077364Z ##[group]Disabling automatic garbage collection
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.8083017Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.8474483Z ##[endgroup]
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.8475633Z ##[group]Setting up auth
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.8476426Z Removing SSH command configuration
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.8485612Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:35.8883879Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:37.3688197Z Removing HTTP extra header
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:37.3698475Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:37.4200046Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:37.9896204Z Removing includeIf entries pointing to credentials config files
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:37.9913112Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:38.0334307Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:38.6244114Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-615aa5b8-6653-4a23-9c70-d51fcce3b650.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:38.6642201Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/tiger/tiger/.git.path D:\a\_temp\git-credentials-615aa5b8-6653-4a23-9c70-d51fcce3b650.config
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:38.7052987Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path D:\a\_temp\git-credentials-615aa5b8-6653-4a23-9c70-d51fcce3b650.config
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:38.7501736Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-615aa5b8-6653-4a23-9c70-d51fcce3b650.config
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:38.7902063Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-615aa5b8-6653-4a23-9c70-d51fcce3b650.config
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:38.8308269Z ##[endgroup]
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:38.8308996Z ##[group]Fetching the repository
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:38.8323506Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +f0a268cac0e962cc4f4021d7b75d1d8d29224419:refs/remotes/origin/build/lab3-parity-20261123
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.2377424Z From https://github.com/bonifero/tiger
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.2378594Z  * [new ref]         f0a268cac0e962cc4f4021d7b75d1d8d29224419 -> origin/build/lab3-parity-20261123
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.2440487Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/build/lab3-parity-20261123
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.2894611Z   origin/build/lab3-parity-20261123
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.2948307Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/build/lab3-parity-20261123
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.3359586Z f0a268cac0e962cc4f4021d7b75d1d8d29224419
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.3396961Z ##[endgroup]
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.3397504Z ##[group]Determining the checkout info
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.3398732Z ##[endgroup]
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.3408461Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.3958449Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.4367844Z ##[group]Checking out the ref
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.4379024Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B build/lab3-parity-20261123 refs/remotes/origin/build/lab3-parity-20261123
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.5983078Z Switched to a new branch 'build/lab3-parity-20261123'
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.6007949Z branch 'build/lab3-parity-20261123' set up to track 'origin/build/lab3-parity-20261123'.
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.6059530Z ##[endgroup]
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.6553488Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
-Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:28:40.6928064Z f0a268cac0e962cc4f4021d7b75d1d8d29224419
-Test Knapsack-Practicum	Run actions/setup-python@v6	﻿2026-11-23T20:28:40.7448833Z ##[group]Run actions/setup-python@v6
-Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:28:40.7449193Z with:
-Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:28:40.7449393Z   python-version: 3.12
-Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:28:40.7449637Z   check-latest: false
-Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:28:40.7452146Z   token: ***
-Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:28:40.7452597Z   update-environment: true
-Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:28:40.7452847Z   allow-prereleases: false
-Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:28:40.7453242Z   freethreaded: false
-Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:28:40.7453510Z ##[endgroup]
-Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:28:40.9098652Z ##[group]Installed versions
-Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:28:40.9303984Z Successfully set up CPython (3.12.10)
-Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:28:40.9304742Z ##[endgroup]
-Test Knapsack-Practicum	Run tests	﻿2026-11-23T20:28:40.9668799Z ##[group]Run python -m unittest discover -v
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:40.9669270Z ^[[36;1mpython -m unittest discover -v^[[0m
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:41.0476224Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:41.0476700Z env:
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:41.0477043Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:41.0477636Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:41.0478213Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:41.0478755Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:41.0479759Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:41.0480161Z ##[endgroup]
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:45.0324849Z test_abandon_lesson_cancel_then_confirm (test_acceptance.AcceptanceTests.test_abandon_lesson_cancel_then_confirm) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:52.6132552Z test_all_six_tasks_all_ten_optima_through_interface (test_acceptance.AcceptanceTests.test_all_six_tasks_all_ten_optima_through_interface) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:52.8170185Z test_context_menu_paste_marks_name_dirty (test_acceptance.AcceptanceTests.test_context_menu_paste_marks_name_dirty) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:54.4377491Z test_custom_boundary_and_nonlinear_tasks (test_acceptance.AcceptanceTests.test_custom_boundary_and_nonlinear_tasks) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:54.9140375Z test_explanation_requires_explicit_hint_and_has_no_attempt_limit (test_acceptance.AcceptanceTests.test_explanation_requires_explicit_hint_and_has_no_attempt_limit) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:55.1354705Z test_file_dialog_cancellation_and_save_failure_keep_edits (test_acceptance.AcceptanceTests.test_file_dialog_cancellation_and_save_failure_keep_edits) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:56.4483036Z test_invalid_editor_values_do_not_start_lesson (test_acceptance.AcceptanceTests.test_invalid_editor_values_do_not_start_lesson) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:56.7644418Z test_keyboard_tab_return_escape_and_readonly_cells (test_acceptance.AcceptanceTests.test_keyboard_tab_return_escape_and_readonly_cells) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:58.0785073Z test_minimum_window_keeps_review_and_restore_actions_visible (test_acceptance.AcceptanceTests.test_minimum_window_keeps_review_and_restore_actions_visible) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:58.8789542Z test_new_table_and_individual_limits (test_acceptance.AcceptanceTests.test_new_table_and_individual_limits) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:59.0989717Z test_pending_cell_is_protected_on_close (test_acceptance.AcceptanceTests.test_pending_cell_is_protected_on_close) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:28:59.3057480Z test_pending_cell_is_protected_on_replace (test_acceptance.AcceptanceTests.test_pending_cell_is_protected_on_replace) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:00.5567907Z test_resize_and_all_zoom_levels_preserve_active_input (test_acceptance.AcceptanceTests.test_resize_and_all_zoom_levels_preserve_active_input) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:00.9043639Z test_save_reload_and_declined_import (test_acceptance.AcceptanceTests.test_save_reload_and_declined_import) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.4721924Z test_wrong_maximum_and_restore_can_be_corrected (test_acceptance.AcceptanceTests.test_wrong_maximum_and_restore_can_be_corrected) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.4820957Z test_bad_json_duplicate_keys_nonfinite_and_size (test_formats.FormatTests.test_bad_json_duplicate_keys_nonfinite_and_size) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.4977304Z test_exact_roundtrip_and_automatic_extension (test_formats.FormatTests.test_exact_roundtrip_and_automatic_extension) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5003389Z test_excessive_json_nesting_is_a_controlled_validation_error (test_formats.FormatTests.test_excessive_json_nesting_is_a_controlled_validation_error) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5120047Z test_failed_atomic_replace_preserves_old_file_and_removes_temp (test_formats.FormatTests.test_failed_atomic_replace_preserves_old_file_and_removes_temp) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5140838Z test_raw_json_decimals_keep_the_exact_optimum (test_formats.FormatTests.test_raw_json_decimals_keep_the_exact_optimum) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5145054Z test_schema_version_and_validation (test_formats.FormatTests.test_schema_version_and_validation) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5153512Z test_all_equal_optima_accepted (test_lesson.LessonTests.test_all_equal_optima_accepted) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5160053Z test_answer_fractions_can_be_larger_than_each_input (test_lesson.LessonTests.test_answer_fractions_can_be_larger_than_each_input) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5164261Z test_hints_are_counted_without_advancing (test_lesson.LessonTests.test_hints_are_counted_without_advancing) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5172214Z test_restoration_rejects_invalid_and_suboptimal_plans (test_lesson.LessonTests.test_restoration_rejects_invalid_and_suboptimal_plans) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5186054Z test_restoration_requires_states_matching_the_actual_alternative (test_lesson.LessonTests.test_restoration_requires_states_matching_the_actual_alternative) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5188033Z test_shape_mismatch_and_wrong_phase (test_lesson.LessonTests.test_shape_mismatch_and_wrong_phase) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5195789Z test_states_use_weighted_resource_and_legacy_call_computes_them (test_lesson.LessonTests.test_states_use_weighted_resource_and_legacy_call_computes_them) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5198815Z test_summary_checks_maximum_and_integer_argmax (test_lesson.LessonTests.test_summary_checks_maximum_and_integer_argmax) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5205223Z test_wrong_states_do_not_advance_or_publish_accepted_plan (test_lesson.LessonTests.test_wrong_states_do_not_advance_or_publish_accepted_plan) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5208331Z test_wrong_values_never_advance_or_destroy_answers (test_lesson.LessonTests.test_wrong_values_never_advance_or_destroy_answers) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5238273Z test_all_manual_optima_and_alternatives (test_presets.PresetTests.test_all_manual_optima_and_alternatives) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5279566Z test_distributed_json_matches_presets (test_presets.PresetTests.test_distributed_json_matches_presets) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5282565Z test_manual_example_intermediate_tables (test_presets.PresetTests.test_manual_example_intermediate_tables) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5285617Z test_exact_numeric_input (test_solver.SolverTests.test_exact_numeric_input) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5290416Z test_exponent_is_bounded_before_fraction_expansion (test_solver.SolverTests.test_exponent_is_bounded_before_fraction_expansion) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5293497Z test_manual_example_and_ties (test_solver.SolverTests.test_manual_example_and_ties) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.5298070Z test_model_validation (test_solver.SolverTests.test_model_validation) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.6102319Z test_random_models_and_every_suffix_against_enumeration (test_solver.SolverTests.test_random_models_and_every_suffix_against_enumeration) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.6149598Z test_resource_budget (test_solver.SolverTests.test_resource_budget) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:01.6152662Z test_unused_capacity_zero_quantity_and_unavailable_items (test_solver.SolverTests.test_unused_capacity_zero_quantity_and_unavailable_items) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:02.0495940Z test_compact_window_keeps_three_editor_rows_at_140_percent (test_ui.InterfaceTests.test_compact_window_keeps_three_editor_rows_at_140_percent) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:02.1607233Z test_destroy_before_idle_does_not_leave_background_errors (test_ui.InterfaceTests.test_destroy_before_idle_does_not_leave_background_errors) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:02.2936692Z test_editor_roundtrip_and_ragged_limits (test_ui.InterfaceTests.test_editor_roundtrip_and_ragged_limits) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:02.4264858Z test_error_keeps_input_and_step_rescale_keeps_input (test_ui.InterfaceTests.test_error_keeps_input_and_step_rescale_keeps_input) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:02.5170418Z test_failed_import_preserves_edited_problem (test_ui.InterfaceTests.test_failed_import_preserves_edited_problem) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:02.8132696Z test_full_workflow_accepts_alternate_optimum_with_states (test_ui.InterfaceTests.test_full_workflow_accepts_alternate_optimum_with_states) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:02.9716108Z test_large_grid_draws_only_viewport (test_ui.InterfaceTests.test_large_grid_draws_only_viewport) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:03.0978252Z test_review_contains_only_accepted_tables (test_ui.InterfaceTests.test_review_contains_only_accepted_tables) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:03.1887785Z test_stale_focus_event_does_not_commit_replacement_editor (test_ui.InterfaceTests.test_stale_focus_event_does_not_commit_replacement_editor) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:03.2749925Z test_tab_and_tsv_paste_respect_read_only_cells (test_ui.InterfaceTests.test_tab_and_tsv_paste_respect_read_only_cells) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:03.4809883Z test_underfilled_plan_and_export (test_ui.InterfaceTests.test_underfilled_plan_and_export) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:03.6793523Z test_editor_utilities_do_not_count_as_failed_submission (test_usability.UsabilityTests.test_editor_utilities_do_not_count_as_failed_submission) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:03.9594910Z test_error_in_source_identifies_and_focuses_cell (test_usability.UsabilityTests.test_error_in_source_identifies_and_focuses_cell) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:04.2096387Z test_example_candidates_fit_beside_reference_at_normal_zoom (test_usability.UsabilityTests.test_example_candidates_fit_beside_reference_at_normal_zoom) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:05.1105511Z test_finished_lesson_retains_every_candidate_and_summary_table (test_usability.UsabilityTests.test_finished_lesson_retains_every_candidate_and_summary_table) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:05.4307881Z test_impossible_trailing_quantities_are_hidden_but_full_model_payload_is_preserved (test_usability.UsabilityTests.test_impossible_trailing_quantities_are_hidden_but_full_model_payload_is_preserved) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:05.6979755Z test_readonly_cell_and_table_can_be_copied (test_usability.UsabilityTests.test_readonly_cell_and_table_can_be_copied) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:06.7638997Z test_rejected_source_attempts_count_through_result_and_reset_for_new_session (test_usability.UsabilityTests.test_rejected_source_attempts_count_through_result_and_reset_for_new_session) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:07.6034040Z test_restore_has_all_accepted_states_visible_in_inline_table (test_usability.UsabilityTests.test_restore_has_all_accepted_states_visible_in_inline_table) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:08.2149748Z test_small_window_preserves_actions_and_reference_at_all_phases (test_usability.UsabilityTests.test_small_window_preserves_actions_and_reference_at_all_phases) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:08.6664981Z test_step_references_only_show_source_and_accepted_answers (test_usability.UsabilityTests.test_step_references_only_show_source_and_accepted_answers) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:09.0138796Z test_zoom_keeps_distant_answer_visible_and_retains_value (test_usability.UsabilityTests.test_zoom_keeps_distant_answer_visible_and_retains_value) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:09.3464374Z test_zoom_keeps_distant_editor_cell_selected_and_visible (test_usability.UsabilityTests.test_zoom_keeps_distant_editor_cell_selected_and_visible) ... ok
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:09.3466863Z 
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:09.3467186Z ----------------------------------------------------------------------
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:09.3468894Z Ran 64 tests in 25.654s
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:09.3469140Z 
-Test Knapsack-Practicum	Run tests	2026-11-23T20:29:09.3469252Z OK
-Test Knapsack-Practicum	Smoke test	﻿2026-11-23T20:29:09.5183314Z ##[group]Run python app.py --smoke-test
-Test Knapsack-Practicum	Smoke test	2026-11-23T20:29:09.5183742Z ^[[36;1mpython app.py --smoke-test^[[0m
-Test Knapsack-Practicum	Smoke test	2026-11-23T20:29:09.5255202Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
-Test Knapsack-Practicum	Smoke test	2026-11-23T20:29:09.5255562Z env:
-Test Knapsack-Practicum	Smoke test	2026-11-23T20:29:09.5255853Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Test Knapsack-Practicum	Smoke test	2026-11-23T20:29:09.5256342Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
-Test Knapsack-Practicum	Smoke test	2026-11-23T20:29:09.5256809Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Test Knapsack-Practicum	Smoke test	2026-11-23T20:29:09.5257223Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Test Knapsack-Practicum	Smoke test	2026-11-23T20:29:09.5257627Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Test Knapsack-Practicum	Smoke test	2026-11-23T20:29:09.5257952Z ##[endgroup]
-Test Knapsack-Practicum	Post Run actions/setup-python@v6	﻿2026-11-23T20:29:10.3633228Z Post job cleanup.
-Test Knapsack-Practicum	Post Run actions/checkout@v6	﻿2026-11-23T20:29:10.5543981Z Post job cleanup.
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:10.7817453Z [command]"C:\Program Files\Git\bin\git.exe" version
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:10.8205040Z git version 2.56.1.windows.1
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:10.8289365Z Temporarily overriding HOME='D:\a\_temp\3c57f721-e5d6-4e51-96c4-940f332f38e9' before making global git config changes
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:10.8290737Z Adding repository directory to the temporary git global config as a safe directory
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:10.8302357Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tiger\tiger
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:10.8712265Z Removing SSH command configuration
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:10.8729518Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:10.9159366Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:11.5016385Z Removing HTTP extra header
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:11.5026854Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:11.5436401Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.1356076Z Removing includeIf entries pointing to credentials config files
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.1369124Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.1743275Z includeif.gitdir:D:/a/tiger/tiger/.git.path
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.1744080Z includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.1744876Z includeif.gitdir:/github/workspace/.git.path
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.1745433Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.1792234Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/tiger/tiger/.git.path
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.2152208Z D:\a\_temp\git-credentials-615aa5b8-6653-4a23-9c70-d51fcce3b650.config
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.2207536Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/tiger/tiger/.git.path D:\a\_temp\git-credentials-615aa5b8-6653-4a23-9c70-d51fcce3b650.config
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.2618224Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.2978275Z D:\a\_temp\git-credentials-615aa5b8-6653-4a23-9c70-d51fcce3b650.config
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.3027160Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path D:\a\_temp\git-credentials-615aa5b8-6653-4a23-9c70-d51fcce3b650.config
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.3443008Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.3801313Z /github/runner_temp/git-credentials-615aa5b8-6653-4a23-9c70-d51fcce3b650.config
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.3846892Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-615aa5b8-6653-4a23-9c70-d51fcce3b650.config
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.4264133Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.4649849Z /github/runner_temp/git-credentials-615aa5b8-6653-4a23-9c70-d51fcce3b650.config
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.4698750Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-615aa5b8-6653-4a23-9c70-d51fcce3b650.config
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:12.5126363Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
-Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:29:13.1405507Z Removing credentials config 'D:\a\_temp\git-credentials-615aa5b8-6653-4a23-9c70-d51fcce3b650.config'
-Test Knapsack-Practicum	Complete job	﻿2026-11-23T20:29:13.1614963Z Cleaning up orphan processes
-Build Knapsack-Practicum.exe	Set up job	﻿2026-11-23T20:29:18.2526689Z Current runner version: '2.338.2'
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2570817Z ##[group]Runner Image Provisioner
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2571613Z Hosted Compute Agent
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2572267Z Version: 20261111.635
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2573362Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2574429Z Build Date: 2026-11-11T01:49:01Z
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2575058Z Worker ID: {7d5e8b9c-ef68-4078-bad0-c9945ff64221}
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2575653Z Region: westus3
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2576145Z Cloud: Azure
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2576570Z ##[endgroup]
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2577965Z ##[group]Operating System
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2578524Z Microsoft Windows Server 2025
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2579018Z 10.0.26100
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2579464Z Datacenter
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2579895Z ##[endgroup]
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2580333Z ##[group]Runner Image
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2580831Z Image: windows-2025-vs2026
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2581342Z Version: 20261116.315.1
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2582349Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261116.315/images/windows/Windows2025-VS2026-Readme.md
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2584127Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261116.315
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2585018Z ##[endgroup]
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2586079Z ##[group]GITHUB_TOKEN Permissions
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2588093Z Contents: read
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2588622Z Metadata: read
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2589136Z ##[endgroup]
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2591180Z Secret source: Actions
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2591962Z Cache mode: write
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.2592612Z Prepare workflow directory
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.3056369Z Prepare all required actions
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.3106376Z Getting action download info
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.6106848Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.7441384Z Download action repository 'actions/setup-python@v6' (SHA:ece7cb06caefa5fff74198d8649806c4678c61a1)
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:18.8769431Z Download action repository 'actions/upload-artifact@v6' (SHA:b7c566a772e6b6bfb58ed0dc250532a479d7789f)
-Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:29:19.1768139Z Complete job name: Build Knapsack-Practicum.exe
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	﻿2026-11-23T20:29:19.3830080Z ##[group]Run actions/checkout@v6
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3832258Z with:
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3833113Z   repository: bonifero/tiger
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3840817Z   token: ***
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3841704Z   ssh-strict: true
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3842521Z   ssh-user: git
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3843271Z   persist-credentials: true
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3844081Z   clean: true
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3844847Z   sparse-checkout-cone-mode: true
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3845791Z   fetch-depth: 1
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3846578Z   fetch-tags: false
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3847362Z   show-progress: true
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3848130Z   lfs: false
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3848843Z   submodules: false
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3849657Z   set-safe-directory: true
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3850516Z   allow-unsafe-pr-checkout: false
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.3851981Z ##[endgroup]
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.5326312Z Syncing repository: bonifero/tiger
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.5328231Z ##[group]Getting Git version info
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.5328864Z Working directory is 'D:\a\tiger\tiger'
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.6182880Z [command]"C:\Program Files\Git\bin\git.exe" version
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.9735875Z git version 2.56.1.windows.1
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.9798945Z ##[endgroup]
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.9820087Z Temporarily overriding HOME='D:\a\_temp\dec90982-093d-4e56-8093-ad8900cdf047' before making global git config changes
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.9823491Z Adding repository directory to the temporary git global config as a safe directory
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:19.9834426Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tiger\tiger
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.0793593Z Deleting the contents of 'D:\a\tiger\tiger'
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.0801569Z ##[group]Determining repository object format
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.0803876Z ##[endgroup]
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.0808266Z ##[group]Initializing the repository
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.0813572Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\tiger\tiger
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.1820581Z Initialized empty Git repository in D:/a/tiger/tiger/.git/
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.1883218Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/bonifero/tiger
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.2611203Z ##[endgroup]
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.2613106Z ##[group]Disabling automatic garbage collection
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.2620592Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.3031092Z ##[endgroup]
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.3032946Z ##[group]Setting up auth
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.3034192Z Removing SSH command configuration
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.3043649Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:20.3457639Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:21.9638924Z Removing HTTP extra header
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:21.9649227Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:22.0078486Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:22.6404360Z Removing includeIf entries pointing to credentials config files
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:22.6421965Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:22.6865333Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:23.2719841Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-4423f0e7-0260-4ba9-80f0-8ff11854a7a9.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:23.3155093Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/tiger/tiger/.git.path D:\a\_temp\git-credentials-4423f0e7-0260-4ba9-80f0-8ff11854a7a9.config
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:23.3580504Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path D:\a\_temp\git-credentials-4423f0e7-0260-4ba9-80f0-8ff11854a7a9.config
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:23.4044994Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-4423f0e7-0260-4ba9-80f0-8ff11854a7a9.config
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:23.4475227Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-4423f0e7-0260-4ba9-80f0-8ff11854a7a9.config
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:23.4907627Z ##[endgroup]
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:23.4908303Z ##[group]Fetching the repository
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:23.4922856Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +f0a268cac0e962cc4f4021d7b75d1d8d29224419:refs/remotes/origin/build/lab3-parity-20261123
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.3706914Z From https://github.com/bonifero/tiger
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.3709349Z  * [new ref]         f0a268cac0e962cc4f4021d7b75d1d8d29224419 -> origin/build/lab3-parity-20261123
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.3787527Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/build/lab3-parity-20261123
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.4278368Z   origin/build/lab3-parity-20261123
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.4344026Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/build/lab3-parity-20261123
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.4770727Z f0a268cac0e962cc4f4021d7b75d1d8d29224419
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.4817216Z ##[endgroup]
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.4818746Z ##[group]Determining the checkout info
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.4819704Z ##[endgroup]
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.4828853Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.5390207Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.5803087Z ##[group]Checking out the ref
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.5812591Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B build/lab3-parity-20261123 refs/remotes/origin/build/lab3-parity-20261123
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.7470578Z Switched to a new branch 'build/lab3-parity-20261123'
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.7495895Z branch 'build/lab3-parity-20261123' set up to track 'origin/build/lab3-parity-20261123'.
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.7561678Z ##[endgroup]
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.8066112Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
-Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:29:25.8440500Z f0a268cac0e962cc4f4021d7b75d1d8d29224419
-Build Knapsack-Practicum.exe	Run actions/setup-python@v6	﻿2026-11-23T20:29:25.8956758Z ##[group]Run actions/setup-python@v6
-Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:29:25.8957171Z with:
-Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:29:25.8957368Z   python-version: 3.12
-Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:29:25.8957571Z   check-latest: false
-Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:29:25.8960060Z   token: ***
-Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:29:25.8960264Z   update-environment: true
-Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:29:25.8960489Z   allow-prereleases: false
-Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:29:25.8960878Z   freethreaded: false
-Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:29:25.8961077Z ##[endgroup]
-Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:29:26.0614305Z ##[group]Installed versions
-Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:29:26.0856189Z Successfully set up CPython (3.12.10)
-Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:29:26.0860492Z ##[endgroup]
-Build Knapsack-Practicum.exe	Install build dependencies	﻿2026-11-23T20:29:26.1164698Z ##[group]Run python -m pip install -r ../.github/requirements-build.txt
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:26.1165328Z ^[[36;1mpython -m pip install -r ../.github/requirements-build.txt^[[0m
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:26.1923487Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:26.1923854Z env:
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:26.1924127Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:26.1924604Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:26.1925039Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:26.1925409Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:26.1925780Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:26.1926078Z ##[endgroup]
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:31.9609567Z Collecting PyInstaller<7,>=6.16 (from -r ../.github/requirements-build.txt (line 1))
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.1595427Z   Downloading pyinstaller-6.22.3-py3-none-win_amd64.whl.metadata (8.5 kB)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.3865912Z Collecting Pillow<13,>=12 (from -r ../.github/requirements-build.txt (line 2))
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.4002955Z   Downloading pillow-12.3.0-cp312-cp312-win_amd64.whl.metadata (9.3 kB)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.4569729Z Collecting altgraph (from PyInstaller<7,>=6.16->-r ../.github/requirements-build.txt (line 1))
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.4684887Z   Downloading altgraph-0.17.5-py2.py3-none-any.whl.metadata (7.5 kB)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.4922529Z Requirement already satisfied: packaging>=22.0 in C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\site-packages (from PyInstaller<7,>=6.16->-r ../.github/requirements-build.txt (line 1)) (26.3)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.5199240Z Collecting pefile>=2022.5.30 (from PyInstaller<7,>=6.16->-r ../.github/requirements-build.txt (line 1))
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.5319325Z   Downloading pefile-2024.8.26-py3-none-any.whl.metadata (1.4 kB)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.5835006Z Collecting pyinstaller-hooks-contrib>=2026.7 (from PyInstaller<7,>=6.16->-r ../.github/requirements-build.txt (line 1))
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.5954341Z   Downloading pyinstaller_hooks_contrib-2026.10-py3-none-any.whl.metadata (16 kB)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.6517883Z Collecting pywin32-ctypes>=0.2.1 (from PyInstaller<7,>=6.16->-r ../.github/requirements-build.txt (line 1))
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.6637955Z   Downloading pywin32_ctypes-0.2.3-py3-none-any.whl.metadata (3.9 kB)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.7754057Z Collecting setuptools>=42.0.0 (from PyInstaller<7,>=6.16->-r ../.github/requirements-build.txt (line 1))
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.7872205Z   Downloading setuptools-84.2.1-py3-none-any.whl.metadata (6.6 kB)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.8494192Z Downloading pyinstaller-6.22.3-py3-none-win_amd64.whl (1.5 MB)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.9191208Z    ---------------------------------------- 1.5/1.5 MB 38.5 MB/s  0:00:00
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:32.9347711Z Downloading pillow-12.3.0-cp312-cp312-win_amd64.whl (7.2 MB)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:33.0297654Z    ---------------------------------------- 7.2/7.2 MB 89.3 MB/s  0:00:00
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:33.0417344Z Downloading pefile-2024.8.26-py3-none-any.whl (74 kB)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:33.0705870Z Downloading pyinstaller_hooks_contrib-2026.10-py3-none-any.whl (463 kB)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:33.1132846Z Downloading pywin32_ctypes-0.2.3-py3-none-any.whl (30 kB)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:33.1468117Z Downloading setuptools-84.2.1-py3-none-any.whl (876 kB)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:33.1758178Z    ---------------------------------------- 876.3/876.3 kB 19.2 MB/s  0:00:00
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:33.1874265Z Downloading altgraph-0.17.5-py2.py3-none-any.whl (21 kB)
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:33.6086155Z Installing collected packages: altgraph, setuptools, pywin32-ctypes, pyinstaller-hooks-contrib, Pillow, pefile, PyInstaller
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:41.0382279Z 
-Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:29:41.0404031Z Successfully installed Pillow-12.3.0 PyInstaller-6.22.3 altgraph-0.17.5 pefile-2024.8.26 pyinstaller-hooks-contrib-2026.10 pywin32-ctypes-0.2.3 setuptools-84.2.1
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	﻿2026-11-23T20:29:41.4523995Z ##[group]Run python build.py
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:41.4524357Z ^[[36;1mpython build.py^[[0m
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:41.4601446Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:41.4601793Z env:
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:41.4602059Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:41.4602498Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:41.4602918Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:41.4603313Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:41.4603690Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:41.4603991Z ##[endgroup]
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.2434158Z 331 INFO: PyInstaller: 6.22.3, contrib hooks: 2026.10
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.2443265Z 331 INFO: Python: 3.12.10
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.2695677Z 357 INFO: Platform: Windows-2025Server-10.0.26100-SP0
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.2696429Z 357 INFO: Python environment: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.2702185Z 357 INFO: wrote D:\a\tiger\tiger\knapsack-practicum\Knapsack-Practicum.spec
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.2905165Z 377 INFO: Removing temporary files and cleaning cache in C:\Users\runneradmin\AppData\Local\pyinstaller
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.2915551Z 379 INFO: Module search paths (PYTHONPATH):
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.2916042Z ['D:\\a\\tiger\\tiger\\knapsack-practicum',
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.2916534Z  'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\python312.zip',
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.2917066Z  'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\DLLs',
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.2917516Z  'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib',
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.2917929Z  'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64',
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.2918401Z  'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages',
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.2918854Z  'D:\\a\\tiger\\tiger\\knapsack-practicum']
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.5499651Z 636 INFO: checking Analysis
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.5500282Z 636 INFO: Building Analysis because Analysis-00.toc is non existent
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.5500810Z 636 INFO: Looking for Python shared library...
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.5501406Z 638 INFO: Using Python shared library: C:\hostedtoolcache\windows\Python\3.12.10\x64\python312.dll
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.5501856Z 638 INFO: Running Analysis Analysis-00.toc
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.5502138Z 638 INFO: Target bytecode optimization level: 0
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.5502846Z 638 INFO: Initializing module dependency graph...
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.5604321Z 648 INFO: Initializing module graph hook caches...
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:42.5752713Z 662 INFO: Analyzing modules for base_library.zip ...
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:43.7637597Z 1850 INFO: Processing standard module hook 'hook-encodings.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks'
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:44.1441767Z 2231 INFO: Processing standard module hook 'hook-math.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks'
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:45.4254425Z 3513 INFO: Processing standard module hook 'hook-pickle.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks'
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:46.6390452Z 4725 INFO: Processing standard module hook 'hook-heapq.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks'
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:47.1778425Z 5265 INFO: Caching module dependency graph...
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:47.2137677Z 5301 INFO: Analyzing D:\a\tiger\tiger\knapsack-practicum\app.py
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:47.3010832Z 5388 INFO: Processing pre-find-module-path hook 'hook-tkinter.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:47.3017664Z 5389 INFO: TclTkInfo: initializing cached Tcl/Tk info...
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:48.3738571Z 6461 INFO: Processing standard module hook 'hook-_tkinter.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks'
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:48.5145218Z 6602 INFO: Processing module hooks (post-graph stage)...
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:48.5182441Z 6606 INFO: Processing standard module hook 'hook-_tkinter.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks'
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:48.5287517Z 6616 INFO: Performing binary vs. data reclassification (927 entries)
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:49.1395666Z 7226 INFO: Looking for ctypes DLLs
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:49.1439751Z 7230 INFO: Analyzing run-time hooks ...
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:49.1451241Z 7232 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:49.1477725Z 7234 INFO: Including run-time hook 'pyi_rth__tkinter.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:49.1752426Z 7262 INFO: Creating base_library.zip...
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:49.1956232Z 7282 INFO: Looking for dynamic libraries
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:49.3181123Z 7405 INFO: Extra DLL search directories (AddDllDirectory): []
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:49.3181591Z 7405 INFO: Extra DLL search directories (PATH): []
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:49.9882424Z 8075 INFO: Warnings written to D:\a\tiger\tiger\knapsack-practicum\.build\Knapsack-Practicum\warn-Knapsack-Practicum.txt
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:50.0034793Z 8091 INFO: Graph cross-reference written to D:\a\tiger\tiger\knapsack-practicum\.build\Knapsack-Practicum\xref-Knapsack-Practicum.html
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:50.0356063Z 8123 INFO: checking PYZ
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:50.0356706Z 8123 INFO: Building PYZ because PYZ-00.toc is non existent
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:50.0357625Z 8123 INFO: Building PYZ (ZlibArchive) D:\a\tiger\tiger\knapsack-practicum\.build\Knapsack-Practicum\PYZ-00.pyz
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:50.1996447Z 8287 INFO: Building PYZ (ZlibArchive) D:\a\tiger\tiger\knapsack-practicum\.build\Knapsack-Practicum\PYZ-00.pyz completed successfully.
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:50.2314340Z 8318 INFO: checking PKG
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:50.2315107Z 8318 INFO: Building PKG because PKG-00.toc is non existent
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:50.2316215Z 8318 INFO: Building PKG (CArchive) Knapsack-Practicum.pkg
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:53.9939703Z 12080 INFO: Building PKG (CArchive) Knapsack-Practicum.pkg completed successfully.
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:54.0119958Z 12098 INFO: Bootloader C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\site-packages\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:54.0122515Z 12100 INFO: checking EXE
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:54.0123273Z 12100 INFO: Building EXE because EXE-00.toc is non existent
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:54.0123789Z 12100 INFO: Building EXE from EXE-00.toc
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:54.0124245Z 12100 INFO: Copying bootloader EXE to D:\a\tiger\tiger\knapsack-practicum\dist\Knapsack-Practicum.exe
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:54.0149074Z 12102 INFO: Copying icon to EXE
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:54.0168993Z 12104 INFO: Copying 0 resources to EXE
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:54.0169471Z 12104 INFO: Embedding manifest in EXE
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:54.0186591Z 12106 INFO: Appending PKG archive to EXE
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:54.0264354Z 12114 INFO: Fixing EXE headers
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:54.1139786Z 12201 INFO: Building EXE from EXE-00.toc completed successfully.
-Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:29:54.1325302Z 12220 INFO: Build complete! The results are available in: D:\a\tiger\tiger\knapsack-practicum\dist
-Build Knapsack-Practicum.exe	Smoke test packaged executable	﻿2026-11-23T20:29:54.3251540Z ##[group]Run $appProcess = Start-Process -FilePath './dist/Knapsack-Practicum.exe' -ArgumentList '--smoke-test' -PassThru
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3252576Z ^[[36;1m$appProcess = Start-Process -FilePath './dist/Knapsack-Practicum.exe' -ArgumentList '--smoke-test' -PassThru^[[0m
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3253117Z ^[[36;1mif (-not $appProcess.WaitForExit(30000)) {^[[0m
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3253415Z ^[[36;1m  $appProcess.Kill()^[[0m
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3253743Z ^[[36;1m  throw 'Packaged application did not close within 30 seconds.'^[[0m
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3254077Z ^[[36;1m}^[[0m
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3254272Z ^[[36;1mif ($appProcess.ExitCode -ne 0) {^[[0m
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3254657Z ^[[36;1m  throw "Packaged application exited with code $($appProcess.ExitCode)."^[[0m
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3255010Z ^[[36;1m}^[[0m
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3331148Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3331505Z env:
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3331766Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3332280Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3332709Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3333088Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3333468Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:29:54.3333767Z ##[endgroup]
-Build Knapsack-Practicum.exe	Upload executable	﻿2026-11-23T20:29:57.6727409Z ##[group]Run actions/upload-artifact@v6
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6727958Z with:
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6728279Z   name: Knapsack-Practicum-windows-x64
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6728724Z   path: knapsack-practicum/dist/
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6729108Z   if-no-files-found: error
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6729451Z   retention-days: 30
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6729770Z   compression-level: 6
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6730094Z   overwrite: false
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6730425Z   include-hidden-files: false
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6730782Z env:
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6731170Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6731946Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6732700Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6733354Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6734017Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.6735101Z ##[endgroup]
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.8915062Z With the provided path, there will be 26 files uploaded
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.8920613Z Artifact name is valid!
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:57.8922009Z Root directory input is valid!
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:58.2294316Z Beginning upload of artifact content to blob storage
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:29:59.9845689Z Uploaded bytes 8388608
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:30:00.1745748Z Uploaded bytes 12623567
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:30:00.2360678Z Finished uploading artifact content to blob storage!
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:30:00.2363615Z SHA256 digest of uploaded artifact zip is d293bf265d0f4ff6be06202e3ee120c4307582283892524def2d55e45dbe665e
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:30:00.2366879Z Finalizing artifact upload
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:30:00.7426714Z Artifact Knapsack-Practicum-windows-x64.zip successfully finalized. Artifact ID 14858684904
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:30:00.7429432Z Artifact Knapsack-Practicum-windows-x64 has been successfully uploaded! Final size is 12623567 bytes. Artifact ID is 14858684904
-Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:30:00.7437184Z Artifact download URL: https://github.com/bonifero/tiger/actions/runs/45259732319/artifacts/14858684904
-Build Knapsack-Practicum.exe	Post Run actions/setup-python@v6	﻿2026-11-23T20:30:00.7834252Z Post job cleanup.
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	﻿2026-11-23T20:30:00.9895735Z Post job cleanup.
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:01.2018347Z [command]"C:\Program Files\Git\bin\git.exe" version
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:01.2396931Z git version 2.56.1.windows.1
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:01.2471860Z Temporarily overriding HOME='D:\a\_temp\61bd979b-afdc-4519-9b0b-139efd1052bb' before making global git config changes
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:01.2472800Z Adding repository directory to the temporary git global config as a safe directory
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:01.2482776Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tiger\tiger
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:01.2903816Z Removing SSH command configuration
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:01.2916847Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:01.3369482Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:01.9867492Z Removing HTTP extra header
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:01.9878789Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.0313798Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.6828841Z Removing includeIf entries pointing to credentials config files
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.6841432Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.7215908Z includeif.gitdir:D:/a/tiger/tiger/.git.path
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.7216462Z includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.7216942Z includeif.gitdir:/github/workspace/.git.path
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.7217668Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.7272458Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/tiger/tiger/.git.path
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.7669903Z D:\a\_temp\git-credentials-4423f0e7-0260-4ba9-80f0-8ff11854a7a9.config
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.7729050Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/tiger/tiger/.git.path D:\a\_temp\git-credentials-4423f0e7-0260-4ba9-80f0-8ff11854a7a9.config
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.8147587Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.8511191Z D:\a\_temp\git-credentials-4423f0e7-0260-4ba9-80f0-8ff11854a7a9.config
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.8563925Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path D:\a\_temp\git-credentials-4423f0e7-0260-4ba9-80f0-8ff11854a7a9.config
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.8985402Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.9348762Z /github/runner_temp/git-credentials-4423f0e7-0260-4ba9-80f0-8ff11854a7a9.config
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.9401198Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-4423f0e7-0260-4ba9-80f0-8ff11854a7a9.config
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:02.9846120Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:03.0220229Z /github/runner_temp/git-credentials-4423f0e7-0260-4ba9-80f0-8ff11854a7a9.config
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:03.0277397Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-4423f0e7-0260-4ba9-80f0-8ff11854a7a9.config
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:03.0706341Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
-Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:30:03.7007147Z Removing credentials config 'D:\a\_temp\git-credentials-4423f0e7-0260-4ba9-80f0-8ff11854a7a9.config'
-Build Knapsack-Practicum.exe	Complete job	﻿2026-11-23T20:30:03.7274319Z Cleaning up orphan processes
+Test Knapsack-Practicum	Set up job	﻿2026-11-23T20:52:28.4751260Z Current runner version: '2.338.2'
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4797767Z ##[group]Runner Image Provisioner
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4798574Z Hosted Compute Agent
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4799105Z Version: 20261111.635
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4799728Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4801043Z Build Date: 2026-11-11T01:49:01Z
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4801751Z Worker ID: {79c3b3c8-6c17-43ea-bca9-6793dc5f0606}
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4802424Z Region: westus3
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4802955Z Cloud: Azure
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4803444Z ##[endgroup]
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4804821Z ##[group]Operating System
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4805521Z Microsoft Windows Server 2025
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4806093Z 10.0.26100
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4806588Z Datacenter
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4807074Z ##[endgroup]
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4807561Z ##[group]Runner Image
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4808182Z Image: windows-2025-vs2026
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4808741Z Version: 20261116.315.1
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4809856Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261116.315/images/windows/Windows2025-VS2026-Readme.md
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4811793Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261116.315
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4812774Z ##[endgroup]
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4813827Z ##[group]GITHUB_TOKEN Permissions
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4816276Z Contents: read
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4816934Z Metadata: read
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4817578Z ##[endgroup]
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4819673Z Secret source: Actions
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4820857Z Cache mode: write
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.4821615Z Prepare workflow directory
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.5298797Z Prepare all required actions
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.5370409Z Getting action download info
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.8398943Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:28.9729807Z Download action repository 'actions/setup-python@v6' (SHA:ece7cb06caefa5fff74198d8649806c4678c61a1)
+Test Knapsack-Practicum	Set up job	2026-11-23T20:52:29.2404869Z Complete job name: Test Knapsack-Practicum
+Test Knapsack-Practicum	Run actions/checkout@v6	﻿2026-11-23T20:52:29.3966331Z ##[group]Run actions/checkout@v6
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3967466Z with:
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3967881Z   repository: bonifero/tiger
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3972239Z   token: ***
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3972641Z   ssh-strict: true
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3973042Z   ssh-user: git
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3973445Z   persist-credentials: true
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3973896Z   clean: true
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3974304Z   sparse-checkout-cone-mode: true
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3974788Z   fetch-depth: 1
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3975176Z   fetch-tags: false
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3975574Z   show-progress: true
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3975984Z   lfs: false
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3976356Z   submodules: false
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3976763Z   set-safe-directory: true
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3977230Z   allow-unsafe-pr-checkout: false
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.3978010Z ##[endgroup]
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.5519932Z Syncing repository: bonifero/tiger
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.5523142Z ##[group]Getting Git version info
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.5524640Z Working directory is 'D:\a\tiger\tiger'
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:29.6519620Z [command]"C:\Program Files\Git\bin\git.exe" version
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.0069062Z git version 2.56.1.windows.1
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.0127126Z ##[endgroup]
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.0148129Z Temporarily overriding HOME='D:\a\_temp\d09bcd54-3c7c-4a4d-90ef-60ca82ca5fc2' before making global git config changes
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.0149684Z Adding repository directory to the temporary git global config as a safe directory
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.0158736Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tiger\tiger
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.0883664Z Deleting the contents of 'D:\a\tiger\tiger'
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.0889858Z ##[group]Determining repository object format
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.0892371Z ##[endgroup]
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.0893210Z ##[group]Initializing the repository
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.0901257Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\tiger\tiger
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.1914434Z Initialized empty Git repository in D:/a/tiger/tiger/.git/
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.1964130Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/bonifero/tiger
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.2685773Z ##[endgroup]
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.2686711Z ##[group]Disabling automatic garbage collection
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.2699089Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.3108897Z ##[endgroup]
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.3110196Z ##[group]Setting up auth
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.3111013Z Removing SSH command configuration
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.3120892Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:30.3513295Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:31.9110928Z Removing HTTP extra header
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:31.9123526Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:31.9517261Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:32.5090193Z Removing includeIf entries pointing to credentials config files
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:32.5101246Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:32.5491869Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:33.1364362Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-59e1a6de-ebb5-4322-bc29-594b1f8f9c04.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:33.1797053Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/tiger/tiger/.git.path D:\a\_temp\git-credentials-59e1a6de-ebb5-4322-bc29-594b1f8f9c04.config
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:33.2184182Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path D:\a\_temp\git-credentials-59e1a6de-ebb5-4322-bc29-594b1f8f9c04.config
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:33.2644277Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-59e1a6de-ebb5-4322-bc29-594b1f8f9c04.config
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:33.3038275Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-59e1a6de-ebb5-4322-bc29-594b1f8f9c04.config
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:33.3441437Z ##[endgroup]
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:33.3442040Z ##[group]Fetching the repository
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:33.3454891Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +d7093c2bb1969208ce710568a79bfb1490cafe2e:refs/remotes/origin/build/lab3-parity-20261123
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.4752181Z From https://github.com/bonifero/tiger
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.4753192Z  * [new ref]         d7093c2bb1969208ce710568a79bfb1490cafe2e -> origin/build/lab3-parity-20261123
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.4809539Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/build/lab3-parity-20261123
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.5263460Z   origin/build/lab3-parity-20261123
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.5313977Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/build/lab3-parity-20261123
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.5717126Z d7093c2bb1969208ce710568a79bfb1490cafe2e
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.5751243Z ##[endgroup]
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.5751888Z ##[group]Determining the checkout info
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.5753111Z ##[endgroup]
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.5764375Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.6304817Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.6690023Z ##[group]Checking out the ref
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.6700055Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B build/lab3-parity-20261123 refs/remotes/origin/build/lab3-parity-20261123
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.9025925Z Switched to a new branch 'build/lab3-parity-20261123'
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.9048231Z branch 'build/lab3-parity-20261123' set up to track 'origin/build/lab3-parity-20261123'.
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.9106927Z ##[endgroup]
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.9603949Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Test Knapsack-Practicum	Run actions/checkout@v6	2026-11-23T20:52:35.9971315Z d7093c2bb1969208ce710568a79bfb1490cafe2e
+Test Knapsack-Practicum	Run actions/setup-python@v6	﻿2026-11-23T20:52:36.0446718Z ##[group]Run actions/setup-python@v6
+Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:52:36.0447088Z with:
+Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:52:36.0447280Z   python-version: 3.12
+Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:52:36.0447533Z   check-latest: false
+Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:52:36.0450031Z   token: ***
+Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:52:36.0450228Z   update-environment: true
+Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:52:36.0450452Z   allow-prereleases: false
+Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:52:36.0450666Z   freethreaded: false
+Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:52:36.0450863Z ##[endgroup]
+Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:52:36.2113934Z ##[group]Installed versions
+Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:52:36.2263220Z Successfully set up CPython (3.12.10)
+Test Knapsack-Practicum	Run actions/setup-python@v6	2026-11-23T20:52:36.2264080Z ##[endgroup]
+Test Knapsack-Practicum	Run tests	﻿2026-11-23T20:52:36.2558442Z ##[group]Run python -m unittest discover -v
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:36.2558929Z ^[[36;1mpython -m unittest discover -v^[[0m
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:36.2970342Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:36.2970989Z env:
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:36.2971480Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:36.2972722Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:36.2973651Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:36.2974370Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:36.2975182Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:36.2975765Z ##[endgroup]
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:40.2301058Z test_abandon_lesson_cancel_then_confirm (test_acceptance.AcceptanceTests.test_abandon_lesson_cancel_then_confirm) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:47.9078411Z test_all_six_tasks_all_ten_optima_through_interface (test_acceptance.AcceptanceTests.test_all_six_tasks_all_ten_optima_through_interface) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:48.1158711Z test_context_menu_paste_marks_name_dirty (test_acceptance.AcceptanceTests.test_context_menu_paste_marks_name_dirty) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:49.7717056Z test_custom_boundary_and_nonlinear_tasks (test_acceptance.AcceptanceTests.test_custom_boundary_and_nonlinear_tasks) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:50.2500398Z test_explanation_requires_explicit_hint_and_has_no_attempt_limit (test_acceptance.AcceptanceTests.test_explanation_requires_explicit_hint_and_has_no_attempt_limit) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:50.4784746Z test_file_dialog_cancellation_and_save_failure_keep_edits (test_acceptance.AcceptanceTests.test_file_dialog_cancellation_and_save_failure_keep_edits) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:51.7984179Z test_invalid_editor_values_do_not_start_lesson (test_acceptance.AcceptanceTests.test_invalid_editor_values_do_not_start_lesson) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:52.0970484Z test_keyboard_tab_return_escape_and_readonly_cells (test_acceptance.AcceptanceTests.test_keyboard_tab_return_escape_and_readonly_cells) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:53.4350709Z test_minimum_window_keeps_review_and_restore_actions_visible (test_acceptance.AcceptanceTests.test_minimum_window_keeps_review_and_restore_actions_visible) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:54.2355867Z test_new_table_and_individual_limits (test_acceptance.AcceptanceTests.test_new_table_and_individual_limits) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:54.4583877Z test_pending_cell_is_protected_on_close (test_acceptance.AcceptanceTests.test_pending_cell_is_protected_on_close) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:54.6697160Z test_pending_cell_is_protected_on_replace (test_acceptance.AcceptanceTests.test_pending_cell_is_protected_on_replace) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:55.9095151Z test_resize_and_all_zoom_levels_preserve_active_input (test_acceptance.AcceptanceTests.test_resize_and_all_zoom_levels_preserve_active_input) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.2483095Z test_save_reload_and_declined_import (test_acceptance.AcceptanceTests.test_save_reload_and_declined_import) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8289769Z test_wrong_maximum_and_restore_can_be_corrected (test_acceptance.AcceptanceTests.test_wrong_maximum_and_restore_can_be_corrected) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8376078Z test_bad_json_duplicate_keys_nonfinite_and_size (test_formats.FormatTests.test_bad_json_duplicate_keys_nonfinite_and_size) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8513783Z test_exact_roundtrip_and_automatic_extension (test_formats.FormatTests.test_exact_roundtrip_and_automatic_extension) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8537995Z test_excessive_json_nesting_is_a_controlled_validation_error (test_formats.FormatTests.test_excessive_json_nesting_is_a_controlled_validation_error) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8632074Z test_failed_atomic_replace_preserves_old_file_and_removes_temp (test_formats.FormatTests.test_failed_atomic_replace_preserves_old_file_and_removes_temp) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8650462Z test_raw_json_decimals_keep_the_exact_optimum (test_formats.FormatTests.test_raw_json_decimals_keep_the_exact_optimum) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8653839Z test_schema_version_and_validation (test_formats.FormatTests.test_schema_version_and_validation) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8661775Z test_all_equal_optima_accepted (test_lesson.LessonTests.test_all_equal_optima_accepted) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8666279Z test_answer_fractions_can_be_larger_than_each_input (test_lesson.LessonTests.test_answer_fractions_can_be_larger_than_each_input) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8669669Z test_hints_are_counted_without_advancing (test_lesson.LessonTests.test_hints_are_counted_without_advancing) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8675801Z test_restoration_rejects_invalid_and_suboptimal_plans (test_lesson.LessonTests.test_restoration_rejects_invalid_and_suboptimal_plans) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8683010Z test_restoration_requires_states_matching_the_actual_alternative (test_lesson.LessonTests.test_restoration_requires_states_matching_the_actual_alternative) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8684223Z test_shape_mismatch_and_wrong_phase (test_lesson.LessonTests.test_shape_mismatch_and_wrong_phase) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8689034Z test_states_use_weighted_resource_and_legacy_call_computes_them (test_lesson.LessonTests.test_states_use_weighted_resource_and_legacy_call_computes_them) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8691100Z test_summary_checks_maximum_and_integer_argmax (test_lesson.LessonTests.test_summary_checks_maximum_and_integer_argmax) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8698020Z test_wrong_states_do_not_advance_or_publish_accepted_plan (test_lesson.LessonTests.test_wrong_states_do_not_advance_or_publish_accepted_plan) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8700863Z test_wrong_values_never_advance_or_destroy_answers (test_lesson.LessonTests.test_wrong_values_never_advance_or_destroy_answers) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8727546Z test_all_manual_optima_and_alternatives (test_presets.PresetTests.test_all_manual_optima_and_alternatives) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8766832Z test_distributed_json_matches_presets (test_presets.PresetTests.test_distributed_json_matches_presets) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8769652Z test_manual_example_intermediate_tables (test_presets.PresetTests.test_manual_example_intermediate_tables) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8772946Z test_exact_numeric_input (test_solver.SolverTests.test_exact_numeric_input) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8777813Z test_exponent_is_bounded_before_fraction_expansion (test_solver.SolverTests.test_exponent_is_bounded_before_fraction_expansion) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8780764Z test_manual_example_and_ties (test_solver.SolverTests.test_manual_example_and_ties) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.8785122Z test_model_validation (test_solver.SolverTests.test_model_validation) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.9582908Z test_random_models_and_every_suffix_against_enumeration (test_solver.SolverTests.test_random_models_and_every_suffix_against_enumeration) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.9626650Z test_resource_budget (test_solver.SolverTests.test_resource_budget) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:56.9629299Z test_unused_capacity_zero_quantity_and_unavailable_items (test_solver.SolverTests.test_unused_capacity_zero_quantity_and_unavailable_items) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:57.3964270Z test_compact_window_keeps_three_editor_rows_at_140_percent (test_ui.InterfaceTests.test_compact_window_keeps_three_editor_rows_at_140_percent) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:57.5049917Z test_destroy_before_idle_does_not_leave_background_errors (test_ui.InterfaceTests.test_destroy_before_idle_does_not_leave_background_errors) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:57.6352445Z test_editor_roundtrip_and_ragged_limits (test_ui.InterfaceTests.test_editor_roundtrip_and_ragged_limits) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:57.7643575Z test_error_keeps_input_and_step_rescale_keeps_input (test_ui.InterfaceTests.test_error_keeps_input_and_step_rescale_keeps_input) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:57.8512304Z test_failed_import_preserves_edited_problem (test_ui.InterfaceTests.test_failed_import_preserves_edited_problem) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:58.1432885Z test_full_workflow_accepts_alternate_optimum_with_states (test_ui.InterfaceTests.test_full_workflow_accepts_alternate_optimum_with_states) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:58.2972311Z test_large_grid_draws_only_viewport (test_ui.InterfaceTests.test_large_grid_draws_only_viewport) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:58.4223644Z test_review_contains_only_accepted_tables (test_ui.InterfaceTests.test_review_contains_only_accepted_tables) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:58.5086144Z test_stale_focus_event_does_not_commit_replacement_editor (test_ui.InterfaceTests.test_stale_focus_event_does_not_commit_replacement_editor) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:58.5990771Z test_tab_and_tsv_paste_respect_read_only_cells (test_ui.InterfaceTests.test_tab_and_tsv_paste_respect_read_only_cells) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:58.8096892Z test_underfilled_plan_and_export (test_ui.InterfaceTests.test_underfilled_plan_and_export) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:59.0048181Z test_editor_utilities_do_not_count_as_failed_submission (test_usability.UsabilityTests.test_editor_utilities_do_not_count_as_failed_submission) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:59.2780341Z test_error_in_source_identifies_and_focuses_cell (test_usability.UsabilityTests.test_error_in_source_identifies_and_focuses_cell) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:52:59.5378398Z test_example_candidates_fit_beside_reference_at_normal_zoom (test_usability.UsabilityTests.test_example_candidates_fit_beside_reference_at_normal_zoom) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:00.5189124Z test_finished_lesson_retains_every_candidate_and_summary_table (test_usability.UsabilityTests.test_finished_lesson_retains_every_candidate_and_summary_table) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:00.8411116Z test_impossible_trailing_quantities_are_hidden_but_full_model_payload_is_preserved (test_usability.UsabilityTests.test_impossible_trailing_quantities_are_hidden_but_full_model_payload_is_preserved) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:01.1080016Z test_readonly_cell_and_table_can_be_copied (test_usability.UsabilityTests.test_readonly_cell_and_table_can_be_copied) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:02.1843454Z test_rejected_source_attempts_count_through_result_and_reset_for_new_session (test_usability.UsabilityTests.test_rejected_source_attempts_count_through_result_and_reset_for_new_session) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:03.0440121Z test_restore_has_all_accepted_states_visible_in_inline_table (test_usability.UsabilityTests.test_restore_has_all_accepted_states_visible_in_inline_table) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:03.5478216Z test_restore_shows_original_weights_and_capacity_beside_answers (test_usability.UsabilityTests.test_restore_shows_original_weights_and_capacity_beside_answers) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:04.1605282Z test_small_window_preserves_actions_and_reference_at_all_phases (test_usability.UsabilityTests.test_small_window_preserves_actions_and_reference_at_all_phases) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:04.6047132Z test_step_references_only_show_source_and_accepted_answers (test_usability.UsabilityTests.test_step_references_only_show_source_and_accepted_answers) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:04.9575886Z test_zoom_keeps_distant_answer_visible_and_retains_value (test_usability.UsabilityTests.test_zoom_keeps_distant_answer_visible_and_retains_value) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:05.2918916Z test_zoom_keeps_distant_editor_cell_selected_and_visible (test_usability.UsabilityTests.test_zoom_keeps_distant_editor_cell_selected_and_visible) ... ok
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:05.2920644Z 
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:05.2921855Z ----------------------------------------------------------------------
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:05.2923125Z Ran 65 tests in 26.381s
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:05.2923363Z 
+Test Knapsack-Practicum	Run tests	2026-11-23T20:53:05.2923467Z OK
+Test Knapsack-Practicum	Smoke test	﻿2026-11-23T20:53:05.4640874Z ##[group]Run python app.py --smoke-test
+Test Knapsack-Practicum	Smoke test	2026-11-23T20:53:05.4641298Z ^[[36;1mpython app.py --smoke-test^[[0m
+Test Knapsack-Practicum	Smoke test	2026-11-23T20:53:05.4717760Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Test Knapsack-Practicum	Smoke test	2026-11-23T20:53:05.4718115Z env:
+Test Knapsack-Practicum	Smoke test	2026-11-23T20:53:05.4718375Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Test Knapsack-Practicum	Smoke test	2026-11-23T20:53:05.4718817Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+Test Knapsack-Practicum	Smoke test	2026-11-23T20:53:05.4719272Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Test Knapsack-Practicum	Smoke test	2026-11-23T20:53:05.4719670Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Test Knapsack-Practicum	Smoke test	2026-11-23T20:53:05.4720060Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Test Knapsack-Practicum	Smoke test	2026-11-23T20:53:05.4720375Z ##[endgroup]
+Test Knapsack-Practicum	Post Run actions/setup-python@v6	﻿2026-11-23T20:53:06.3037790Z Post job cleanup.
+Test Knapsack-Practicum	Post Run actions/checkout@v6	﻿2026-11-23T20:53:06.4945695Z Post job cleanup.
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:06.7273146Z [command]"C:\Program Files\Git\bin\git.exe" version
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:06.7670043Z git version 2.56.1.windows.1
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:06.7756944Z Temporarily overriding HOME='D:\a\_temp\c40da248-1290-4e1a-9010-00eefc287c3b' before making global git config changes
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:06.7758266Z Adding repository directory to the temporary git global config as a safe directory
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:06.7771325Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tiger\tiger
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:06.8165140Z Removing SSH command configuration
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:06.8177167Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:06.8576212Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:07.4626268Z Removing HTTP extra header
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:07.4636630Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:07.5037684Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.0887694Z Removing includeIf entries pointing to credentials config files
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.0900596Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.1260258Z includeif.gitdir:D:/a/tiger/tiger/.git.path
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.1261358Z includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.1261930Z includeif.gitdir:/github/workspace/.git.path
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.1262493Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.1305824Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/tiger/tiger/.git.path
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.1655055Z D:\a\_temp\git-credentials-59e1a6de-ebb5-4322-bc29-594b1f8f9c04.config
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.1704373Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/tiger/tiger/.git.path D:\a\_temp\git-credentials-59e1a6de-ebb5-4322-bc29-594b1f8f9c04.config
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.2098603Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.2451362Z D:\a\_temp\git-credentials-59e1a6de-ebb5-4322-bc29-594b1f8f9c04.config
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.2496647Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path D:\a\_temp\git-credentials-59e1a6de-ebb5-4322-bc29-594b1f8f9c04.config
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.2889571Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.3239909Z /github/runner_temp/git-credentials-59e1a6de-ebb5-4322-bc29-594b1f8f9c04.config
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.3294161Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-59e1a6de-ebb5-4322-bc29-594b1f8f9c04.config
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.3756615Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.4112032Z /github/runner_temp/git-credentials-59e1a6de-ebb5-4322-bc29-594b1f8f9c04.config
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.4166793Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-59e1a6de-ebb5-4322-bc29-594b1f8f9c04.config
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:08.4568510Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Test Knapsack-Practicum	Post Run actions/checkout@v6	2026-11-23T20:53:09.0309472Z Removing credentials config 'D:\a\_temp\git-credentials-59e1a6de-ebb5-4322-bc29-594b1f8f9c04.config'
+Test Knapsack-Practicum	Complete job	﻿2026-11-23T20:53:09.0535616Z Cleaning up orphan processes
+Build Knapsack-Practicum.exe	Set up job	﻿2026-11-23T20:53:13.6331662Z Current runner version: '2.338.2'
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6382028Z ##[group]Runner Image Provisioner
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6382908Z Hosted Compute Agent
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6383465Z Version: 20261111.635
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6384128Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6385058Z Build Date: 2026-11-11T01:49:01Z
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6385676Z Worker ID: {c127d58e-822e-435a-a01a-ef3db0bf965b}
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6386295Z Region: westus3
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6386770Z Cloud: Azure
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6387226Z ##[endgroup]
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6388507Z ##[group]Operating System
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6389092Z Microsoft Windows Server 2025
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6389615Z 10.0.26100
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6390045Z Datacenter
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6390514Z ##[endgroup]
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6390991Z ##[group]Runner Image
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6391711Z Image: windows-2025-vs2026
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6392347Z Version: 20261116.315.1
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6393411Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261116.315/images/windows/Windows2025-VS2026-Readme.md
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6395703Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261116.315
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6396616Z ##[endgroup]
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6397601Z ##[group]GITHUB_TOKEN Permissions
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6399643Z Contents: read
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6400163Z Metadata: read
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6400620Z ##[endgroup]
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6402625Z Secret source: Actions
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6403438Z Cache mode: write
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6404201Z Prepare workflow directory
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6818263Z Prepare all required actions
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:13.6866775Z Getting action download info
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:14.0154541Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:14.1390280Z Download action repository 'actions/setup-python@v6' (SHA:ece7cb06caefa5fff74198d8649806c4678c61a1)
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:14.2594279Z Download action repository 'actions/upload-artifact@v6' (SHA:b7c566a772e6b6bfb58ed0dc250532a479d7789f)
+Build Knapsack-Practicum.exe	Set up job	2026-11-23T20:53:14.5649486Z Complete job name: Build Knapsack-Practicum.exe
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	﻿2026-11-23T20:53:14.7255023Z ##[group]Run actions/checkout@v6
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7256950Z with:
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7257450Z   repository: bonifero/tiger
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7261913Z   token: ***
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7262336Z   ssh-strict: true
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7262766Z   ssh-user: git
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7263193Z   persist-credentials: true
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7263740Z   clean: true
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7264182Z   sparse-checkout-cone-mode: true
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7264693Z   fetch-depth: 1
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7265117Z   fetch-tags: false
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7265558Z   show-progress: true
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7265977Z   lfs: false
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7266370Z   submodules: false
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7266832Z   set-safe-directory: true
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7267328Z   allow-unsafe-pr-checkout: false
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.7268242Z ##[endgroup]
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.8947911Z Syncing repository: bonifero/tiger
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.8953148Z ##[group]Getting Git version info
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.8954712Z Working directory is 'D:\a\tiger\tiger'
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:14.9864618Z [command]"C:\Program Files\Git\bin\git.exe" version
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.2975371Z git version 2.56.1.windows.1
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.3033310Z ##[endgroup]
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.3053910Z Temporarily overriding HOME='D:\a\_temp\00d45969-209a-4d58-ad7d-a10a90c78aaa' before making global git config changes
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.3056783Z Adding repository directory to the temporary git global config as a safe directory
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.3064628Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tiger\tiger
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.3791929Z Deleting the contents of 'D:\a\tiger\tiger'
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.3798464Z ##[group]Determining repository object format
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.3801717Z ##[endgroup]
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.3805753Z ##[group]Initializing the repository
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.3811688Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\tiger\tiger
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.4698240Z Initialized empty Git repository in D:/a/tiger/tiger/.git/
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.4761038Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/bonifero/tiger
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.5455213Z ##[endgroup]
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.5457093Z ##[group]Disabling automatic garbage collection
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.5463547Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.5861771Z ##[endgroup]
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.5863684Z ##[group]Setting up auth
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.5865316Z Removing SSH command configuration
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.5873220Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:15.6330291Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:17.0958420Z Removing HTTP extra header
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:17.0969203Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:17.1390712Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:17.7296177Z Removing includeIf entries pointing to credentials config files
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:17.7310094Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:17.7710005Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:18.3392594Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-95b9ee16-48ff-4f42-a28b-6d5ea339be63.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:18.3807909Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/tiger/tiger/.git.path D:\a\_temp\git-credentials-95b9ee16-48ff-4f42-a28b-6d5ea339be63.config
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:18.4220863Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path D:\a\_temp\git-credentials-95b9ee16-48ff-4f42-a28b-6d5ea339be63.config
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:18.4680609Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-95b9ee16-48ff-4f42-a28b-6d5ea339be63.config
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:18.5092322Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-95b9ee16-48ff-4f42-a28b-6d5ea339be63.config
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:18.5507095Z ##[endgroup]
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:18.5507780Z ##[group]Fetching the repository
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:18.5523042Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +d7093c2bb1969208ce710568a79bfb1490cafe2e:refs/remotes/origin/build/lab3-parity-20261123
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:20.6063063Z From https://github.com/bonifero/tiger
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:20.6063997Z  * [new ref]         d7093c2bb1969208ce710568a79bfb1490cafe2e -> origin/build/lab3-parity-20261123
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:20.6130782Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/build/lab3-parity-20261123
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:20.6554623Z   origin/build/lab3-parity-20261123
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:20.6612501Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/build/lab3-parity-20261123
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:20.7002546Z d7093c2bb1969208ce710568a79bfb1490cafe2e
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:20.7048243Z ##[endgroup]
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:20.7049993Z ##[group]Determining the checkout info
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:20.7050580Z ##[endgroup]
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:20.7059538Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:20.7583560Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:20.7987288Z ##[group]Checking out the ref
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:20.7997551Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B build/lab3-parity-20261123 refs/remotes/origin/build/lab3-parity-20261123
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:21.0297057Z Switched to a new branch 'build/lab3-parity-20261123'
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:21.0321181Z branch 'build/lab3-parity-20261123' set up to track 'origin/build/lab3-parity-20261123'.
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:21.0392221Z ##[endgroup]
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:21.0875400Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Build Knapsack-Practicum.exe	Run actions/checkout@v6	2026-11-23T20:53:21.1239348Z d7093c2bb1969208ce710568a79bfb1490cafe2e
+Build Knapsack-Practicum.exe	Run actions/setup-python@v6	﻿2026-11-23T20:53:21.1762531Z ##[group]Run actions/setup-python@v6
+Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:53:21.1763018Z with:
+Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:53:21.1763212Z   python-version: 3.12
+Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:53:21.1763426Z   check-latest: false
+Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:53:21.1766780Z   token: ***
+Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:53:21.1766997Z   update-environment: true
+Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:53:21.1767223Z   allow-prereleases: false
+Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:53:21.1767446Z   freethreaded: false
+Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:53:21.1767635Z ##[endgroup]
+Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:53:21.3439799Z ##[group]Installed versions
+Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:53:21.3640387Z Successfully set up CPython (3.12.10)
+Build Knapsack-Practicum.exe	Run actions/setup-python@v6	2026-11-23T20:53:21.3641162Z ##[endgroup]
+Build Knapsack-Practicum.exe	Install build dependencies	﻿2026-11-23T20:53:21.3940947Z ##[group]Run python -m pip install -r ../.github/requirements-build.txt
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:21.3941611Z ^[[36;1mpython -m pip install -r ../.github/requirements-build.txt^[[0m
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:21.4759555Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:21.4759933Z env:
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:21.4760215Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:21.4760690Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:21.4761115Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:21.4761498Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:21.4762398Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:21.4762712Z ##[endgroup]
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:27.0142352Z Collecting PyInstaller<7,>=6.16 (from -r ../.github/requirements-build.txt (line 1))
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:27.2374008Z   Downloading pyinstaller-6.22.3-py3-none-win_amd64.whl.metadata (8.5 kB)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:27.4757525Z Collecting Pillow<13,>=12 (from -r ../.github/requirements-build.txt (line 2))
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:27.4927858Z   Downloading pillow-12.3.0-cp312-cp312-win_amd64.whl.metadata (9.3 kB)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:27.5932793Z Collecting altgraph (from PyInstaller<7,>=6.16->-r ../.github/requirements-build.txt (line 1))
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:27.6068803Z   Downloading altgraph-0.17.5-py2.py3-none-any.whl.metadata (7.5 kB)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:27.6306367Z Requirement already satisfied: packaging>=22.0 in C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\site-packages (from PyInstaller<7,>=6.16->-r ../.github/requirements-build.txt (line 1)) (26.3)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:27.6671433Z Collecting pefile>=2022.5.30 (from PyInstaller<7,>=6.16->-r ../.github/requirements-build.txt (line 1))
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:27.6826591Z   Downloading pefile-2024.8.26-py3-none-any.whl.metadata (1.4 kB)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:27.7574263Z Collecting pyinstaller-hooks-contrib>=2026.7 (from PyInstaller<7,>=6.16->-r ../.github/requirements-build.txt (line 1))
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:27.7714185Z   Downloading pyinstaller_hooks_contrib-2026.10-py3-none-any.whl.metadata (16 kB)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:27.8307238Z Collecting pywin32-ctypes>=0.2.1 (from PyInstaller<7,>=6.16->-r ../.github/requirements-build.txt (line 1))
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:27.8443541Z   Downloading pywin32_ctypes-0.2.3-py3-none-any.whl.metadata (3.9 kB)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:27.9946948Z Collecting setuptools>=42.0.0 (from PyInstaller<7,>=6.16->-r ../.github/requirements-build.txt (line 1))
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:28.0670201Z   Downloading setuptools-84.2.1-py3-none-any.whl.metadata (6.6 kB)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:28.1444091Z Downloading pyinstaller-6.22.3-py3-none-win_amd64.whl (1.5 MB)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:28.2716431Z    ---------------------------------------- 1.5/1.5 MB 12.7 MB/s  0:00:00
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:28.3337443Z Downloading pillow-12.3.0-cp312-cp312-win_amd64.whl (7.2 MB)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:28.4153602Z    ---------------------------------------- 7.2/7.2 MB 89.3 MB/s  0:00:00
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:28.4286170Z Downloading pefile-2024.8.26-py3-none-any.whl (74 kB)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:28.4982291Z Downloading pyinstaller_hooks_contrib-2026.10-py3-none-any.whl (463 kB)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:28.8541946Z Downloading pywin32_ctypes-0.2.3-py3-none-any.whl (30 kB)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:29.1495233Z Downloading setuptools-84.2.1-py3-none-any.whl (876 kB)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:29.8336635Z    ---------------------------------------- 876.3/876.3 kB 913.9 kB/s  0:00:00
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:29.8468282Z Downloading altgraph-0.17.5-py2.py3-none-any.whl (21 kB)
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:30.3833209Z Installing collected packages: altgraph, setuptools, pywin32-ctypes, pyinstaller-hooks-contrib, Pillow, pefile, PyInstaller
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:38.0902641Z 
+Build Knapsack-Practicum.exe	Install build dependencies	2026-11-23T20:53:38.0924300Z Successfully installed Pillow-12.3.0 PyInstaller-6.22.3 altgraph-0.17.5 pefile-2024.8.26 pyinstaller-hooks-contrib-2026.10 pywin32-ctypes-0.2.3 setuptools-84.2.1
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	﻿2026-11-23T20:53:38.2932714Z ##[group]Run python build.py
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:38.2933457Z ^[[36;1mpython build.py^[[0m
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:38.3004604Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:38.3004957Z env:
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:38.3005221Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:38.3005650Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:38.3006072Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:38.3006552Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:38.3006925Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:38.3007224Z ##[endgroup]
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.0794586Z 321 INFO: PyInstaller: 6.22.3, contrib hooks: 2026.10
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.0797965Z 321 INFO: Python: 3.12.10
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.1041544Z 345 INFO: Platform: Windows-2025Server-10.0.26100-SP0
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.1042335Z 345 INFO: Python environment: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.1048541Z 347 INFO: wrote D:\a\tiger\tiger\knapsack-practicum\Knapsack-Practicum.spec
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.1122846Z 353 INFO: Removing temporary files and cleaning cache in C:\Users\runneradmin\AppData\Local\pyinstaller
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.1135143Z 354 INFO: Module search paths (PYTHONPATH):
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.1135677Z ['D:\\a\\tiger\\tiger\\knapsack-practicum',
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.1136246Z  'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\python312.zip',
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.1136869Z  'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\DLLs',
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.1137377Z  'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib',
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.1137851Z  'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64',
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.1138400Z  'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages',
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.1138959Z  'D:\\a\\tiger\\tiger\\knapsack-practicum']
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.3604444Z 602 INFO: checking Analysis
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.3605480Z 602 INFO: Building Analysis because Analysis-00.toc is non existent
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.3606118Z 602 INFO: Looking for Python shared library...
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.3606760Z 602 INFO: Using Python shared library: C:\hostedtoolcache\windows\Python\3.12.10\x64\python312.dll
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.3607421Z 602 INFO: Running Analysis Analysis-00.toc
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.3607880Z 602 INFO: Target bytecode optimization level: 0
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.3608833Z 602 INFO: Initializing module dependency graph...
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.3710035Z 613 INFO: Initializing module graph hook caches...
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:39.3860192Z 627 INFO: Analyzing modules for base_library.zip ...
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:40.1199109Z 1360 INFO: Processing standard module hook 'hook-encodings.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks'
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:41.2813991Z 2523 INFO: Processing standard module hook 'hook-math.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks'
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:42.7571779Z 3999 INFO: Processing standard module hook 'hook-pickle.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks'
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:44.2253537Z 5465 INFO: Processing standard module hook 'hook-heapq.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks'
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:44.8286517Z 6070 INFO: Caching module dependency graph...
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:44.8633340Z 6104 INFO: Analyzing D:\a\tiger\tiger\knapsack-practicum\app.py
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:44.9475046Z 6190 INFO: Processing pre-find-module-path hook 'hook-tkinter.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:44.9482351Z 6190 INFO: TclTkInfo: initializing cached Tcl/Tk info...
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:45.9710380Z 7211 INFO: Processing standard module hook 'hook-_tkinter.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks'
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:46.1080458Z 7348 INFO: Processing module hooks (post-graph stage)...
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:46.1117864Z 7352 INFO: Processing standard module hook 'hook-_tkinter.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks'
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:46.1231590Z 7364 INFO: Performing binary vs. data reclassification (927 entries)
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:46.7080077Z 7949 INFO: Looking for ctypes DLLs
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:46.7126622Z 7954 INFO: Analyzing run-time hooks ...
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:46.7138512Z 7954 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:46.7171045Z 7959 INFO: Including run-time hook 'pyi_rth__tkinter.py' from 'C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:46.7492319Z 7991 INFO: Creating base_library.zip...
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:46.7736970Z 8014 INFO: Looking for dynamic libraries
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:46.9078333Z 8150 INFO: Extra DLL search directories (AddDllDirectory): []
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:46.9078767Z 8150 INFO: Extra DLL search directories (PATH): []
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:47.4952043Z 8735 INFO: Warnings written to D:\a\tiger\tiger\knapsack-practicum\.build\Knapsack-Practicum\warn-Knapsack-Practicum.txt
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:47.5106133Z 8752 INFO: Graph cross-reference written to D:\a\tiger\tiger\knapsack-practicum\.build\Knapsack-Practicum\xref-Knapsack-Practicum.html
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:47.5417413Z 8783 INFO: checking PYZ
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:47.5418363Z 8783 INFO: Building PYZ because PYZ-00.toc is non existent
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:47.5419342Z 8783 INFO: Building PYZ (ZlibArchive) D:\a\tiger\tiger\knapsack-practicum\.build\Knapsack-Practicum\PYZ-00.pyz
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:47.7023729Z 8944 INFO: Building PYZ (ZlibArchive) D:\a\tiger\tiger\knapsack-practicum\.build\Knapsack-Practicum\PYZ-00.pyz completed successfully.
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:47.7333196Z 8974 INFO: checking PKG
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:47.7333815Z 8974 INFO: Building PKG because PKG-00.toc is non existent
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:47.7334862Z 8974 INFO: Building PKG (CArchive) Knapsack-Practicum.pkg
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:51.5536742Z 12796 INFO: Building PKG (CArchive) Knapsack-Practicum.pkg completed successfully.
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:51.5723582Z 12814 INFO: Bootloader C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\site-packages\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:51.5725676Z 12814 INFO: checking EXE
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:51.5725998Z 12814 INFO: Building EXE because EXE-00.toc is non existent
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:51.5726488Z 12814 INFO: Building EXE from EXE-00.toc
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:51.5727119Z 12814 INFO: Copying bootloader EXE to D:\a\tiger\tiger\knapsack-practicum\dist\Knapsack-Practicum.exe
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:51.5753176Z 12816 INFO: Copying icon to EXE
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:51.5772920Z 12818 INFO: Copying 0 resources to EXE
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:51.5773528Z 12818 INFO: Embedding manifest in EXE
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:51.5790471Z 12820 INFO: Appending PKG archive to EXE
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:51.5865983Z 12827 INFO: Fixing EXE headers
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:51.6780476Z 12919 INFO: Building EXE from EXE-00.toc completed successfully.
+Build Knapsack-Practicum.exe	Build Windows executable and include variants	2026-11-23T20:53:51.7049746Z 12947 INFO: Build complete! The results are available in: D:\a\tiger\tiger\knapsack-practicum\dist
+Build Knapsack-Practicum.exe	Smoke test packaged executable	﻿2026-11-23T20:53:51.8912414Z ##[group]Run $appProcess = Start-Process -FilePath './dist/Knapsack-Practicum.exe' -ArgumentList '--smoke-test' -PassThru
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8913548Z ^[[36;1m$appProcess = Start-Process -FilePath './dist/Knapsack-Practicum.exe' -ArgumentList '--smoke-test' -PassThru^[[0m
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8914095Z ^[[36;1mif (-not $appProcess.WaitForExit(30000)) {^[[0m
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8914391Z ^[[36;1m  $appProcess.Kill()^[[0m
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8914715Z ^[[36;1m  throw 'Packaged application did not close within 30 seconds.'^[[0m
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8915040Z ^[[36;1m}^[[0m
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8915239Z ^[[36;1mif ($appProcess.ExitCode -ne 0) {^[[0m
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8915650Z ^[[36;1m  throw "Packaged application exited with code $($appProcess.ExitCode)."^[[0m
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8916002Z ^[[36;1m}^[[0m
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8987094Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8987436Z env:
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8987715Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8988236Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8989102Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8989623Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8990000Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Smoke test packaged executable	2026-11-23T20:53:51.8990296Z ##[endgroup]
+Build Knapsack-Practicum.exe	Upload executable	﻿2026-11-23T20:53:55.0891193Z ##[group]Run actions/upload-artifact@v6
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0891761Z with:
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0892106Z   name: Knapsack-Practicum-windows-x64
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0892634Z   path: knapsack-practicum/dist/
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0893031Z   if-no-files-found: error
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0893385Z   retention-days: 30
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0893702Z   compression-level: 6
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0894026Z   overwrite: false
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0894346Z   include-hidden-files: false
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0894716Z env:
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0895125Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0895944Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0896700Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0897383Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0898080Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.0898699Z ##[endgroup]
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.3007868Z With the provided path, there will be 26 files uploaded
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.3013682Z Artifact name is valid!
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.3015189Z Root directory input is valid!
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:55.6436266Z Beginning upload of artifact content to blob storage
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:56.9809101Z Uploaded bytes 8388608
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:57.1466890Z Uploaded bytes 12625240
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:57.2097986Z Finished uploading artifact content to blob storage!
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:57.2101674Z SHA256 digest of uploaded artifact zip is aad6b79312e16c2b0c4686f86cacb0fe8885e80578d338e40547587d4c8602ce
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:57.2104671Z Finalizing artifact upload
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:57.7926599Z Artifact Knapsack-Practicum-windows-x64.zip successfully finalized. Artifact ID 14862207033
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:57.7927917Z Artifact Knapsack-Practicum-windows-x64 has been successfully uploaded! Final size is 12625240 bytes. Artifact ID is 14862207033
+Build Knapsack-Practicum.exe	Upload executable	2026-11-23T20:53:57.7935699Z Artifact download URL: https://github.com/bonifero/tiger/actions/runs/45263821221/artifacts/14862207033
+Build Knapsack-Practicum.exe	Post Run actions/setup-python@v6	﻿2026-11-23T20:53:57.8438198Z Post job cleanup.
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	﻿2026-11-23T20:53:58.0536634Z Post job cleanup.
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:58.2741607Z [command]"C:\Program Files\Git\bin\git.exe" version
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:58.3266539Z git version 2.56.1.windows.1
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:58.3359504Z Temporarily overriding HOME='D:\a\_temp\f2620da3-9423-48ae-a701-37bfdb58aa73' before making global git config changes
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:58.3360881Z Adding repository directory to the temporary git global config as a safe directory
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:58.3371174Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tiger\tiger
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:58.3906795Z Removing SSH command configuration
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:58.3912724Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:58.4470674Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.0599779Z Removing HTTP extra header
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.0610697Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.1021985Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.6882122Z Removing includeIf entries pointing to credentials config files
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.6894417Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.7250318Z includeif.gitdir:D:/a/tiger/tiger/.git.path
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.7250954Z includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.7251474Z includeif.gitdir:/github/workspace/.git.path
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.7251984Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.7306062Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/tiger/tiger/.git.path
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.7650331Z D:\a\_temp\git-credentials-95b9ee16-48ff-4f42-a28b-6d5ea339be63.config
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.7706526Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/tiger/tiger/.git.path D:\a\_temp\git-credentials-95b9ee16-48ff-4f42-a28b-6d5ea339be63.config
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.8107303Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.8455659Z D:\a\_temp\git-credentials-95b9ee16-48ff-4f42-a28b-6d5ea339be63.config
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.8508996Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/tiger/tiger/.git/worktrees/*.path D:\a\_temp\git-credentials-95b9ee16-48ff-4f42-a28b-6d5ea339be63.config
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.8912656Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.9260449Z /github/runner_temp/git-credentials-95b9ee16-48ff-4f42-a28b-6d5ea339be63.config
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.9313218Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-95b9ee16-48ff-4f42-a28b-6d5ea339be63.config
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:53:59.9716996Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:54:00.0093859Z /github/runner_temp/git-credentials-95b9ee16-48ff-4f42-a28b-6d5ea339be63.config
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:54:00.0159627Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-95b9ee16-48ff-4f42-a28b-6d5ea339be63.config
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:54:00.0608490Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Build Knapsack-Practicum.exe	Post Run actions/checkout@v6	2026-11-23T20:54:00.6390884Z Removing credentials config 'D:\a\_temp\git-credentials-95b9ee16-48ff-4f42-a28b-6d5ea339be63.config'
+Build Knapsack-Practicum.exe	Complete job	﻿2026-11-23T20:54:00.6608138Z Cleaning up orphan processes
