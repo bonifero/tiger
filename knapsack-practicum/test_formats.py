@@ -20,7 +20,7 @@ class FormatTests(unittest.TestCase):
             path = save(Path(directory) / "задача", self.problem)
             self.assertEqual(path.suffix, ".json")
             self.assertEqual(load(path), self.problem)
-            data = json.loads(path.read_text())
+            data = json.loads(path.read_text(encoding='utf-8'))
             self.assertEqual(data["values"][0], ["0", "1/3", "5/2"])
             self.assertEqual(list(Path(directory).glob("*.tmp")), [])
 
@@ -30,7 +30,7 @@ class FormatTests(unittest.TestCase):
             path.write_text("old data")
             with patch("formats.os.replace", side_effect=OSError("simulated")), self.assertRaises(OSError):
                 save(path, self.problem)
-            self.assertEqual(path.read_text(), "old data")
+            self.assertEqual(path.read_text(encoding='utf-8'), "old data")
             self.assertEqual(list(Path(directory).iterdir()), [path])
 
     def test_schema_version_and_validation(self):

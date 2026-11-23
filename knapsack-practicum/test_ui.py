@@ -183,6 +183,22 @@ class InterfaceTests(unittest.TestCase):
         self.assertTrue(self.app.check_button.winfo_ismapped())
         self.assertGreater(self.app.check_button.winfo_width(), 100)
 
+    def test_stale_focus_event_does_not_commit_replacement_editor(self):
+        from types import SimpleNamespace
+        grid = self.app.editor_grid
+        grid.selected = (0, 4)
+        grid._start_edit()
+        previous = grid.entry
+        grid._next_editable(1, editing=True)
+        current = grid.entry
+        current.delete(0, 'end')
+        current.insert(0, '123')
+        grid._focus_out(SimpleNamespace(widget=previous))
+        self.assertIs(grid.entry, current)
+        self.assertEqual(grid.rows[0][5], '17')
+        grid.commit()
+        self.assertEqual(grid.rows[0][5], '123')
+
     def test_large_grid_draws_only_viewport(self):
         window = self.app.open_source()
         window.destroy()

@@ -275,9 +275,11 @@ class DataGrid(tk.Frame):
         self.entry.bind('<<Paste>>', self._paste)
         self.entry.bind('<FocusOut>', self._focus_out)
 
-    def _focus_out(self, _event=None):
-        # Defer because the primary action may itself be destroying this table.
-        if self.winfo_exists():
+    def _focus_out(self, event):
+        # Windows may deliver queued focus events after an editor was replaced,
+        # or after focus has already returned to the current editor.
+        if (self.winfo_exists() and event.widget is self.entry
+                and self.focus_get() is not self.entry):
             self.commit()
 
     def _cancel_edit(self, _event=None):
