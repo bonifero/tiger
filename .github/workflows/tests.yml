@@ -1,0 +1,36 @@
+name: "Все тесты"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Run all practicum tests
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install LDP independent-check dependencies
+        run: python -m pip install -r ldp-practicum/requirements-test.txt
+      - name: Test KTZ-Practicum (лаб. 1)
+        working-directory: ktz-practicum
+        run: python -m unittest discover -v
+      - name: Test LDP-Practicum (лаб. 2)
+        working-directory: ldp-practicum
+        run: python -m unittest discover -v
+      - name: Test Knapsack-Practicum (лаб. 3)
+        working-directory: knapsack-practicum
+        run: python -m unittest discover -v
+      - name: Test Games-Practicum (лаб. 4)
+        working-directory: games-practicum
+        run: python -m unittest discover -v
